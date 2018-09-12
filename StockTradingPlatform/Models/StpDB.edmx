@@ -1,0 +1,713 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="StpDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblAuthenticate">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="uid" Type="int" />
+          <Property Name="userName" Type="varchar" MaxLength="100" />
+          <Property Name="password" Type="varchar" MaxLength="100" />
+          <Property Name="dateAdded" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tblSessionsData">
+          <Key>
+            <PropertyRef Name="sessionId" />
+          </Key>
+          <Property Name="sessionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="uid" Type="int" />
+          <Property Name="loginTime" Type="datetime" />
+          <Property Name="logoutTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tblStocks">
+          <Key>
+            <PropertyRef Name="stockId" />
+          </Key>
+          <Property Name="stockId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="stockName" Type="varchar" MaxLength="20" />
+          <Property Name="quantity" Type="int" />
+          <Property Name="quantity_remaining" Type="int" />
+          <Property Name="addedBy" Type="int" />
+          <Property Name="status" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="tblStocksHistory">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="date" Type="datetime" />
+          <Property Name="stockId" Type="int" />
+          <Property Name="openingPrice" Type="numeric" Precision="10" Scale="2" />
+          <Property Name="closingPrice" Type="numeric" Precision="10" Scale="2" />
+          <Property Name="lowPrice" Type="numeric" Precision="10" Scale="2" />
+          <Property Name="highPrice" Type="numeric" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="tblStocksPrice">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="stockId" Type="int" />
+          <Property Name="timeOfDay" Type="datetime" />
+          <Property Name="currentPrice" Type="numeric" Precision="10" Scale="2" />
+          <Property Name="lowPrice" Type="numeric" Precision="10" Scale="2" />
+          <Property Name="highPrice" Type="numeric" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="tblTradeRequests">
+          <Key>
+            <PropertyRef Name="requestId" />
+          </Key>
+          <Property Name="requestId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="uid" Type="int" />
+          <Property Name="requestType" Type="char" MaxLength="1" />
+          <Property Name="stockId" Type="int" />
+          <Property Name="requestQty" Type="int" />
+          <Property Name="remainingQty" Type="int" />
+          <Property Name="requestPrice" Type="numeric" Precision="10" Scale="2" />
+          <Property Name="requestTime" Type="datetime" />
+          <Property Name="requestStatus" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="tblTransactions">
+          <Key>
+            <PropertyRef Name="transactionId" />
+          </Key>
+          <Property Name="transactionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="buyerReqId" Type="int" />
+          <Property Name="sellerReqId" Type="int" />
+          <Property Name="price" Type="numeric" Precision="10" Scale="2" />
+          <Property Name="quantity" Type="int" />
+          <Property Name="time" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tblUsers">
+          <Key>
+            <PropertyRef Name="uid" />
+          </Key>
+          <Property Name="uid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fname" Type="varchar" MaxLength="20" />
+          <Property Name="lname" Type="varchar" MaxLength="20" />
+          <Property Name="email" Type="varchar" MaxLength="40" />
+          <Property Name="mobile" Type="bigint" />
+          <Property Name="dob" Type="date" />
+          <Property Name="address" Type="varchar" MaxLength="100" />
+          <Property Name="role" Type="char" MaxLength="1" />
+          <Property Name="status" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="tblWallet">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="uid" Type="int" />
+          <Property Name="balance" Type="numeric" Precision="10" Scale="2" />
+        </EntityType>
+        <Association Name="FK__tblAuthenti__uid__4F7CD00D">
+          <End Role="tblUsers" Type="Self.tblUsers" Multiplicity="0..1" />
+          <End Role="tblAuthenticate" Type="Self.tblAuthenticate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUsers">
+              <PropertyRef Name="uid" />
+            </Principal>
+            <Dependent Role="tblAuthenticate">
+              <PropertyRef Name="uid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblSessions__uid__5629CD9C">
+          <End Role="tblUsers" Type="Self.tblUsers" Multiplicity="0..1" />
+          <End Role="tblSessionsData" Type="Self.tblSessionsData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUsers">
+              <PropertyRef Name="uid" />
+            </Principal>
+            <Dependent Role="tblSessionsData">
+              <PropertyRef Name="uid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblStocks__added__59FA5E80">
+          <End Role="tblUsers" Type="Self.tblUsers" Multiplicity="0..1" />
+          <End Role="tblStocks" Type="Self.tblStocks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUsers">
+              <PropertyRef Name="uid" />
+            </Principal>
+            <Dependent Role="tblStocks">
+              <PropertyRef Name="addedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblStocks__stock__5CD6CB2B">
+          <End Role="tblStocks" Type="Self.tblStocks" Multiplicity="0..1" />
+          <End Role="tblStocksPrice" Type="Self.tblStocksPrice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblStocks">
+              <PropertyRef Name="stockId" />
+            </Principal>
+            <Dependent Role="tblStocksPrice">
+              <PropertyRef Name="stockId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblStocks__stock__619B8048">
+          <End Role="tblStocks" Type="Self.tblStocks" Multiplicity="0..1" />
+          <End Role="tblStocksHistory" Type="Self.tblStocksHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblStocks">
+              <PropertyRef Name="stockId" />
+            </Principal>
+            <Dependent Role="tblStocksHistory">
+              <PropertyRef Name="stockId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblTradeR__stock__656C112C">
+          <End Role="tblStocks" Type="Self.tblStocks" Multiplicity="0..1" />
+          <End Role="tblTradeRequests" Type="Self.tblTradeRequests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblStocks">
+              <PropertyRef Name="stockId" />
+            </Principal>
+            <Dependent Role="tblTradeRequests">
+              <PropertyRef Name="stockId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblTradeReq__uid__6477ECF3">
+          <End Role="tblUsers" Type="Self.tblUsers" Multiplicity="0..1" />
+          <End Role="tblTradeRequests" Type="Self.tblTradeRequests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUsers">
+              <PropertyRef Name="uid" />
+            </Principal>
+            <Dependent Role="tblTradeRequests">
+              <PropertyRef Name="uid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblTransa__buyer__693CA210">
+          <End Role="tblTradeRequests" Type="Self.tblTradeRequests" Multiplicity="0..1" />
+          <End Role="tblTransactions" Type="Self.tblTransactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTradeRequests">
+              <PropertyRef Name="requestId" />
+            </Principal>
+            <Dependent Role="tblTransactions">
+              <PropertyRef Name="buyerReqId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblTransa__selle__6A30C649">
+          <End Role="tblTradeRequests" Type="Self.tblTradeRequests" Multiplicity="0..1" />
+          <End Role="tblTransactions" Type="Self.tblTransactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTradeRequests">
+              <PropertyRef Name="requestId" />
+            </Principal>
+            <Dependent Role="tblTransactions">
+              <PropertyRef Name="sellerReqId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblWallet__uid__534D60F1">
+          <End Role="tblUsers" Type="Self.tblUsers" Multiplicity="0..1" />
+          <End Role="tblWallet" Type="Self.tblWallet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUsers">
+              <PropertyRef Name="uid" />
+            </Principal>
+            <Dependent Role="tblWallet">
+              <PropertyRef Name="uid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="StpDBModelStoreContainer">
+          <EntitySet Name="tblAuthenticate" EntityType="Self.tblAuthenticate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblSessionsData" EntityType="Self.tblSessionsData" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblStocks" EntityType="Self.tblStocks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblStocksHistory" EntityType="Self.tblStocksHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblStocksPrice" EntityType="Self.tblStocksPrice" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblTradeRequests" EntityType="Self.tblTradeRequests" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblTransactions" EntityType="Self.tblTransactions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblUsers" EntityType="Self.tblUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblWallet" EntityType="Self.tblWallet" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__tblAuthenti__uid__4F7CD00D" Association="Self.FK__tblAuthenti__uid__4F7CD00D">
+            <End Role="tblUsers" EntitySet="tblUsers" />
+            <End Role="tblAuthenticate" EntitySet="tblAuthenticate" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblSessions__uid__5629CD9C" Association="Self.FK__tblSessions__uid__5629CD9C">
+            <End Role="tblUsers" EntitySet="tblUsers" />
+            <End Role="tblSessionsData" EntitySet="tblSessionsData" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblStocks__added__59FA5E80" Association="Self.FK__tblStocks__added__59FA5E80">
+            <End Role="tblUsers" EntitySet="tblUsers" />
+            <End Role="tblStocks" EntitySet="tblStocks" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblStocks__stock__5CD6CB2B" Association="Self.FK__tblStocks__stock__5CD6CB2B">
+            <End Role="tblStocks" EntitySet="tblStocks" />
+            <End Role="tblStocksPrice" EntitySet="tblStocksPrice" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblStocks__stock__619B8048" Association="Self.FK__tblStocks__stock__619B8048">
+            <End Role="tblStocks" EntitySet="tblStocks" />
+            <End Role="tblStocksHistory" EntitySet="tblStocksHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblTradeR__stock__656C112C" Association="Self.FK__tblTradeR__stock__656C112C">
+            <End Role="tblStocks" EntitySet="tblStocks" />
+            <End Role="tblTradeRequests" EntitySet="tblTradeRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblTradeReq__uid__6477ECF3" Association="Self.FK__tblTradeReq__uid__6477ECF3">
+            <End Role="tblUsers" EntitySet="tblUsers" />
+            <End Role="tblTradeRequests" EntitySet="tblTradeRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblTransa__buyer__693CA210" Association="Self.FK__tblTransa__buyer__693CA210">
+            <End Role="tblTradeRequests" EntitySet="tblTradeRequests" />
+            <End Role="tblTransactions" EntitySet="tblTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblTransa__selle__6A30C649" Association="Self.FK__tblTransa__selle__6A30C649">
+            <End Role="tblTradeRequests" EntitySet="tblTradeRequests" />
+            <End Role="tblTransactions" EntitySet="tblTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblWallet__uid__534D60F1" Association="Self.FK__tblWallet__uid__534D60F1">
+            <End Role="tblUsers" EntitySet="tblUsers" />
+            <End Role="tblWallet" EntitySet="tblWallet" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="StpDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tblAuthenticate">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="uid" Type="Int32" />
+          <Property Name="userName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="dateAdded" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tblUser" Relationship="Self.FK__tblAuthenti__uid__4F7CD00D" FromRole="tblAuthenticate" ToRole="tblUsers" />
+        </EntityType>
+        <EntityType Name="tblSessionsData">
+          <Key>
+            <PropertyRef Name="sessionId" />
+          </Key>
+          <Property Name="sessionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="uid" Type="Int32" />
+          <Property Name="loginTime" Type="DateTime" Precision="3" />
+          <Property Name="logoutTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tblUser" Relationship="Self.FK__tblSessions__uid__5629CD9C" FromRole="tblSessionsData" ToRole="tblUsers" />
+        </EntityType>
+        <EntityType Name="tblStock">
+          <Key>
+            <PropertyRef Name="stockId" />
+          </Key>
+          <Property Name="stockId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="stockName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="quantity" Type="Int32" />
+          <Property Name="quantity_remaining" Type="Int32" />
+          <Property Name="addedBy" Type="Int32" />
+          <Property Name="status" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="tblUser" Relationship="Self.FK__tblStocks__added__59FA5E80" FromRole="tblStocks" ToRole="tblUsers" />
+          <NavigationProperty Name="tblStocksPrices" Relationship="Self.FK__tblStocks__stock__5CD6CB2B" FromRole="tblStocks" ToRole="tblStocksPrice" />
+          <NavigationProperty Name="tblStocksHistories" Relationship="Self.FK__tblStocks__stock__619B8048" FromRole="tblStocks" ToRole="tblStocksHistory" />
+          <NavigationProperty Name="tblTradeRequests" Relationship="Self.FK__tblTradeR__stock__656C112C" FromRole="tblStocks" ToRole="tblTradeRequests" />
+        </EntityType>
+        <EntityType Name="tblStocksHistory">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="date" Type="DateTime" Precision="3" />
+          <Property Name="stockId" Type="Int32" />
+          <Property Name="openingPrice" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="closingPrice" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="lowPrice" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="highPrice" Type="Decimal" Precision="10" Scale="2" />
+          <NavigationProperty Name="tblStock" Relationship="Self.FK__tblStocks__stock__619B8048" FromRole="tblStocksHistory" ToRole="tblStocks" />
+        </EntityType>
+        <EntityType Name="tblStocksPrice">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="stockId" Type="Int32" />
+          <Property Name="timeOfDay" Type="DateTime" Precision="3" />
+          <Property Name="currentPrice" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="lowPrice" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="highPrice" Type="Decimal" Precision="10" Scale="2" />
+          <NavigationProperty Name="tblStock" Relationship="Self.FK__tblStocks__stock__5CD6CB2B" FromRole="tblStocksPrice" ToRole="tblStocks" />
+        </EntityType>
+        <EntityType Name="tblTradeRequest">
+          <Key>
+            <PropertyRef Name="requestId" />
+          </Key>
+          <Property Name="requestId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="uid" Type="Int32" />
+          <Property Name="requestType" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="stockId" Type="Int32" />
+          <Property Name="requestQty" Type="Int32" />
+          <Property Name="remainingQty" Type="Int32" />
+          <Property Name="requestPrice" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="requestTime" Type="DateTime" Precision="3" />
+          <Property Name="requestStatus" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="tblStock" Relationship="Self.FK__tblTradeR__stock__656C112C" FromRole="tblTradeRequests" ToRole="tblStocks" />
+          <NavigationProperty Name="tblUser" Relationship="Self.FK__tblTradeReq__uid__6477ECF3" FromRole="tblTradeRequests" ToRole="tblUsers" />
+          <NavigationProperty Name="tblTransactions" Relationship="Self.FK__tblTransa__buyer__693CA210" FromRole="tblTradeRequests" ToRole="tblTransactions" />
+          <NavigationProperty Name="tblTransactions1" Relationship="Self.FK__tblTransa__selle__6A30C649" FromRole="tblTradeRequests" ToRole="tblTransactions" />
+        </EntityType>
+        <EntityType Name="tblTransaction">
+          <Key>
+            <PropertyRef Name="transactionId" />
+          </Key>
+          <Property Name="transactionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="buyerReqId" Type="Int32" />
+          <Property Name="sellerReqId" Type="Int32" />
+          <Property Name="price" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="quantity" Type="Int32" />
+          <Property Name="time" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tblTradeRequest" Relationship="Self.FK__tblTransa__buyer__693CA210" FromRole="tblTransactions" ToRole="tblTradeRequests" />
+          <NavigationProperty Name="tblTradeRequest1" Relationship="Self.FK__tblTransa__selle__6A30C649" FromRole="tblTransactions" ToRole="tblTradeRequests" />
+        </EntityType>
+        <EntityType Name="tblUser">
+          <Key>
+            <PropertyRef Name="uid" />
+          </Key>
+          <Property Name="uid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fname" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="lname" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="mobile" Type="Int64" />
+          <Property Name="dob" Type="DateTime" Precision="0" />
+          <Property Name="address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="role" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="status" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="tblAuthenticates" Relationship="Self.FK__tblAuthenti__uid__4F7CD00D" FromRole="tblUsers" ToRole="tblAuthenticate" />
+          <NavigationProperty Name="tblSessionsDatas" Relationship="Self.FK__tblSessions__uid__5629CD9C" FromRole="tblUsers" ToRole="tblSessionsData" />
+          <NavigationProperty Name="tblStocks" Relationship="Self.FK__tblStocks__added__59FA5E80" FromRole="tblUsers" ToRole="tblStocks" />
+          <NavigationProperty Name="tblTradeRequests" Relationship="Self.FK__tblTradeReq__uid__6477ECF3" FromRole="tblUsers" ToRole="tblTradeRequests" />
+          <NavigationProperty Name="tblWallets" Relationship="Self.FK__tblWallet__uid__534D60F1" FromRole="tblUsers" ToRole="tblWallet" />
+        </EntityType>
+        <EntityType Name="tblWallet">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="uid" Type="Int32" />
+          <Property Name="balance" Type="Decimal" Precision="10" Scale="2" />
+          <NavigationProperty Name="tblUser" Relationship="Self.FK__tblWallet__uid__534D60F1" FromRole="tblWallet" ToRole="tblUsers" />
+        </EntityType>
+        <Association Name="FK__tblAuthenti__uid__4F7CD00D">
+          <End Role="tblUsers" Type="Self.tblUser" Multiplicity="0..1" />
+          <End Role="tblAuthenticate" Type="Self.tblAuthenticate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUsers">
+              <PropertyRef Name="uid" />
+            </Principal>
+            <Dependent Role="tblAuthenticate">
+              <PropertyRef Name="uid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblSessions__uid__5629CD9C">
+          <End Role="tblUsers" Type="Self.tblUser" Multiplicity="0..1" />
+          <End Role="tblSessionsData" Type="Self.tblSessionsData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUsers">
+              <PropertyRef Name="uid" />
+            </Principal>
+            <Dependent Role="tblSessionsData">
+              <PropertyRef Name="uid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblStocks__added__59FA5E80">
+          <End Role="tblUsers" Type="Self.tblUser" Multiplicity="0..1" />
+          <End Role="tblStocks" Type="Self.tblStock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUsers">
+              <PropertyRef Name="uid" />
+            </Principal>
+            <Dependent Role="tblStocks">
+              <PropertyRef Name="addedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblStocks__stock__5CD6CB2B">
+          <End Role="tblStocks" Type="Self.tblStock" Multiplicity="0..1" />
+          <End Role="tblStocksPrice" Type="Self.tblStocksPrice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblStocks">
+              <PropertyRef Name="stockId" />
+            </Principal>
+            <Dependent Role="tblStocksPrice">
+              <PropertyRef Name="stockId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblStocks__stock__619B8048">
+          <End Role="tblStocks" Type="Self.tblStock" Multiplicity="0..1" />
+          <End Role="tblStocksHistory" Type="Self.tblStocksHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblStocks">
+              <PropertyRef Name="stockId" />
+            </Principal>
+            <Dependent Role="tblStocksHistory">
+              <PropertyRef Name="stockId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblTradeR__stock__656C112C">
+          <End Role="tblStocks" Type="Self.tblStock" Multiplicity="0..1" />
+          <End Role="tblTradeRequests" Type="Self.tblTradeRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblStocks">
+              <PropertyRef Name="stockId" />
+            </Principal>
+            <Dependent Role="tblTradeRequests">
+              <PropertyRef Name="stockId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblTradeReq__uid__6477ECF3">
+          <End Role="tblUsers" Type="Self.tblUser" Multiplicity="0..1" />
+          <End Role="tblTradeRequests" Type="Self.tblTradeRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUsers">
+              <PropertyRef Name="uid" />
+            </Principal>
+            <Dependent Role="tblTradeRequests">
+              <PropertyRef Name="uid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblTransa__buyer__693CA210">
+          <End Role="tblTradeRequests" Type="Self.tblTradeRequest" Multiplicity="0..1" />
+          <End Role="tblTransactions" Type="Self.tblTransaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTradeRequests">
+              <PropertyRef Name="requestId" />
+            </Principal>
+            <Dependent Role="tblTransactions">
+              <PropertyRef Name="buyerReqId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblTransa__selle__6A30C649">
+          <End Role="tblTradeRequests" Type="Self.tblTradeRequest" Multiplicity="0..1" />
+          <End Role="tblTransactions" Type="Self.tblTransaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTradeRequests">
+              <PropertyRef Name="requestId" />
+            </Principal>
+            <Dependent Role="tblTransactions">
+              <PropertyRef Name="sellerReqId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblWallet__uid__534D60F1">
+          <End Role="tblUsers" Type="Self.tblUser" Multiplicity="0..1" />
+          <End Role="tblWallet" Type="Self.tblWallet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUsers">
+              <PropertyRef Name="uid" />
+            </Principal>
+            <Dependent Role="tblWallet">
+              <PropertyRef Name="uid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="StpDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblAuthenticates" EntityType="Self.tblAuthenticate" />
+          <EntitySet Name="tblSessionsDatas" EntityType="Self.tblSessionsData" />
+          <EntitySet Name="tblStocks" EntityType="Self.tblStock" />
+          <EntitySet Name="tblStocksHistories" EntityType="Self.tblStocksHistory" />
+          <EntitySet Name="tblStocksPrices" EntityType="Self.tblStocksPrice" />
+          <EntitySet Name="tblTradeRequests" EntityType="Self.tblTradeRequest" />
+          <EntitySet Name="tblTransactions" EntityType="Self.tblTransaction" />
+          <EntitySet Name="tblUsers" EntityType="Self.tblUser" />
+          <EntitySet Name="tblWallets" EntityType="Self.tblWallet" />
+          <AssociationSet Name="FK__tblAuthenti__uid__4F7CD00D" Association="Self.FK__tblAuthenti__uid__4F7CD00D">
+            <End Role="tblUsers" EntitySet="tblUsers" />
+            <End Role="tblAuthenticate" EntitySet="tblAuthenticates" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblSessions__uid__5629CD9C" Association="Self.FK__tblSessions__uid__5629CD9C">
+            <End Role="tblUsers" EntitySet="tblUsers" />
+            <End Role="tblSessionsData" EntitySet="tblSessionsDatas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblStocks__added__59FA5E80" Association="Self.FK__tblStocks__added__59FA5E80">
+            <End Role="tblUsers" EntitySet="tblUsers" />
+            <End Role="tblStocks" EntitySet="tblStocks" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblStocks__stock__5CD6CB2B" Association="Self.FK__tblStocks__stock__5CD6CB2B">
+            <End Role="tblStocks" EntitySet="tblStocks" />
+            <End Role="tblStocksPrice" EntitySet="tblStocksPrices" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblStocks__stock__619B8048" Association="Self.FK__tblStocks__stock__619B8048">
+            <End Role="tblStocks" EntitySet="tblStocks" />
+            <End Role="tblStocksHistory" EntitySet="tblStocksHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblTradeR__stock__656C112C" Association="Self.FK__tblTradeR__stock__656C112C">
+            <End Role="tblStocks" EntitySet="tblStocks" />
+            <End Role="tblTradeRequests" EntitySet="tblTradeRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblTradeReq__uid__6477ECF3" Association="Self.FK__tblTradeReq__uid__6477ECF3">
+            <End Role="tblUsers" EntitySet="tblUsers" />
+            <End Role="tblTradeRequests" EntitySet="tblTradeRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblTransa__buyer__693CA210" Association="Self.FK__tblTransa__buyer__693CA210">
+            <End Role="tblTradeRequests" EntitySet="tblTradeRequests" />
+            <End Role="tblTransactions" EntitySet="tblTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblTransa__selle__6A30C649" Association="Self.FK__tblTransa__selle__6A30C649">
+            <End Role="tblTradeRequests" EntitySet="tblTradeRequests" />
+            <End Role="tblTransactions" EntitySet="tblTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblWallet__uid__534D60F1" Association="Self.FK__tblWallet__uid__534D60F1">
+            <End Role="tblUsers" EntitySet="tblUsers" />
+            <End Role="tblWallet" EntitySet="tblWallets" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="StpDBModelStoreContainer" CdmEntityContainer="StpDBEntities">
+          <EntitySetMapping Name="tblAuthenticates">
+            <EntityTypeMapping TypeName="StpDBModel.tblAuthenticate">
+              <MappingFragment StoreEntitySet="tblAuthenticate">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="uid" ColumnName="uid" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="dateAdded" ColumnName="dateAdded" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblSessionsDatas">
+            <EntityTypeMapping TypeName="StpDBModel.tblSessionsData">
+              <MappingFragment StoreEntitySet="tblSessionsData">
+                <ScalarProperty Name="sessionId" ColumnName="sessionId" />
+                <ScalarProperty Name="uid" ColumnName="uid" />
+                <ScalarProperty Name="loginTime" ColumnName="loginTime" />
+                <ScalarProperty Name="logoutTime" ColumnName="logoutTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblStocks">
+            <EntityTypeMapping TypeName="StpDBModel.tblStock">
+              <MappingFragment StoreEntitySet="tblStocks">
+                <ScalarProperty Name="stockId" ColumnName="stockId" />
+                <ScalarProperty Name="stockName" ColumnName="stockName" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="quantity_remaining" ColumnName="quantity_remaining" />
+                <ScalarProperty Name="addedBy" ColumnName="addedBy" />
+                <ScalarProperty Name="status" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblStocksHistories">
+            <EntityTypeMapping TypeName="StpDBModel.tblStocksHistory">
+              <MappingFragment StoreEntitySet="tblStocksHistory">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="stockId" ColumnName="stockId" />
+                <ScalarProperty Name="openingPrice" ColumnName="openingPrice" />
+                <ScalarProperty Name="closingPrice" ColumnName="closingPrice" />
+                <ScalarProperty Name="lowPrice" ColumnName="lowPrice" />
+                <ScalarProperty Name="highPrice" ColumnName="highPrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblStocksPrices">
+            <EntityTypeMapping TypeName="StpDBModel.tblStocksPrice">
+              <MappingFragment StoreEntitySet="tblStocksPrice">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="stockId" ColumnName="stockId" />
+                <ScalarProperty Name="timeOfDay" ColumnName="timeOfDay" />
+                <ScalarProperty Name="currentPrice" ColumnName="currentPrice" />
+                <ScalarProperty Name="lowPrice" ColumnName="lowPrice" />
+                <ScalarProperty Name="highPrice" ColumnName="highPrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblTradeRequests">
+            <EntityTypeMapping TypeName="StpDBModel.tblTradeRequest">
+              <MappingFragment StoreEntitySet="tblTradeRequests">
+                <ScalarProperty Name="requestId" ColumnName="requestId" />
+                <ScalarProperty Name="uid" ColumnName="uid" />
+                <ScalarProperty Name="requestType" ColumnName="requestType" />
+                <ScalarProperty Name="stockId" ColumnName="stockId" />
+                <ScalarProperty Name="requestQty" ColumnName="requestQty" />
+                <ScalarProperty Name="remainingQty" ColumnName="remainingQty" />
+                <ScalarProperty Name="requestPrice" ColumnName="requestPrice" />
+                <ScalarProperty Name="requestTime" ColumnName="requestTime" />
+                <ScalarProperty Name="requestStatus" ColumnName="requestStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblTransactions">
+            <EntityTypeMapping TypeName="StpDBModel.tblTransaction">
+              <MappingFragment StoreEntitySet="tblTransactions">
+                <ScalarProperty Name="transactionId" ColumnName="transactionId" />
+                <ScalarProperty Name="buyerReqId" ColumnName="buyerReqId" />
+                <ScalarProperty Name="sellerReqId" ColumnName="sellerReqId" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="time" ColumnName="time" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblUsers">
+            <EntityTypeMapping TypeName="StpDBModel.tblUser">
+              <MappingFragment StoreEntitySet="tblUsers">
+                <ScalarProperty Name="uid" ColumnName="uid" />
+                <ScalarProperty Name="fname" ColumnName="fname" />
+                <ScalarProperty Name="lname" ColumnName="lname" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="mobile" ColumnName="mobile" />
+                <ScalarProperty Name="dob" ColumnName="dob" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="role" ColumnName="role" />
+                <ScalarProperty Name="status" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblWallets">
+            <EntityTypeMapping TypeName="StpDBModel.tblWallet">
+              <MappingFragment StoreEntitySet="tblWallet">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="uid" ColumnName="uid" />
+                <ScalarProperty Name="balance" ColumnName="balance" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

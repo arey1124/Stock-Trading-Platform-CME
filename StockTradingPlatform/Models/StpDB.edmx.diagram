@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3c9b5e5ab58c407989ab072d8e3e8902" Name="Diagram1">
+        <EntityTypeShape EntityType="StpDBModel.tblAuthenticate" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="StpDBModel.tblSessionsData" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="StpDBModel.tblStock" Width="1.5" PointX="3" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="StpDBModel.tblStocksHistory" Width="1.5" PointX="5.25" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="StpDBModel.tblStocksPrice" Width="1.5" PointX="5.25" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="StpDBModel.tblTradeRequest" Width="1.5" PointX="8.25" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="StpDBModel.tblTransaction" Width="1.5" PointX="10.5" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="StpDBModel.tblUser" Width="1.5" PointX="0.75" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="StpDBModel.tblWallet" Width="1.5" PointX="3" PointY="16" IsExpanded="true" />
+        <AssociationConnector Association="StpDBModel.FK__tblAuthenti__uid__4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="StpDBModel.FK__tblSessions__uid__5629CD9C" ManuallyRouted="false" />
+        <AssociationConnector Association="StpDBModel.FK__tblStocks__added__59FA5E80" ManuallyRouted="false" />
+        <AssociationConnector Association="StpDBModel.FK__tblStocks__stock__5CD6CB2B" ManuallyRouted="false" />
+        <AssociationConnector Association="StpDBModel.FK__tblStocks__stock__619B8048" ManuallyRouted="false" />
+        <AssociationConnector Association="StpDBModel.FK__tblTradeR__stock__656C112C" ManuallyRouted="false" />
+        <AssociationConnector Association="StpDBModel.FK__tblTradeReq__uid__6477ECF3" ManuallyRouted="false" />
+        <AssociationConnector Association="StpDBModel.FK__tblTransa__buyer__693CA210" ManuallyRouted="false" />
+        <AssociationConnector Association="StpDBModel.FK__tblTransa__selle__6A30C649" ManuallyRouted="false" />
+        <AssociationConnector Association="StpDBModel.FK__tblWallet__uid__534D60F1" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
