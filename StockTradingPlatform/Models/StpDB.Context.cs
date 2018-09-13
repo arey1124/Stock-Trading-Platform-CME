@@ -31,7 +31,6 @@ namespace StockTradingPlatform.Models
         public virtual DbSet<tblStocksHistory> tblStocksHistories { get; set; }
         public virtual DbSet<tblStocksPrice> tblStocksPrices { get; set; }
         public virtual DbSet<tblTradeRequest> tblTradeRequests { get; set; }
-        public virtual DbSet<tblTransaction> tblTransactions { get; set; }
         public virtual DbSet<tblUser> tblUsers { get; set; }
         public virtual DbSet<tblWallet> tblWallets { get; set; }
     }

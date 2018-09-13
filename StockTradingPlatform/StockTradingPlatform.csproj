@@ -161,9 +161,6 @@
     <Compile Include="Models\tblTradeRequest.cs">
       <DependentUpon>StpDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tblTransaction.cs">
-      <DependentUpon>StpDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\tblUser.cs">
       <DependentUpon>StpDB.tt</DependentUpon>
     </Compile>
