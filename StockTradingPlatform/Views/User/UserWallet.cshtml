@@ -1,0 +1,99 @@
+﻿
+
+
+@model StockTradingPlatform.Models.UserManager
+
+@{
+    ViewBag.Title = "UserWallet";
+    Layout = "~/Views/Shared/_UserDashboard.cshtml";
+
+}
+<h2 style="margin-top:20px;">UserWallet</h2>
+
+<br />
+<link href="~/Styles/OtherHelperStyles/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+<div class="container">
+    <div class="row content">
+
+
+        <div class="col-sm-8 card">
+            <br />
+            <h4>User Holdings</h4>
+            <br />
+            <table class="table ">
+                <thead class="thead-dark">
+                    <tr>
+
+                        <th scope="col">Stock Name</th>
+                        <th scope="col">Qty</th>
+                        <th scope="col">Current Price</th>
+                        <th scope="col">Total Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        double total = 0;
+                    }
+
+                    @foreach (var item in Model.tblHoldings)
+                    {
+
+                        double x = (double)item.Qty;
+                        string price = Model.StpDBEntities.getCurrentprice(item.stockId).FirstOrDefault().ToString();
+                        double z = x * (Convert.ToDouble(price));
+                        total += z;
+
+
+                        <tr>
+                            <th scope="row"> @item.tblStocks.stockName</th>
+                            <td>@x</td>
+                            <td>@price</td>
+                            <td>@z</td>
+
+                        </tr>
+
+                    }
+
+                </tbody>
+            </table>
+
+
+
+        </div>
+
+        <div class="col-sm-4 ">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">Wallet Summary :</h5>
+                </div>
+                <div class="card-body">
+                    @{
+
+                        double balance = (double)Model.tblWallet.balance;
+                        double total_amount = total + balance;
+                        Html.Display("hey");
+                    }
+                    <table class="table ">
+                        <tr>
+                            <td>Wallet Balance:</td>
+
+                            <td><i class="fa fa-inr" aria-hidden="true"></i>  @(String.Format("{0:n}", balance))</td>
+                        </tr>
+                        <tr>
+                            <td>Profit/Loss :</td>
+                            <td><i class="fa fa-inr" aria-hidden="true">  @(String.Format("{0:n}", total)) </i></td>
+                        </tr>
+
+                        <tr class="table-info">
+                            <td>Total Amount :</td>
+                            <td><i class="fa fa-inr" aria-hidden="true">  @(String.Format("{0:n}", total_amount))</i></td>
+                        </tr>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,43 @@
+﻿body, html {
+    height: 100%;
+    padding-bottom:0px;
+}
+
+.form-inline > * {
+    margin: 5px 5px;
+}
+
+.form_container {
+    width: 70%;
+    background-color: powderblue;
+    bottom: 0;
+    height: 100%;
+    margin-top: 0px;
+}
+
+.stk_btn_div {
+    margin-top: 5em;
+    text-align: center;
+    margin-bottom:6em;
+}
+
+.button {
+    width: 200px;
+}
+
+.stp_form {
+    margin-right: 20px;
+}
+
+.form_part1 {
+    margin-bottom: 4em;
+    margin-top: 3em;
+}
+
+.form-part2 {
+    margin-bottom: 4em
+}
+
+.stk_select {
+    width: 200px;
+}

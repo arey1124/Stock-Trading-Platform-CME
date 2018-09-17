@@ -1,0 +1,57 @@
+﻿@using StockTradingPlatform.Models
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/_UserDashboard.cshtml";
+    var user = ViewBag.user as tblUser;
+    string userName = ViewBag.userName;
+}
+
+
+<div class="container rounded">
+    <div class="row">
+        <div class="card col-sm-3" style="background-color: #fff;margin: 20px;height: 300px;">
+            <img class="card-img-top" src="~/Images/man.png" alt="Card image cap" style="padding-top: 20px;padding-left: 50px;padding-right: 50px;">
+            <div class="card-body">
+                <p class="card-text text-center">@user.fname  @user.lname</p>
+                <a href=""><input class="btn btn-outline-primary" value="Edit Profile" style="margin:5px;" /></a>
+            </div>
+        </div>
+        <div class="card col-sm-8" style="background-color: #fff;padding: 10px;margin: 20px;">
+            <div class="card-body">
+                <table class="table table-striped">
+                    <tbody>
+                        <tr>
+                            <th scope="row">First Name</th>
+                            <td>@user.fname</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Last Name</th>
+                            <td>@user.lname</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Email</th>
+                            <td>@user.email</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Phone Number</th>
+                            <td>@user.mobile</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">User Name</th>
+                            <td>@userName</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Address</th>
+                            <td>@user.address</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Date Of Birth</th>
+                            <td>@user.dob</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,73 @@
+﻿
+@model IEnumerable<StockTradingPlatform.Models.UserTransactionsDetailByUid_Result>
+@using StockTradingPlatform.Models
+
+<table class="table table-striped bg-white">
+    <tr>
+        <th>
+            Transaction Id
+        </th>
+        <th>
+            Transaction Type
+        </th>
+        <th>
+            Stock
+        </th>
+        <th>
+            Price
+        </th>
+        <th>
+            Quantity
+        </th>
+        <th>
+            Amount
+        </th>
+        <th>
+            Time
+        </th>
+    </tr>
+
+
+    @foreach (var item in Model.ToList())
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.tid)
+            </td>
+            @if (item.reqType == "B")
+            {
+                <td>Buy</td>
+            }
+            else
+            {
+                <td>Sell</td>
+            }
+            <td>
+                @Html.DisplayFor(modelItem => item.stockName)
+            </td>
+            <td>
+                @{
+                    double price = (double)item.reqPrice;
+                }
+                Rs.@Html.DisplayFor(modelItem => item.reqPrice)
+            </td>
+            <td>
+                @{
+                    int qty = (int)item.qty;
+                }
+                @qty
+            </td>
+            <td>
+                @{
+                    double amount = price * (double)qty;
+                }
+                Rs.@amount
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.time)
+            </td>
+        </tr>
+    }
+</table>
+
+

@@ -22,6 +22,7 @@ namespace StockTradingPlatform.Models
             this.tblStocks = new HashSet<tblStock>();
             this.tblTradeRequests = new HashSet<tblTradeRequest>();
             this.tblWallets = new HashSet<tblWallet>();
+            this.tblHoldings = new HashSet<tblHoldings>();
         }
     
         public int uid { get; set; }
@@ -44,5 +45,7 @@ namespace StockTradingPlatform.Models
         public virtual ICollection<tblTradeRequest> tblTradeRequests { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblWallet> tblWallets { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblHoldings> tblHoldings { get; set; }
     }
 }

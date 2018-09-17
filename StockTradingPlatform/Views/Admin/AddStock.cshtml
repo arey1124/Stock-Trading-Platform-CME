@@ -1,0 +1,78 @@
+﻿@{
+    Layout = "~/Views/Shared/Admin_Layout.cshtml";
+
+}
+
+@model StockTradingPlatform.Models.StockManager
+@{
+    ViewBag.Title = "AddStock";
+
+}
+
+
+<script src="~/Scripts/Admin/Add_Stock.js"></script>
+<link href="~/Styles/Add_Stock.css" rel="stylesheet" />
+
+
+    <div class="text-center text-primary"><h2>Add New Stock</h2></div>
+
+    @using (Html.BeginForm())
+    {
+    <div class="container">
+
+
+        <div class="form_part1">
+            <h4 class="text-primary font-weight-bold">Stock Details:</h4>
+            <div class="form-group form-inline ">
+                <div class="form-group stp_form">
+
+
+                    @Html.TextBoxFor(m => m.tblStock.stockName, new { @class = "form-control border border-primary", @placeholder = "Stock Name", @onblur = "validateName();" })
+                </div>
+                <div class="form-group stp_form">
+
+                    @Html.TextBoxFor(m => m.tblStocksPrice.currentPrice, new { @class = "form-control border border-primary", @placeholder = "Stock Price", @onblur = "validateStockPrice();" })
+                </div>
+                <div class="form-group stp_form">
+
+                    @Html.TextBoxFor(m => m.tblStock.quantity, new { @class = "form-control border border-primary", @placeholder = "Quantity", @onblur = "validateQuantity();", @type = "number" })
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="form_part2">
+            <h4 class="text-primary font-weight-bold">Stock Status:</h4>
+            <div class="form-group form-inline stp_form stk_select">
+                @Html.DropDownListFor(m =>m.tblStock.status ,
+                new SelectList(
+                                new List<SelectListItem>
+                                    {
+
+                                        new SelectListItem { Selected = true, Text = "Active", Value = "A"},
+                                        new SelectListItem { Selected = false, Text = "In Active", Value ="I" },
+                                        }, "Value", "Text"
+                        ),new { @class = "form-control border border-primary" })
+
+
+
+
+
+            </div>
+        </div>
+        <div class="  stk_btn_div">
+            <Button type="submit" value="Create" class="button btn btn-primary btn_submit">@ViewBag.name</Button>
+
+        </div>
+
+    </div>
+
+
+    }
+   
+
+
+
+

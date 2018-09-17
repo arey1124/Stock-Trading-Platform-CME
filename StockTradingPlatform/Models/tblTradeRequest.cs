@@ -14,6 +14,13 @@ namespace StockTradingPlatform.Models
     
     public partial class tblTradeRequest
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tblTradeRequest()
+        {
+            this.tblTransactions = new HashSet<tblTransactions>();
+            this.tblTransactions1 = new HashSet<tblTransactions>();
+        }
+    
         public int requestId { get; set; }
         public Nullable<int> uid { get; set; }
         public string requestType { get; set; }
@@ -26,5 +33,9 @@ namespace StockTradingPlatform.Models
     
         public virtual tblStock tblStock { get; set; }
         public virtual tblUser tblUser { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblTransactions> tblTransactions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblTransactions> tblTransactions1 { get; set; }
     }
 }

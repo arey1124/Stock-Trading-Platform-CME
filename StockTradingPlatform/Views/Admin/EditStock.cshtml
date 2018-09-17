@@ -1,0 +1,88 @@
+﻿
+@{
+    Layout = "~/Views/Shared/Admin_Layout.cshtml";
+
+}
+@model StockTradingPlatform.Models.StockManager
+@{
+    ViewBag.Title = "AddStock";
+
+}
+
+
+<script src="~/Scripts/Admin/Add_Stock.js"></script>
+<link href="~/Styles/Add_Stock.css" rel="stylesheet" />
+
+
+    <div class="text-center text-primary"><h2>@ViewBag.name Stock</h2></div>
+
+    @using (Html.BeginForm())
+    {
+    <div class="container">
+        <div class="form_part1">
+            <h4 class="text-primary font-weight-bold">Stock Details:</h4>
+            <div class="form-group form-inline ">
+                <div class="form-group stp_form">
+
+                    @Html.HiddenFor(m => m.tblStock.stockId)
+                    @Html.HiddenFor(m => m.tblStock.quantity)
+                    @Html.HiddenFor(m => m.tblStock.quantity_remaining)
+                    @Html.HiddenFor(m => m.tblStock.addedBy)
+                    @Html.TextBoxFor(m => m.tblStock.stockName, new { @class = "form-control border border-primary", @placeholder = "Stock Name", @onblur = "validateName();" })
+
+                </div>
+                <div class="form-group stp_form">
+                    @Html.HiddenFor(m => m.tblStocksPrice.id)
+                    @Html.HiddenFor(m => m.tblStocksPrice.stockId)
+                    @Html.TextBoxFor(m => m.tblStocksPrice.currentPrice, new { @class = "form-control border border-primary", @placeholder = "Stock Price", @onblur = "validateStockPrice();" })
+
+                </div>
+
+
+            </div>
+            <br />
+            <h4 class="text-primary font-weight-bold">Stock Quantity: @Html.DisplayFor(m => m.tblStock.quantity)</h4><br />
+            <h4 class="text-primary font-weight-bold">Stock Quantity Remaining: @Html.DisplayFor(m => m.tblStock.quantity_remaining)</h4>
+            <br />
+
+            <h4 class="text-primary font-weight-bold">Add/Subtract Quantity:</h4>
+            <div class="form-group stp_form">
+
+                @Html.TextBoxFor(m => m.qty, new { @class = "form-control border border-primary", @placeholder = "Quantity", @onblur = "validateQuantity();", @type = "number" })
+                <h5 class="text-danger font-weight-bold">@ViewBag.error</h5>
+            </div>
+
+        </div>
+
+        <div class="form_part2">
+            <h4 class="text-primary font-weight-bold">Stock Status:</h4>
+            <div class="form-group form-inline stp_form stk_select">
+                @Html.DropDownListFor(m =>m.tblStock.status ,
+                new SelectList(
+                                new List<SelectListItem>
+                                    {
+
+                                        new SelectListItem { Selected = true, Text = "Active", Value = "A"},
+                                        new SelectListItem { Selected = false, Text = "In Active", Value ="I" },
+                                        }, "Value", "Text"
+                        ),new { @class = "form-control border border-primary" })
+
+
+
+
+
+            </div>
+        </div>
+        <div class="stk_btn_div">
+            <Button type="submit" value="EDit" class="button btn btn-primary btn_submit">@ViewBag.name</Button>
+
+        </div>
+
+    </div>
+
+
+    }
+
+
+
+@Html.ActionLink("Back to List", "List of stocks")

@@ -1,0 +1,100 @@
+﻿@using StockTradingPlatform.Models
+@model IEnumerable<StockTradingPlatform.Models.tblTradeRequest>
+
+
+<table class="table table-striped bg-white">
+    <tr>
+        <th>
+            Request Id
+        </th>
+        <th>
+            Stock
+        </th>
+        <th>
+            Request Type
+        </th>
+        <th>
+            Request Qty
+        </th>
+        <th>
+            Remaining Qty
+        </th>
+        <th>
+            Request Price
+        </th>
+        <th>
+            Request Time
+        </th>
+        <th>
+            Status
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.requestId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tblStock.stockName)
+            </td>
+            @if (item.requestType == "B")
+            {
+                <td>Buy</td>
+            }
+            else
+            {
+                <td>Sell</td>
+            }
+            <td>
+                @Html.DisplayFor(modelItem => item.requestQty)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.remainingQty)
+            </td>
+            <td>
+                Rs.@Html.DisplayFor(modelItem => item.requestPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.requestTime)
+            </td>
+            @if (item.requestStatus == "O")
+            {
+                <td>Open</td>
+            }
+            else if (item.requestStatus == "P")
+            {
+                <td>Partially Filled</td>
+            }
+            else if (item.requestStatus == "C")
+            {
+                <td>Cancelled</td>
+            }
+            else if (item.requestStatus == "D")
+            {
+                <td>Done</td>
+            }
+            @if (item.requestStatus == "O")
+            {
+                <td>
+                    <a href='@Url.Action("CancelRequest",new { id = item.requestId })'><input type="button" value="Cancel" class="btn btn-outline-danger" /></a>
+                    <br /><br />
+                    <a href='@Url.Action("TradeRequest",new { a = 0 , id = item.requestId })'><input type="button" value="Modify" class="btn btn-outline-success" /></a>
+                </td>
+            }
+            else if (item.requestStatus == "P")
+            {
+                <td>
+                    @Html.ActionLink("Cancel", "Cancel", new { id = item.uid })
+                </td>
+            }
+            else
+            {
+                <td></td>
+            }
+        </tr>
+    }
+</table>
+

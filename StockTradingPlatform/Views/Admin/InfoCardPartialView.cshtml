@@ -1,0 +1,57 @@
+﻿
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+<link href="~/Styles/OtherHelperStyles/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+<link href="~/Styles/OtherHelperStyles/Ionicons/css/ionicons.min.css" rel="stylesheet" />
+<link href="~/Styles/OtherHelperStyles/AdminLTE.min.css" rel="stylesheet" />
+
+<div class="row">
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box">
+            <span class="info-box-icon bg-aqua"><i class="fa fa-users"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">Users</span>
+                <span class="info-box-number">@ViewBag.usercount</span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+    </div>
+
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box">
+            <span class="info-box-icon bg-aqua"><i class="fa fa-line-chart"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">Stocks Active</span>
+                <span class="info-box-number">@ViewBag.stockcount</span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+    </div>
+
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box">
+            <span class="info-box-icon bg-aqua"><i class="fa fa-ticket"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">Trade Requests</span>
+                <span class="info-box-number">@ViewBag.traderequestcount</span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box">
+            <span class="info-box-icon bg-aqua"><i class="fa fa-exchange"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">Transactions</span>
+                <span class="info-box-number">@ViewBag.transactionscount</span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+    </div>
+</div>

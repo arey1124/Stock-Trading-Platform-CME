@@ -1,0 +1,92 @@
+﻿@{
+    Layout = "~/Views/Shared/Admin_Layout.cshtml";
+}
+
+@model StockTradingPlatform.Models.TransactionsManager
+
+@{
+    ViewBag.Title = "Transactions";
+}
+
+<div class="container">
+    <h2 style="text-align:center">Transactions</h2></br>
+    <table class="table table-striped">
+        <tr>
+            <th>
+                Transaction Id
+            </th>
+            <th>
+                Buyer Req Id
+            </th>
+            <th>
+                Buyer Name
+            </th>
+            <th>
+                Seller Req Id
+            </th>
+            <th>
+                Seller Name
+            </th>
+            <th>
+                Stock
+            </th>
+            <th>
+                Buy Price
+            </th>
+            <th>
+                Sell Price
+            </th>
+            <th>
+                Quantity
+            </th>
+            <th>
+                Time
+            </th>
+        </tr>
+
+        @foreach (var item in Model.StpDBEntities.tblTransactions)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.transactionId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.buyerReqId)
+                </td>
+                <td>
+                    @{
+                        string buyName = Model.StpDBEntities.getUserName(item.buyerReqId).FirstOrDefault().ToString();
+                    }
+                    @buyName
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.sellerReqId)
+                </td>
+                <td>
+                    @{
+                        string sellName = Model.StpDBEntities.getUserName(item.sellerReqId).FirstOrDefault().ToString();
+                    }
+                    @sellName
+                </td>
+                <td>
+                    @{
+                        string sName = Model.StpDBEntities.getStockName(item.buyerReqId).FirstOrDefault().ToString();
+                    }
+                    @sName
+                </td>
+                <td>
+                    Rs.@Html.DisplayFor(modelItem => item.buyPrice)
+                </td>
+                <td>
+                    Rs.@Html.DisplayFor(modelItem => item.sellPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.time)
+                </td>
+            </tr>
+        }
+    </table>
+</div>

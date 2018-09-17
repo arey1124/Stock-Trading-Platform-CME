@@ -1,0 +1,37 @@
+﻿.login-div {
+    border-color: #007bff;
+    background: #ffffff;
+    width: 400px;
+    height: 400px;
+    padding: 40px;
+    margin-top: -100px;
+}
+
+.login-logo {
+    width: 100%;
+}
+
+.form-div {
+    margin-top: 30px;
+}
+
+.forgot-pass {
+    margin-top: 20px;
+}
+
+.image-bottom {
+    width: 400px;
+    position: fixed;
+    right: 0px;
+    bottom: 0px;
+}
+
+.curve-image-top {
+    position: relative;
+    width: 50%;
+    display: block;
+}
+
+body {
+    background-color: powderblue;
+}

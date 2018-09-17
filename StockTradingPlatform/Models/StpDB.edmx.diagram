@@ -10,7 +10,7 @@
         <EntityTypeShape EntityType="StpDBModel.tblStock" Width="1.5" PointX="3" PointY="10.875" IsExpanded="true" />
         <EntityTypeShape EntityType="StpDBModel.tblStocksHistory" Width="1.5" PointX="5.25" PointY="9.5" IsExpanded="true" />
         <EntityTypeShape EntityType="StpDBModel.tblStocksPrice" Width="1.5" PointX="5.25" PointY="12.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="StpDBModel.tblTradeRequest" Width="1.5" PointX="8.25" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="StpDBModel.tblTradeRequest" Width="1.5" PointX="9.5" PointY="9.375" IsExpanded="true" />
         <EntityTypeShape EntityType="StpDBModel.tblUser" Width="1.5" PointX="0.75" PointY="9" IsExpanded="true" />
         <EntityTypeShape EntityType="StpDBModel.tblWallet" Width="1.5" PointX="3" PointY="16" IsExpanded="true" />
         <AssociationConnector Association="StpDBModel.FK__tblAuthenti__uid__4F7CD00D" ManuallyRouted="false" />
@@ -21,6 +21,12 @@
         <AssociationConnector Association="StpDBModel.FK__tblTradeR__stock__656C112C" ManuallyRouted="false" />
         <AssociationConnector Association="StpDBModel.FK__tblTradeReq__uid__6477ECF3" ManuallyRouted="false" />
         <AssociationConnector Association="StpDBModel.FK__tblWallet__uid__534D60F1" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="StpDBModel.tblTransactions" Width="1.5" PointX="11.75" PointY="9.75" />
+        <AssociationConnector Association="StpDBModel.FK__tblTransa__buyer__6E01572D" />
+        <AssociationConnector Association="StpDBModel.FK__tblTransa__selle__6EF57B66" />
+        <EntityTypeShape EntityType="StpDBModel.tblHoldings" Width="1.5" PointX="5.25" PointY="6.375" />
+        <AssociationConnector Association="StpDBModel.FK__tblHoldin__stock__75A278F5" />
+        <AssociationConnector Association="StpDBModel.FK__tblHoldings__uid__74AE54BC" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

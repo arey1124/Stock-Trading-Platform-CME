@@ -1,0 +1,78 @@
+﻿@{
+    Layout = "~/Views/Shared/Admin_Layout.cshtml";
+
+}
+
+
+
+@model StockTradingPlatform.Models.StockManager
+
+@{
+   
+    ViewBag.Title = "ListOfStocks";
+}
+<div class="container">
+    <h2 style="text-align:center">Stock Details</h2>
+
+    <p>
+        <button class="button btn btn-primary  btn_submit"><a href="/Admin/addstock" style="color:white">Add Stock</a></button>
+    </p>
+    <table class="table table-striped">
+        <tr>
+
+            <th>
+                STOCK NAME
+
+            </th>
+            <th>
+                QUANTITY
+            </th>
+
+
+            <th>
+                STATUS
+            </th>
+            <th>
+                PRICE
+            </th>
+            <th></th>
+        </tr>
+
+
+        @foreach (var item in Model.StpDBEntities.tblStocks)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.stockName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.quantity)
+                </td>
+
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.status)
+                </td>
+                <td>
+                    @{
+
+                        string x = Model.StpDBEntities.getCurrentprice(item.stockId).FirstOrDefault().ToString();
+                    }
+                    <h5>@x</h5>
+                </td>
+                <td>
+
+                    <button class="button btn btn-primary  btn_submit"> @Html.ActionLink("Modify", "EditStock", new { id = item.stockId }, new { @style = "color:White" })</button>
+
+
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    <br />
+  
+
+</div>

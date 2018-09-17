@@ -1,0 +1,145 @@
+﻿<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+@using StockTradingPlatform.Models
+
+
+
+@{
+    /**/
+
+    Layout = "~/Views/Shared/_UserDashboard.cshtml";
+    ViewBag.Title = "Dashboard";
+}
+
+<div class="container">
+    <div class="row" style="padding: 20px;">
+        @foreach (var e in ViewBag.stockDetails)
+        {
+            <div class="col-sm-2 rounded" style="background-color: #fff;margin:10px;border-bottom: 4px solid #3498db;">
+                <div class="card-body">
+                    @{
+                        string stockName = e.stockName.ToString();
+                    }
+                    @Ajax.ActionLink(stockName, "GraphData", "User",
+                    new {id=e.stockId,stockName=e.stockName},
+                    new AjaxOptions
+                    {
+                        UpdateTargetId = "graph",
+                        InsertionMode = InsertionMode.Replace,
+                        HttpMethod = "Get"
+                    })
+                    <br />
+                    @e.currentPrice<br />
+                    @if ((e.currentPrice - e.openingPrice) > 0)
+                    {
+                        decimal d = (((e.currentPrice - e.openingPrice) / e.currentPrice) * 100);
+                        <span class="text-success">+  @d.ToString("0.00")  %</span>
+                    }
+                    else
+                    {
+                        decimal d = (((e.openingPrice - e.currentPrice) / e.openingPrice) * 100);
+                        <span class="text-danger">-  @d.ToString("0.00")  %</span>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<div class="container rounded" id="graph" style="background-color: #fff;padding: 20px;">
+    <img src="@Url.Action("Graph",new { id=ViewBag.stockDetails[0].stockId,stockName=ViewBag.stockDetails[0].stockName})" />
+</div>
+
+<div class="container rounded" style="background-color: #fff;padding-top: 20px;margin-top:20px;padding-left:20px;padding-right:20px;padding-bottom:40px;">
+    <div class="row">
+        <div class="col-sm-10">
+            <h4>Market Requirements</h4>
+        </div>
+        <div class="col-sm-2">
+
+            <a href='@Url.Action("TradeRequest", new { a = 1 })'><input type="button" class="btn btn-outline-primary" value="Put a trade request" /></a>
+        </div>
+    </div>
+
+    <table class="table table-striped" style="margin-top:15px;">
+        <tr class="text-center">
+            <th>Stock Name</th>
+            <th>Request Type</th>
+            <th>Quantity</th>
+            <th>Request Price</th>
+        </tr>
+        @foreach (var item in ViewBag.allUserReq)
+        {
+            <tr class="text-center">
+                @foreach (var stock in ViewBag.stocks)
+                {
+                    if (@stock.stockId == @item.stockId)
+                    {
+                        <td>@stock.stockName</td>
+                        break;
+                    }
+                }
+                @if (item.requestType == "B")
+                {
+                    <td>Buy</td>
+                }
+                else
+                {
+                    <td>Sell</td>
+                }
+                <td>@item.remainingQty</td>
+                <td>@item.requestPrice</td>
+            </tr>
+        }
+    </table>
+    <span class="float-right" style="padding:5px;"><a href='@Url.Action("AllRequests")' class="text-primary">View More ></a></span>
+</div>
+
+<div class="container rounded" style="background-color: #fff;padding-top: 20px;margin-top:20px;padding-left:20px;padding-right:20px;padding-bottom:40px;">
+    <h4>Ongoing Requests</h4>
+    <table class="table table-striped" style="margin-top:15px;">
+        <tr class="text-center">
+            <th>Stock Name</th>
+            <th>Request Type</th>
+            <th>Quantity</th>
+            <th>Quantity Remaining</th>
+            <th>Request Price</th>
+            <th></th>
+        </tr>
+        @foreach (var item in ViewBag.ongoingReq)
+        {
+            <tr class="text-center">
+                @foreach (var stock in ViewBag.stocks)
+                {
+                    if (@stock.stockId == @item.stockId)
+                    {
+                        <td>@stock.stockName</td>
+                        break;
+                    }
+                }
+                @if (item.requestType == "B")
+                {
+                    <td>Buy</td>
+                }
+                else
+                {
+                    <td>Sell</td>
+                }
+                <td>@item.requestQty</td>
+                <td>@item.remainingQty</td>
+                <td>@item.requestPrice</td>
+                <td>
+                    <a href='@Url.Action("CancelRequest",new { id = item.requestId })'><input type="button" value="Cancel" class="btn btn-outline-danger" /></a>
+                    <a href='@Url.Action("TradeRequest",new { a = 0 , id = item.requestId })'><input type="button" value="Modify" class="btn btn-outline-success" /></a>
+                </td>
+            </tr>
+        }
+    </table>
+    <span class="float-right" style="padding:5px;"><a href='@Url.Action("UserTradeRequests")' class="text-primary">View More ></a></span>
+</div>
+
+
+
+

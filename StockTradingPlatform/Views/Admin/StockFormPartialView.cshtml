@@ -1,0 +1,46 @@
+﻿<script src="~/Scripts/Admin/Add_Stock.js"></script>
+<link href="~/Styles/Add_Stock.css" rel="stylesheet" />
+
+<div class="container form_container ">
+    <div class="text-center text-primary"><h2>Add New Stock</h2></div>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="form_part1">
+            <h4 class="text-primary font-weight-bold">Stock Details:</h4>
+            <div class="form-group form-inline ">
+                <div class="form-group stp_form">
+                    <input ID="st_name" type="text" class="form-control border border-primary" aria-describedby="StockName" placeholder="Stock Name" onblur="validateName()" required />
+
+                </div>
+                <div class="form-group stp_form">
+                    <input ID="st_price" type="number" class="form-control border border-primary" aria-describedby="StockPrice" placeholder="Stock Price" onblur="validateStockPrice()" required />
+
+                </div>
+                <div class="form-group stp_form">
+                    <input ID="st_qty" type="number" class="form-control border border-primary" aria-describedby="stockQuantity" placeholder="Quantity" onblur="validateQuantity()" required />
+                </div>
+
+            </div>
+
+        </div>
+        <div class="form_part2">
+            <h4 class="text-primary font-weight-bold">Stock Status:</h4>
+            <div class="form-group form-inline stp_form stk_select">
+                <select ID="stk_status" class="form-control border border-primary" Width="200px">
+                    <option Selected="True" Value="A">Active</option>
+                    <option Value="I">In-Active</option>
+                </select>
+
+
+            </div>
+        </div>
+        <div class="wrapper  stk_btn_div">
+            <Button ID="btn_add_stk" class="button btn btn-primary btn_submit">@ViewBag.name</Button>
+
+        </div>
+
+
+    }
+    </div>

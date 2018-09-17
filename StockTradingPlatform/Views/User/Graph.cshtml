@@ -1,0 +1,6 @@
+﻿@model List<string>
+<div class="container rounded" style="background-color: #fff;padding: 20px;">
+    <img src="@Url.Action("Graph",new { id=Convert.ToInt32(Model[1]),stockName=Model[0]})" />
+</div>
+
+

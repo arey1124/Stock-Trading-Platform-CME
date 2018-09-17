@@ -1,0 +1,105 @@
+﻿<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+@{
+    Layout = "~/Views/Shared/_UserDashboard.cshtml";
+}
+
+@using StockTradingPlatform.Models
+
+
+@model IEnumerable<StockTradingPlatform.Models.UserTransactionsDetailByUid_Result>
+
+@{
+    ViewBag.Title = "User Transactions";
+}
+
+<h2>User Transactions</h2>
+
+@Html.ActionLink("All Transactions", "UserTransactions", "User") |
+@Ajax.ActionLink("Buy Transactions", "UserTransactionsBuy", new { id = ViewBag.id },
+        new AjaxOptions
+        {
+            UpdateTargetId = "div1",
+            InsertionMode = InsertionMode.Replace,
+            HttpMethod = "Get"
+        }) |
+
+@Ajax.ActionLink("Sell Transactions", "UserTransactionsSell", new { id = ViewBag.id },
+        new AjaxOptions
+        {
+            UpdateTargetId = "div1",
+            InsertionMode = InsertionMode.Replace,
+            HttpMethod = "Get"
+        })
+<br /><br />
+<div id="div1">
+    <table class="table table-striped bg-white">
+        <tr>
+            <th>
+                Transaction Id
+            </th>
+            <th>
+                Transaction Type
+            </th>
+            <th>
+                Stock
+            </th>
+            <th>
+                Price
+            </th>
+            <th>
+                Quantity
+            </th>
+            <th>
+                Amount
+            </th>
+            <th>
+                Time
+            </th>
+        </tr>
+
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tid)
+                </td>
+                @if (item.reqType == "B")
+                {
+                    <td>Buy</td>
+                }
+                else
+                {
+                    <td>Sell</td>
+                }
+                <td>
+                    @Html.DisplayFor(modelItem => item.stockName)
+                </td>
+                <td>
+                    @{
+                        double price = (double)item.reqPrice;
+                    }
+                    Rs.@Html.DisplayFor(modelItem => item.reqPrice)
+                </td>
+                <td>
+                    @{
+                        int qty = (int)item.qty;
+                    }
+                    @qty
+                </td>
+                <td>
+                    @{
+                        double amount = price * (double)qty;
+                    }
+                    Rs.@amount
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.time)
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
