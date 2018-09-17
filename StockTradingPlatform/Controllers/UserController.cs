@@ -55,7 +55,7 @@ namespace StockTradingPlatform.Controllers
 
             new Chart(width: 1000, height: 400, theme: ChartTheme.Vanilla)
                 .AddTitle(stockName)
-                .AddSeries("Default", chartType: "Line", xValue: xValues, yValues: yValues)
+                .AddSeries("Default", chartType: "Area", xValue: xValues, yValues: yValues)
                 .Write("bmp");
             return null;
         }
