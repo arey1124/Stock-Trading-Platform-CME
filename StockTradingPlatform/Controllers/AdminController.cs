@@ -13,7 +13,9 @@ namespace StockTradingPlatform.Controllers
 
     public class AdminController : Controller
     {
-
+        /// <summary>
+        /// check out my push
+        /// </summary>
         private StpDBEntities db = new StpDBEntities();
         // GET: Admin
 
