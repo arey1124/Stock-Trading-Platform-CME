@@ -26,6 +26,8 @@ namespace DataAccessLayer
                     query = "delete from tblUsers where email = '" + email + "'";
                     r3 = SqlHelper.ExecuteNonSelect(query);
                 }
+                query = "insert into tblWallet(uid, balance) values(" + uid + ",10000);";
+                r3 = SqlHelper.ExecuteNonSelect(query);
             }
             return r2;
         }
