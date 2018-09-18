@@ -31,10 +31,10 @@
                 Stock
             </th>
             <th>
-                Buy Price
+                Buy Price (Rs.)
             </th>
             <th>
-                Sell Price
+                Sell Price (Rs.)
             </th>
             <th>
                 Quantity
@@ -75,10 +75,10 @@
                     @sName
                 </td>
                 <td>
-                    Rs.@Html.DisplayFor(modelItem => item.buyPrice)
+                    @Html.DisplayFor(modelItem => item.buyPrice)
                 </td>
                 <td>
-                    Rs.@Html.DisplayFor(modelItem => item.sellPrice)
+                    @Html.DisplayFor(modelItem => item.sellPrice)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.quantity)
