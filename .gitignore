@@ -1,1 +1,10 @@
 .vs/
+
+BusinessLogicLayer/bin/Debug/*
+BusinessLogicLayer/obj/Debug/*
+
+StockTradingPlatform/bin/*
+StockTradingPlatform/obj/Debug/*
+
+DataAccessLayer/bin/Debug/*
+DataAccessLayer/obj/Debug/*
