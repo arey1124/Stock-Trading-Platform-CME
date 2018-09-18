@@ -16,7 +16,7 @@
                 Request Id
             </th>
             <th>
-                User Id
+                User Name
             </th>
             <th>
                 Stock
@@ -48,7 +48,7 @@
                     @Html.DisplayFor(modelItem => item.requestId)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.tblUser.uid)
+                    @Html.DisplayFor(modelItem => item.tblUser.fname) @Html.DisplayFor(modelItem => item.tblUser.lname)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.tblStock.stockName)
