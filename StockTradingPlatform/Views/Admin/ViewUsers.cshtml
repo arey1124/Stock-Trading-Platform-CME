@@ -67,7 +67,10 @@
                     @Html.DisplayFor(modelItem => item.mobile)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.dob)
+                    @{ 
+                        string dob = item.dob.ToString().Substring(0,11);
+                    }
+                    @dob
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.address)
