@@ -46,13 +46,13 @@
                 Stock
             </th>
             <th>
-                Price
+                Price (Rs.)
             </th>
             <th>
                 Quantity
             </th>
             <th>
-                Amount
+                Amount (Rs.)
             </th>
             <th>
                 Time
@@ -81,7 +81,7 @@
                     @{
                         double price = (double)item.reqPrice;
                     }
-                    Rs.@Html.DisplayFor(modelItem => item.reqPrice)
+                    @Html.DisplayFor(modelItem => item.reqPrice)
                 </td>
                 <td>
                     @{
@@ -93,7 +93,7 @@
                     @{
                         double amount = price * (double)qty;
                     }
-                    Rs.@amount
+                    @amount
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.time)

@@ -20,7 +20,7 @@
             Remaining Qty
         </th>
         <th>
-            Request Price
+            Request Price (Rs.)
         </th>
         <th>
             Request Time
@@ -55,7 +55,7 @@
                 @Html.DisplayFor(modelItem => item.remainingQty)
             </td>
             <td>
-                Rs.@Html.DisplayFor(modelItem => item.requestPrice)
+                @Html.DisplayFor(modelItem => item.requestPrice)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.requestTime)
