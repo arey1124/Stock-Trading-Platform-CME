@@ -25,8 +25,6 @@ namespace StockTradingPlatform.Controllers
             if (Session["user"] == null || Session["userName"] == null)
                 return Redirect("~/Login.aspx");
             StockManager manager = new StockManager();
-
-
             ViewBag.usercount = string.Format("{0:n0}", manager.StpDBEntities.tblUsers.Where(x => x.status == "A" && x.role == "U").Count());
             ViewBag.stockcount = string.Format("{0:n0}", manager.StpDBEntities.tblStocks.Where(x => x.status == "A").Count());
             ViewBag.traderequestcount = string.Format("{0:n0}", manager.StpDBEntities.tblTradeRequests.Count());
@@ -43,13 +41,7 @@ namespace StockTradingPlatform.Controllers
         }
 
         //above code is chayank's
-
-
-
-
-
-
-
+        
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// <summary>
         /// prajjwal's code starts
@@ -62,16 +54,37 @@ namespace StockTradingPlatform.Controllers
             var tblTradeRequests = db.tblTradeRequests.Include(t => t.tblStock).Include(t => t.tblUser);
             return View(tblTradeRequests.ToList());
         }
-        
-     
+
+
         // GET: tblUsers
+        
         public ActionResult ViewUsers() //AdminController => ViewUsers()
         {
             if (Session["user"] == null || Session["userName"] == null)
                 return Redirect("~/Login.aspx");
             return View(db.tblUsers.ToList());
         }
-         
+
+        // POST: tblUsers
+        [HttpPost]
+        public ActionResult ViewUsers(FormCollection form) //AdminController => ViewUsers()
+        {
+            string text = form["searchbox"].ToString();
+            System.Diagnostics.Debug.WriteLine(text);
+            if (Session["user"] == null || Session["userName"] == null)
+                return Redirect("~/Login.aspx");
+            text = text.ToLower();
+            List<tblUser> users = new List<tblUser>();
+            foreach (tblUser user in db.tblUsers)
+            {
+                if(user.fname.ToLower().Contains(text) || user.lname.ToLower().Contains(text) || user.email.ToLower().Contains(text) || user.address.ToLower().Contains(text))
+                {
+                    users.Add(user);
+                }
+            }
+            return View(users);
+        }
+
 
         // GET: tblUsers/Edit/5
         public ActionResult EditUser(int? id) //AdminController => EditUser()

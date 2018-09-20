@@ -211,7 +211,7 @@
 
         <footer class="main-footer">
             
-            <strong>Done By .NET Team </strong>
+            <strong>&copy;2018 .NET Team CME Stock Trading Platform</strong>
         </footer>
 
        
