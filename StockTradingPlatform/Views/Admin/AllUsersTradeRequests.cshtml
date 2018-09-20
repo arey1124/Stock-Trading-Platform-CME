@@ -8,9 +8,9 @@
 @{
     ViewBag.Title = "Trade Requests";
 }
-<div class="container">
+<div class="container rounded" style="background:#fff;">
     <h2 style="text-align:center">Trade Requests</h2></br>
-    <table class="table table-striped">
+    <table class="table">
         <tr>
             <th>
                 Request Id
@@ -39,57 +39,88 @@
             <th>
                 Status
             </th>
+            <th>Details</th>
         </tr>
 
         @foreach (var item in Model)
         {
-            <tr>
+        <tr class="bg-secondary">
+            <td>
+                @Html.DisplayFor(modelItem => item.requestId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tblUser.fname) @Html.DisplayFor(modelItem => item.tblUser.lname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tblStock.stockName)
+            </td>
+            @if (item.requestType == "B")
+            {
+                <td>Buy</td>
+            }
+            else
+            {
+                <td>Sell</td>
+            }
+            <td>
+                @Html.DisplayFor(modelItem => item.requestQty)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.remainingQty)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.requestPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.requestTime)
+            </td>
+            @if (item.requestStatus == "O")
+            {
+                <td>Open</td>
+            }
+            else if (item.requestStatus == "P")
+            {
+                <td>Partially Filled</td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.requestId)
+                    <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                        View Details
+                    </a>
                 </td>
+            }
+            else if (item.requestStatus == "C")
+            {
+                <td>Cancelled</td>
+            }
+            else if (item.requestStatus == "D")
+            {
+                <td>Executed</td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.tblUser.fname) @Html.DisplayFor(modelItem => item.tblUser.lname)
+                    <button class="btn btn-primary view" onclick="toggleView(this)"  data-id="@Html.DisplayFor(modelItem => item.requestId)" role="button" aria-expanded="false" aria-controls="collapseExample">
+                        View Details
+                    </button>
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.tblStock.stockName)
-                </td>
-                @if (item.requestType == "B")
-                {
-                    <td>Buy</td>
-                }
-                else
-                {
-                    <td>Sell</td>
-                }
-                <td>
-                    @Html.DisplayFor(modelItem => item.requestQty)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.remainingQty)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.requestPrice)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.requestTime)
-                </td>
-                @if (item.requestStatus == "O")
-                {
-                    <td>Open</td>
-                }
-                else if (item.requestStatus == "P")
-                {
-                    <td>Partially Filled</td>
-                }
-                else if (item.requestStatus == "C")
-                {
-                    <td>Cancelled</td>
-                }
-                else if (item.requestStatus == "D")
-                {
-                    <td>Executed</td>
-                }
-            </tr>
+            }
+        </tr>
+        <tr class="collapse bg-primary" id="@Html.DisplayFor(modelItem => item.requestId)" >
+            <td  colspan="10" >
+                More details here
+                <!--Prajjwal can write transaction details here-->
+            </td>
+        </tr>
         }
     </table>
 </div>
+
+<script type="text/javascript">
+    function toggleView(t) {
+        var myBookId = $(t).data("id");
+        console.log(myBookId);
+        console.log("hello");
+        $("#" + myBookId).toggle();
+        if ($("#" + myBookId).is(':visible')) {
+            $(t).html('Hide Details');
+        } else {
+            $(t).html('View Details');
+        }
+    }
+</script>
