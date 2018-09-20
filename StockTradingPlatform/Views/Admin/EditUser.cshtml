@@ -9,13 +9,9 @@
 }
 
 
+
 <div class="container">
     <h2 style="text-align:center">Modify User</h2>
-
-
-
-
-
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
@@ -60,7 +56,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.dob, "DOB", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.dob, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.dob,"{dd-MM-yyyy}", new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.dob, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -76,7 +72,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.role, "Role", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.role, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.DropDownListFor(model => model.role, new SelectList(  new List<Object> { new { value = "A", text = "Admin" }, new { value = "U", text = "Trader" } }, "value","text",Model.role), new { @class = "form-control col-sm-2" })
                     @Html.ValidationMessageFor(model => model.role, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -84,15 +80,26 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.status, "Status", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.status, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.DropDownListFor(model => model.status, new SelectList(new List<Object> { new { value = "A", text = "Active" }, new { value = "S", text = "Suspended" } }, "value", "text", Model.status), new { @class = "form-control col-sm-2" })
                     @Html.ValidationMessageFor(model => model.status, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Save" class="btn btn-default" />
-                </div>
+                
+                @using (Html.BeginForm("EditUsers", "Admin", FormMethod.Post))
+                {
+                    <div class="col-md-offset-2 col-md-10 pull-left">
+                        <button class="button btn btn-primary  btn_submit col-sm-2">Save</button>
+                    </div>
+                }
+                <div><br/><br/></div>
+                @using (Html.BeginForm("ViewUsers", "Admin", FormMethod.Get))
+                {
+                    <div class="col-md-offset-2 col-md-10">
+                        <button class="button btn btn-primary  btn_submit col-sm-2">Cancel</button>
+                    </div>
+                }
             </div>
         </div>
     }

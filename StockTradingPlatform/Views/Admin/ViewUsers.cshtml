@@ -15,14 +15,15 @@
         <div class="form-group col-sm-2 pull-left">
             <button class="button btn btn-primary  btn_submit"><a href="~/Admin/AddUser.aspx" style="color:white">Add New User</a></button>
         </div>
-        <form>
+        @using (Html.BeginForm("ViewUsers", "Admin", FormMethod.Post))
+        {
             <div class="form-group col-sm-1 pull-right">
                 <button class="button btn btn-primary  btn_submit" onclick="">Search</button>
             </div>
             <div class="form-group col-sm-3 pull-right">
                 <input type="text" class="form-control border border-primary" name="searchbox" placeholder="Keyword" />
             </div>
-        </form>
+        }
     </div>
     <table class="table table-striped">
         <tr>

@@ -124,6 +124,7 @@
     <Content Include="Images\curve-bottom.png" />
     <Content Include="Images\curve.png" />
     <Content Include="Images\logo.png" />
+    <Content Include="Images\man.png" />
     <Content Include="Login.aspx" />
     <Content Include="Models\StpDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
