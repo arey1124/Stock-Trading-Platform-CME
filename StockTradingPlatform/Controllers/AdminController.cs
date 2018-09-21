@@ -193,6 +193,26 @@ namespace StockTradingPlatform.Controllers
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /////chayank's code starts
         //below everything related to stock chyaank's code below
+        public ActionResult Profile()
+        {
+           if (Session["user"] == null || Session["userName"] == null)
+               return Redirect("~/Login.aspx");
+            var user = Session["user"] as tblUser;
+            string education = "Information Science from SJCE,Mysore";
+            ViewBag.fname = user.fname;
+            if (user.fname == "Prajjwal") education = "Computer Science from LPU,Punjab";
+            if (user.fname == "Arihant") education = "Computer science from Manipal University,Jaipur";
+            ViewBag.lname = user.lname;
+            ViewBag.mob = user.mobile;
+            ViewBag.userName = Session["userName"].ToString();
+            ViewBag.education = education;
+
+            
+            ViewBag.uid = user.uid;
+            return View();
+        }
+
+
         public ActionResult ListOfStocks()
         {//to pass two models in one onject
            if (Session["user"] == null || Session["userName"] == null)

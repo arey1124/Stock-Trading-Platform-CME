@@ -2165,6 +2165,7 @@
     <Content Include="Views\User\TransactionsByUid.cshtml" />
     <Content Include="Views\User\Graph.cshtml" />
     <Content Include="Views\User\UserWallet.cshtml" />
+    <Content Include="Views\Admin\Profile.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
