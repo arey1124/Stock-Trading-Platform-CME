@@ -5,11 +5,10 @@ using System.Web;
 
 namespace StockTradingPlatform.Models
 {
-    public class UserManager
+    public class UserManager : StockManager
     {
 
-        public StpDBEntities StpDBEntities { get; set; }
-        public tblStock tblStock { get; set; }
+       
         public tblUser tblUser { get; set; }
         public tblWallet tblWallet { get; set; }
         public tblHoldings tblHolding { get; set; }

@@ -37,6 +37,7 @@ namespace StockTradingPlatform.Models
         public virtual DbSet<tblWallet> tblWallets { get; set; }
         public virtual DbSet<tblTransactions> tblTransactions { get; set; }
         public virtual DbSet<tblHoldings> tblHoldings { get; set; }
+        public virtual DbSet<tblMarketdata> tblMarketdatas { get; set; }
     
         public virtual ObjectResult<Nullable<int>> getLastStockId()
         {
@@ -75,22 +76,18 @@ namespace StockTradingPlatform.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<double>>("getCurrentprice", idParameter);
         }
     
-        public virtual ObjectResult<Nullable<int>> getLastStockId1(Nullable<int> stockId)
+        public virtual ObjectResult<Nullable<int>> getLastStockId1()
         {
-            var stockIdParameter = stockId.HasValue ?
-                new ObjectParameter("stockId", stockId) :
-                new ObjectParameter("stockId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("getLastStockId1", stockIdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("getLastStockId1");
         }
     
-        public virtual ObjectResult<Nullable<int>> getIdexFromStockPriceTable(Nullable<int> stockId)
+        public virtual ObjectResult<Nullable<int>> getIdexFromStockPriceTable(Nullable<int> stockid)
         {
-            var stockIdParameter = stockId.HasValue ?
-                new ObjectParameter("stockId", stockId) :
-                new ObjectParameter("stockId", typeof(int));
+            var stockidParameter = stockid.HasValue ?
+                new ObjectParameter("stockid", stockid) :
+                new ObjectParameter("stockid", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("getIdexFromStockPriceTable", stockIdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("getIdexFromStockPriceTable", stockidParameter);
         }
     
         public virtual ObjectResult<UserTransactionsDetailByUid_Result> UserTransactionsDetailByUid(Nullable<int> id)

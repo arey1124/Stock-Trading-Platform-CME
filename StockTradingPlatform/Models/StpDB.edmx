@@ -24,6 +24,16 @@
           <Property Name="stockId" Type="int" />
           <Property Name="Qty" Type="int" />
         </EntityType>
+        <EntityType Name="tblMarketdata">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="stockName" Type="varchar" MaxLength="20" />
+          <Property Name="qty" Type="int" />
+          <Property Name="currentPrice" Type="numeric" Precision="10" Scale="2" />
+          <Property Name="status" Type="char" MaxLength="1" />
+        </EntityType>
         <EntityType Name="tblSessionsData">
           <Key>
             <PropertyRef Name="sessionId" />
@@ -115,7 +125,7 @@
           <Property Name="uid" Type="int" />
           <Property Name="balance" Type="numeric" Precision="10" Scale="2" />
         </EntityType>
-        <Association Name="FK__tblAuthenti__uid__440B1D61">
+        <Association Name="FK__tblAuthenti__uid__15502E78">
           <End Role="tblUsers" Type="Self.tblUsers" Multiplicity="0..1" />
           <End Role="tblAuthenticate" Type="Self.tblAuthenticate" Multiplicity="*" />
           <ReferentialConstraint>
@@ -127,7 +137,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblHoldin__stock__65370702">
+        <Association Name="FK__tblHoldin__stock__03F0984C">
           <End Role="tblStocks" Type="Self.tblStocks" Multiplicity="0..1" />
           <End Role="tblHoldings" Type="Self.tblHoldings" Multiplicity="*" />
           <ReferentialConstraint>
@@ -139,7 +149,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblHoldings__uid__6442E2C9">
+        <Association Name="FK__tblHoldings__uid__02FC7413">
           <End Role="tblUsers" Type="Self.tblUsers" Multiplicity="0..1" />
           <End Role="tblHoldings" Type="Self.tblHoldings" Multiplicity="*" />
           <ReferentialConstraint>
@@ -151,7 +161,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblSessions__uid__4AB81AF0">
+        <Association Name="FK__tblSessions__uid__1BFD2C07">
           <End Role="tblUsers" Type="Self.tblUsers" Multiplicity="0..1" />
           <End Role="tblSessionsData" Type="Self.tblSessionsData" Multiplicity="*" />
           <ReferentialConstraint>
@@ -163,7 +173,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblStocks__added__4E88ABD4">
+        <Association Name="FK__tblStocks__added__1FCDBCEB">
           <End Role="tblUsers" Type="Self.tblUsers" Multiplicity="0..1" />
           <End Role="tblStocks" Type="Self.tblStocks" Multiplicity="*" />
           <ReferentialConstraint>
@@ -175,7 +185,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblStocks__stock__5165187F">
+        <Association Name="FK__tblStocks__stock__22AA2996">
           <End Role="tblStocks" Type="Self.tblStocks" Multiplicity="0..1" />
           <End Role="tblStocksPrice" Type="Self.tblStocksPrice" Multiplicity="*" />
           <ReferentialConstraint>
@@ -187,7 +197,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblStocks__stock__5629CD9C">
+        <Association Name="FK__tblStocks__stock__276EDEB3">
           <End Role="tblStocks" Type="Self.tblStocks" Multiplicity="0..1" />
           <End Role="tblStocksHistory" Type="Self.tblStocksHistory" Multiplicity="*" />
           <ReferentialConstraint>
@@ -199,7 +209,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblTradeR__stock__59FA5E80">
+        <Association Name="FK__tblTradeR__stock__2B3F6F97">
           <End Role="tblStocks" Type="Self.tblStocks" Multiplicity="0..1" />
           <End Role="tblTradeRequests" Type="Self.tblTradeRequests" Multiplicity="*" />
           <ReferentialConstraint>
@@ -211,7 +221,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblTradeReq__uid__59063A47">
+        <Association Name="FK__tblTradeReq__uid__2A4B4B5E">
           <End Role="tblUsers" Type="Self.tblUsers" Multiplicity="0..1" />
           <End Role="tblTradeRequests" Type="Self.tblTradeRequests" Multiplicity="*" />
           <ReferentialConstraint>
@@ -223,7 +233,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblTransa__buyer__160F4887">
+        <Association Name="FK__tblTransa__buyer__6E01572D">
           <End Role="tblTradeRequests" Type="Self.tblTradeRequests" Multiplicity="0..1" />
           <End Role="tblTransactions" Type="Self.tblTransactions" Multiplicity="*" />
           <ReferentialConstraint>
@@ -235,7 +245,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblTransa__selle__17036CC0">
+        <Association Name="FK__tblTransa__selle__6EF57B66">
           <End Role="tblTradeRequests" Type="Self.tblTradeRequests" Multiplicity="0..1" />
           <End Role="tblTransactions" Type="Self.tblTransactions" Multiplicity="*" />
           <ReferentialConstraint>
@@ -247,7 +257,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblWallet__uid__47DBAE45">
+        <Association Name="FK__tblWallet__uid__1920BF5C">
           <End Role="tblUsers" Type="Self.tblUsers" Multiplicity="0..1" />
           <End Role="tblWallet" Type="Self.tblWallet" Multiplicity="*" />
           <ReferentialConstraint>
@@ -263,11 +273,9 @@
           <Parameter Name="id" Type="int" Mode="In" />
         </Function>
         <Function Name="getIdexFromStockPriceTable" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="stockId" Type="int" Mode="In" />
+          <Parameter Name="stockid" Type="int" Mode="In" />
         </Function>
-        <Function Name="getLastStockId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="stockId" Type="int" Mode="In" />
-        </Function>
+        <Function Name="getLastStockId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="getSName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
           <Parameter Name="id" Type="int" Mode="In" />
         </Function>
@@ -287,6 +295,7 @@
         <EntityContainer Name="StpDBModelStoreContainer">
           <EntitySet Name="tblAuthenticate" EntityType="Self.tblAuthenticate" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblHoldings" EntityType="Self.tblHoldings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblMarketdata" EntityType="Self.tblMarketdata" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblSessionsData" EntityType="Self.tblSessionsData" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblStocks" EntityType="Self.tblStocks" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblStocksHistory" EntityType="Self.tblStocksHistory" Schema="dbo" store:Type="Tables" />
@@ -295,51 +304,51 @@
           <EntitySet Name="tblTransactions" EntityType="Self.tblTransactions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblUsers" EntityType="Self.tblUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblWallet" EntityType="Self.tblWallet" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__tblAuthenti__uid__440B1D61" Association="Self.FK__tblAuthenti__uid__440B1D61">
+          <AssociationSet Name="FK__tblAuthenti__uid__15502E78" Association="Self.FK__tblAuthenti__uid__15502E78">
             <End Role="tblUsers" EntitySet="tblUsers" />
             <End Role="tblAuthenticate" EntitySet="tblAuthenticate" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblHoldin__stock__65370702" Association="Self.FK__tblHoldin__stock__65370702">
+          <AssociationSet Name="FK__tblHoldin__stock__03F0984C" Association="Self.FK__tblHoldin__stock__03F0984C">
             <End Role="tblStocks" EntitySet="tblStocks" />
             <End Role="tblHoldings" EntitySet="tblHoldings" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblHoldings__uid__6442E2C9" Association="Self.FK__tblHoldings__uid__6442E2C9">
+          <AssociationSet Name="FK__tblHoldings__uid__02FC7413" Association="Self.FK__tblHoldings__uid__02FC7413">
             <End Role="tblUsers" EntitySet="tblUsers" />
             <End Role="tblHoldings" EntitySet="tblHoldings" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblSessions__uid__4AB81AF0" Association="Self.FK__tblSessions__uid__4AB81AF0">
+          <AssociationSet Name="FK__tblSessions__uid__1BFD2C07" Association="Self.FK__tblSessions__uid__1BFD2C07">
             <End Role="tblUsers" EntitySet="tblUsers" />
             <End Role="tblSessionsData" EntitySet="tblSessionsData" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblStocks__added__4E88ABD4" Association="Self.FK__tblStocks__added__4E88ABD4">
+          <AssociationSet Name="FK__tblStocks__added__1FCDBCEB" Association="Self.FK__tblStocks__added__1FCDBCEB">
             <End Role="tblUsers" EntitySet="tblUsers" />
             <End Role="tblStocks" EntitySet="tblStocks" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblStocks__stock__5165187F" Association="Self.FK__tblStocks__stock__5165187F">
+          <AssociationSet Name="FK__tblStocks__stock__22AA2996" Association="Self.FK__tblStocks__stock__22AA2996">
             <End Role="tblStocks" EntitySet="tblStocks" />
             <End Role="tblStocksPrice" EntitySet="tblStocksPrice" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblStocks__stock__5629CD9C" Association="Self.FK__tblStocks__stock__5629CD9C">
+          <AssociationSet Name="FK__tblStocks__stock__276EDEB3" Association="Self.FK__tblStocks__stock__276EDEB3">
             <End Role="tblStocks" EntitySet="tblStocks" />
             <End Role="tblStocksHistory" EntitySet="tblStocksHistory" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblTradeR__stock__59FA5E80" Association="Self.FK__tblTradeR__stock__59FA5E80">
+          <AssociationSet Name="FK__tblTradeR__stock__2B3F6F97" Association="Self.FK__tblTradeR__stock__2B3F6F97">
             <End Role="tblStocks" EntitySet="tblStocks" />
             <End Role="tblTradeRequests" EntitySet="tblTradeRequests" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblTradeReq__uid__59063A47" Association="Self.FK__tblTradeReq__uid__59063A47">
+          <AssociationSet Name="FK__tblTradeReq__uid__2A4B4B5E" Association="Self.FK__tblTradeReq__uid__2A4B4B5E">
             <End Role="tblUsers" EntitySet="tblUsers" />
             <End Role="tblTradeRequests" EntitySet="tblTradeRequests" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblTransa__buyer__160F4887" Association="Self.FK__tblTransa__buyer__160F4887">
+          <AssociationSet Name="FK__tblTransa__buyer__6E01572D" Association="Self.FK__tblTransa__buyer__6E01572D">
             <End Role="tblTradeRequests" EntitySet="tblTradeRequests" />
             <End Role="tblTransactions" EntitySet="tblTransactions" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblTransa__selle__17036CC0" Association="Self.FK__tblTransa__selle__17036CC0">
+          <AssociationSet Name="FK__tblTransa__selle__6EF57B66" Association="Self.FK__tblTransa__selle__6EF57B66">
             <End Role="tblTradeRequests" EntitySet="tblTradeRequests" />
             <End Role="tblTransactions" EntitySet="tblTransactions" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblWallet__uid__47DBAE45" Association="Self.FK__tblWallet__uid__47DBAE45">
+          <AssociationSet Name="FK__tblWallet__uid__1920BF5C" Association="Self.FK__tblWallet__uid__1920BF5C">
             <End Role="tblUsers" EntitySet="tblUsers" />
             <End Role="tblWallet" EntitySet="tblWallet" />
           </AssociationSet>
@@ -624,14 +633,14 @@
           <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="getLastStockId1" ReturnType="Collection(Int32)">
-          <Parameter Name="stockId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="getIdexFromStockPriceTable" ReturnType="Collection(Int32)">
-          <Parameter Name="stockId" Mode="In" Type="Int32" />
+          <Parameter Name="stockid" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UserTransactionsDetailByUid" ReturnType="Collection(StpDBModel.UserTransactionsDetailByUid_Result)">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="tblMarketdatas" EntityType="StpDBModel.tblMarketdata" />
         </EntityContainer>
         <EntityType Name="tblTransactions">
           <Key>
@@ -720,6 +729,16 @@
           <Property Type="Decimal" Name="reqPrice" Nullable="true" Precision="10" Scale="2" />
           <Property Type="DateTime" Name="time" Nullable="true" Precision="23" />
         </ComplexType>
+        <EntityType Name="tblMarketdata">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="stockName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="qty" Type="Int32" />
+          <Property Name="currentPrice" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="status" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -873,6 +892,17 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="tblMarketdatas">
+            <EntityTypeMapping TypeName="StpDBModel.tblMarketdata">
+              <MappingFragment StoreEntitySet="tblMarketdata">
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="currentPrice" ColumnName="currentPrice" />
+                <ScalarProperty Name="qty" ColumnName="qty" />
+                <ScalarProperty Name="stockName" ColumnName="stockName" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -887,7 +917,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

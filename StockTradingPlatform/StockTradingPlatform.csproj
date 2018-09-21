@@ -121,8 +121,10 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
+    <Content Include="Images\admin.png" />
     <Content Include="Images\curve-bottom.png" />
     <Content Include="Images\curve.png" />
+    <Content Include="Images\imglogo.png" />
     <Content Include="Images\logo.png" />
     <Content Include="Images\man.png" />
     <Content Include="Login.aspx" />
@@ -1971,6 +1973,9 @@
       <DependentUpon>StpDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tblHoldings.cs">
+      <DependentUpon>StpDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblMarketdata.cs">
       <DependentUpon>StpDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tblSessionsData.cs">

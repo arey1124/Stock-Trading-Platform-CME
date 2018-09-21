@@ -22,9 +22,12 @@ namespace StockTradingPlatform.Controllers
         //index is dashboard
         public ActionResult Index()
         {
-            if (Session["user"] == null || Session["userName"] == null)
-                return Redirect("~/Login.aspx");
+          if (Session["user"] == null || Session["userName"] == null)
+             return Redirect("~/Login.aspx");
             StockManager manager = new StockManager();
+            var user = Session["user"] as tblUser;
+            ViewBag.fname = user.fname;
+            ViewBag.lname= user.lname;
             ViewBag.usercount = string.Format("{0:n0}", manager.StpDBEntities.tblUsers.Where(x => x.status == "A" && x.role == "U").Count());
             ViewBag.stockcount = string.Format("{0:n0}", manager.StpDBEntities.tblStocks.Where(x => x.status == "A").Count());
             ViewBag.traderequestcount = string.Format("{0:n0}", manager.StpDBEntities.tblTradeRequests.Count());
@@ -41,7 +44,13 @@ namespace StockTradingPlatform.Controllers
         }
 
         //above code is chayank's
-        
+
+
+
+
+
+
+
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// <summary>
         /// prajjwal's code starts
@@ -51,51 +60,47 @@ namespace StockTradingPlatform.Controllers
         {
             if (Session["user"] == null || Session["userName"] == null)
                 return Redirect("~/Login.aspx");
+
+            //code for showing who signed in -
+            var user = Session["user"] as tblUser;
+            ViewBag.fname = user.fname;
+            ViewBag.lname = user.lname;
+            //code ends
+
             var tblTradeRequests = db.tblTradeRequests.Include(t => t.tblStock).Include(t => t.tblUser);
             return View(tblTradeRequests.ToList());
         }
-
-
-        // GET: tblUsers
         
+     
+        // GET: tblUsers
         public ActionResult ViewUsers() //AdminController => ViewUsers()
         {
+            
+
             if (Session["user"] == null || Session["userName"] == null)
                 return Redirect("~/Login.aspx");
+
+            //code for showing who signed in -
+            var user = Session["user"] as tblUser;
+            ViewBag.fname = user.fname;
+            ViewBag.lname = user.lname;
+            //code ends
+
             return View(db.tblUsers.ToList());
         }
-
-        // POST: tblUsers
-        [HttpPost]
-        public ActionResult ViewUsers(string searchbox) //AdminController => ViewUsers()
-        {
-            string text = searchbox;
-            if (Session["user"] == null || Session["userName"] == null)
-                return Redirect("~/Login.aspx");
-            text = text.ToLower();
-            List<tblUser> users = new List<tblUser>();
-            foreach (tblUser user in db.tblUsers)
-            {
-                if (text == "admin" && user.role == "A")
-                    users.Add(user);
-                else if (text == "trader" && user.role == "U")
-                    users.Add(user);
-                else if (text == "active" && user.status == "A")
-                    users.Add(user);
-                else if (text == "suspended" && user.status == "S")
-                    users.Add(user);
-                else if (user.fname.ToLower().Contains(text) || user.lname.ToLower().Contains(text) || user.email.ToLower().Contains(text) || user.address.ToLower().Contains(text))
-                    users.Add(user);
-            }
-            return View(users);
-        }
-
+         
 
         // GET: tblUsers/Edit/5
         public ActionResult EditUser(int? id) //AdminController => EditUser()
         {
             if (Session["user"] == null || Session["userName"] == null)
                 return Redirect("~/Login.aspx");
+
+            //code for showing who signed in -
+            var user = Session["user"] as tblUser;
+            ViewBag.fname = user.fname;
+            ViewBag.lname = user.lname;
+            //code ends
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -115,6 +120,13 @@ namespace StockTradingPlatform.Controllers
         {
             if (Session["user"] == null || Session["userName"] == null)
                 return Redirect("~/Login.aspx");
+
+            //code for showing who signed in -
+            var user = Session["user"] as tblUser;
+            ViewBag.fname = user.fname;
+            ViewBag.lname = user.lname;
+            //code ends
+
             if (ModelState.IsValid)
             {
                 db.Entry(tblUsers).State = EntityState.Modified;
@@ -129,6 +141,12 @@ namespace StockTradingPlatform.Controllers
         {
             if (Session["user"] == null || Session["userName"] == null)
                 return Redirect("~/Login.aspx");
+
+            //code for showing who signed in -
+            var user = Session["user"] as tblUser;
+            ViewBag.fname = user.fname;
+            ViewBag.lname = user.lname;
+            //code ends
             TransactionsManager model = new TransactionsManager();
             return View(model);
         }
@@ -150,8 +168,14 @@ namespace StockTradingPlatform.Controllers
         //below everything related to stock chyaank's code below
         public ActionResult ListOfStocks()
         {//to pass two models in one onject
-            if (Session["user"] == null || Session["userName"] == null)
-                return Redirect("~/Login.aspx");
+           if (Session["user"] == null || Session["userName"] == null)
+               return Redirect("~/Login.aspx");
+
+            //code for showing who signed in -
+          var user = Session["user"] as tblUser;
+           ViewBag.fname = user.fname;
+           ViewBag.lname = user.lname;
+            //code ends
             StockManager model = new StockManager();
             
             return View(model);
@@ -161,8 +185,13 @@ namespace StockTradingPlatform.Controllers
         // get : addStock
         public ActionResult AddStock()
         {
-            if (Session["user"] == null || Session["userName"] == null)
-                return Redirect("~/Login.aspx");
+           if (Session["user"] == null || Session["userName"] == null)
+               return Redirect("~/Login.aspx");
+            //code for showing who signed in -
+            var user = Session["user"] as tblUser;
+            ViewBag.fname = user.fname;
+            ViewBag.lname = user.lname;
+            //code ends
             ViewBag.name = "ADD STOCK";
             StockManager model = new StockManager();
 
@@ -171,27 +200,96 @@ namespace StockTradingPlatform.Controllers
 
         //post for addstock
         [HttpPost]
-        public ActionResult AddStock(StockManager ob)
+        public ActionResult AddStock(string submit)
         {
-            if (Session["user"] == null || Session["userName"] == null)
-                return Redirect("~/Login.aspx");
+             if (Session["user"] == null || Session["userName"] == null)
+                 return Redirect("~/Login.aspx");
+
+            //code for showing who signed in -
+             var user = Session["user"] as tblUser;
+             ViewBag.fname = user.fname;
+             ViewBag.lname = user.lname;
+            //code ends
+            UserManager manager = new UserManager();
+            int uid = user.uid;
+            int id = Convert.ToInt32(submit);
+
+            //get particular stock market data
+            manager.tblMarketdata = manager.StpDBEntities.tblMarketdatas.Find(id);
+
             //inserted data to stock table
-            ob.tblStock.quantity_remaining = ob.tblStock.quantity;
-            ob.tblStock.stockId = (int)ob.StpDBEntities.getLastStockId().FirstOrDefault() + 1;
-            ob.tblStock.addedBy = 1;
-            ob.StpDBEntities.tblStocks.Add(ob.tblStock);
+            manager.tblStock.stockId = 1;
+                //(int)manager.StpDBEntities.getLastStockId().FirstOrDefault() + 1;
+            manager.tblStock.stockName = manager.tblMarketdata.stockName;
+            manager.tblStock.quantity = manager.tblMarketdata.qty;
+            //calling a function to randomly give holdings to existing customers
+            //give all users equal share of qty of stock and add to holdings table
+            //reduce their respective wallet balance
+            int qty = manager.tblMarketdata.qty.Value;
+            System.Diagnostics.Debug.WriteLine("this is qty " +qty);
+            var user_list = manager.StpDBEntities.tblUsers.Where(t=>t.role=="U" && t.status=="A").ToList();
+            int user_count=user_list.Count();
+            int share_per_user = qty / user_count;
+
+            //checking if there are left overs after dividing
+            int total_qty = share_per_user * user_count;
+            int extra = 0;
+            if (total_qty < qty) extra = qty - total_qty;
+            //use extra 
+
+            tblUser first_user=null;
+            foreach(tblUser u in manager.StpDBEntities.tblUsers.Where(t => t.role == "U" && t.status == "A"))
+            {
+                if(first_user==null)
+                { first_user = u; }
+                int user_id = u.uid;
+                tblHoldings holding = new tblHoldings();
+                holding.uid = user_id;
+                holding.stockId = manager.tblStock.stockId;
+                holding.Qty = share_per_user;
+
+                manager.StpDBEntities.tblHoldings.Add(holding);
+           
+            }
+
+            if(extra != 0)
+            {
+                int user_id = first_user.uid;
+                tblHoldings holding = new tblHoldings();
+                holding.uid = user_id;
+                holding.stockId = manager.tblStock.stockId;
+                holding.Qty = share_per_user;
+
+                manager.StpDBEntities.tblHoldings.Add(holding);
+                
+            }
+
+
+
+            manager.tblStock.quantity_remaining = 0;
+            manager.tblStock.addedBy = uid;
+            manager.tblStock.status = "A";
+
+            //insert into collection
+            manager.StpDBEntities.tblStocks.Add(manager.tblStock);
 
            
 
             //inserted data to stock price table
-            ob.tblStocksPrice.stockId = ob.tblStock.stockId;
-            ob.tblStocksPrice.highPrice = ob.tblStocksPrice.currentPrice;
-            ob.tblStocksPrice.lowPrice = ob.tblStocksPrice.currentPrice;
-            ob.tblStocksPrice.timeOfDay = DateTime.Now;
-            ob.StpDBEntities.tblStocksPrices.Add(ob.tblStocksPrice);
+            manager.tblStocksPrice.stockId = manager.tblStock.stockId;
+            manager.tblStocksPrice.timeOfDay = DateTime.Now;
+            manager.tblStocksPrice.currentPrice = manager.tblMarketdata.currentPrice;
+            manager.tblStocksPrice.lowPrice = manager.tblMarketdata.currentPrice;
+            manager.tblStocksPrice.highPrice = manager.tblMarketdata.currentPrice;
+
+            //insert into collection
+            manager.StpDBEntities.tblStocksPrices.Add(manager.tblStocksPrice);
+
+            //change status to added in tbl market data
+            manager.tblMarketdata.status = "A";
 
             //saving changes to databases
-            ob.StpDBEntities.SaveChanges();
+            manager.StpDBEntities.SaveChanges();
 
             return RedirectToAction("listofstocks");
 
@@ -204,6 +302,13 @@ namespace StockTradingPlatform.Controllers
         {
             if (Session["user"] == null || Session["userName"] == null)
                 return Redirect("~/Login.aspx");
+
+            //code for showing who signed in -
+            var user = Session["user"] as tblUser;
+            ViewBag.fname = user.fname;
+            ViewBag.lname = user.lname;
+            //code ends
+
             StockManager model = new StockManager();
             model.tblStock=model.StpDBEntities.tblStocks.Single(x => x.stockId == id );
             int index = (int)model.StpDBEntities.getIdexFromStockPriceTable(id).FirstOrDefault();
@@ -221,6 +326,13 @@ namespace StockTradingPlatform.Controllers
         {
             if (Session["user"] == null || Session["userName"] == null)
                 return Redirect("~/Login.aspx");
+
+            //code for showing who signed in -
+            var user = Session["user"] as tblUser;
+            ViewBag.fname = user.fname;
+            ViewBag.lname = user.lname;
+            //code ends
+
             System.Diagnostics.Debug.WriteLine("this is a bug " + ob.tblStocksPrice.stockId + "  : price " + ob.tblStocksPrice.currentPrice+"qty addded or subtracted "+ob.qty);
 
             //to check if qty added or subtracted is corrected

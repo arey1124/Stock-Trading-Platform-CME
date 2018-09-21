@@ -25,22 +25,23 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 <!-- ADD THE CLASS sidebar-collapse TO HIDE THE SIDEBAR PRIOR TO LOADING THE SITE -->
-<body class="hold-transition skin-blue sidebar-collapse sidebar-mini">
+<body class="hold-transition skin-blue fixed sidebar-mini">
     <!-- Site wrapper -->
     <div class="wrapper">
 
         <header class="main-header">
             <!-- Logo -->
-            <a href="/Admin/Index" class="logo">
+            <a href="/Admin/Index" class="logo" >
+
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><b>CME</b></span>
                 <!-- logo for regular state and mobile devices -->
                 <span class="logo-lg"><b>CME</b> GROUP</span>
             </a>
             <!-- Header Navbar: style can be found in header.less -->
-            <nav class="navbar navbar-static-top">
+            <nav class="navbar navbar-static-top" >
                 <!-- Sidebar toggle button-->
-                <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                <a href="#"  data-toggle="push-menu" role="button">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -48,10 +49,43 @@
                 </a>
 
                 <div class="navbar-custom-menu">
+
                     <ul class="nav navbar-nav">
                         <!-- Messages: style can be found in dropdown.less-->
-                        <!-- Control Sidebar Toggle Button -->
+                        <!-- Notifications: style can be found in dropdown.less -->
+                        <!-- Tasks: style can be found in dropdown.less -->
+                        <!-- User Account: style can be found in dropdown.less -->
+                        <li class="dropdown user user-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <img src="~/Images/admin.png" class="user-image" alt="User Image">
+                                <span class="hidden-xs">@ViewBag.fname &nbsp;@ViewBag.lname</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <!-- User image -->
+                                <li class="user-header">
+                                    <img src="~/Images/admin.png" class="img-circle" alt="User Image">
 
+                                    <p>
+                                        @ViewBag.fname &nbsp;@ViewBag.lname - Web Developer
+                                        <small>Member since July. 2018</small>
+                                    </p>
+                                </li>
+                                <!-- Menu Body -->
+                                <!-- Menu Footer-->
+                                <li class="user-footer">
+                                    <div class="pull-left">
+                                        <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                    </div>
+                                    <div class="pull-right">
+                                        <a href="#" class="btn btn-default btn-flat">Logout</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- Control Sidebar Toggle Button -->
+                        <li>
+                            <a href="/Admin/Logout"> <i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a>
+                        </li>
                     </ul>
                 </div>
             </nav>
@@ -62,8 +96,19 @@
         <aside class="main-sidebar">
             <!-- sidebar: style can be found in sidebar.less -->
             <section class="sidebar">
+                <br/>
                 <!-- Sidebar user panel -->
-                
+                <div class="user-panel">
+                    <div class="pull-left image">
+                        <img src="~/Images/admin.png" class="img-circle" alt="User Image">
+                    </div>
+                    <div class="pull-left info">
+                        <p>@ViewBag.fname &nbsp;@ViewBag.lname</p>
+                        <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                    </div>
+                </div>
+                <br/>
+               
 
                 <!-- /.search form -->
                 <!-- sidebar menu: : style can be found in sidebar.less -->
@@ -80,7 +125,7 @@
                         </a>
                         <ul class="treeview-menu">
                             <li>
-                                
+
                                 <a href="/Admin/ListOfStocks"><i class="fa fa-circle-o"></i>View/Modify Stock</a>
 
                             </li>
@@ -98,9 +143,10 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
+                            <li><a href="~/Admin/AddUser.aspx"><i class="fa fa-circle-o"></i>Add User</a></li>
                             <li><a href="/Admin/ViewUsers"><i class="fa fa-circle-o"></i>View Users</a></li>
-                            <li><a href="/Admin/AllUsersTradeRequests"><i class="fa fa-circle-o"></i>View Trade Requests</a></li> 
-                            <li><a href="/Admin/AllTransactions"><i class="fa fa-circle-o"></i>View Transactions</a></li> 
+                            <li><a href="/Admin/AllUsersTradeRequests"><i class="fa fa-circle-o"></i>View Trade Requests</a></li>
+                            <li><a href="/Admin/AllTransactions"><i class="fa fa-circle-o"></i>View Transactions</a></li>
                         </ul>
                     </li>
 
