@@ -275,15 +275,14 @@
     <FunctionImport Name="getCurrentprice" ReturnType="Collection(Double)">
       <Parameter Name="id" Mode="In" Type="Int32" />
     </FunctionImport>
-    <FunctionImport Name="getLastStockId1" ReturnType="Collection(Int32)">
-      <Parameter Name="stockId" Mode="In" Type="Int32" />
-    </FunctionImport>
+    <FunctionImport Name="getLastStockId1" ReturnType="Collection(Int32)" />
     <FunctionImport Name="getIdexFromStockPriceTable" ReturnType="Collection(Int32)">
-      <Parameter Name="stockId" Mode="In" Type="Int32" />
+      <Parameter Name="stockid" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="UserTransactionsDetailByUid" ReturnType="Collection(StpDBModel.UserTransactionsDetailByUid_Result)">
       <Parameter Name="id" Mode="In" Type="Int32" />
     </FunctionImport>
+    <EntitySet Name="tblMarketdatas" EntityType="StpDBModel.tblMarketdata" />
   </EntityContainer>
   <EntityType Name="tblTransactions">
     <Key>
@@ -372,4 +371,14 @@
     <Property Type="Decimal" Name="reqPrice" Nullable="true" Precision="10" Scale="2" />
     <Property Type="DateTime" Name="time" Nullable="true" Precision="23" />
   </ComplexType>
+  <EntityType Name="tblMarketdata">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="stockName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="qty" Type="Int32" />
+    <Property Name="currentPrice" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="status" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+  </EntityType>
 </Schema>
