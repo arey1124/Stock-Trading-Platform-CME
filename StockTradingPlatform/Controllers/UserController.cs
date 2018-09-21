@@ -10,7 +10,7 @@ using StockTradingPlatform.Models;
 using System.Collections.Generic;
 using System.Web.Helpers;
 using System.Collections;
-
+using StockTradingPlatform.Utils;
 
 namespace StockTradingPlatform.Controllers
 {
@@ -149,6 +149,11 @@ namespace StockTradingPlatform.Controllers
                 tradeRequest.requestStatus = "O";
                 this.db.tblTradeRequests.Add(tradeRequest);
                 this.db.SaveChanges();
+                TradeMatchingAlgo ob = new TradeMatchingAlgo();
+
+                //to call matching algo
+                ob.MatchingAlgo(tradeRequest);
+
                 return Redirect("/User/Dashboard");
             }
             else if (Operation == "Update")
@@ -160,6 +165,10 @@ namespace StockTradingPlatform.Controllers
                     result.remainingQty = reqQty.Value;
                     result.requestPrice = reqPrice.Value;
                     db.SaveChanges();
+
+                    //to call matching algo uncomment below line
+                    //ob.MatchingAlgo(tradeRequest);
+
                     return Redirect("/User/Dashboard");
                 }
             }

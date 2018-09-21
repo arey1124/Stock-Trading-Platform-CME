@@ -88,7 +88,34 @@ namespace StockTradingPlatform.Controllers
 
             return View(db.tblUsers.ToList());
         }
-         
+
+        [HttpPost]
+        public ActionResult ViewUsers(string searchbox) //AdminController => ViewUsers()
+        {
+            string text = searchbox;
+            if (Session["user"] == null || Session["userName"] == null)
+                return Redirect("~/Login.aspx");
+            text = text.ToLower();
+            List<tblUser> users = new List<tblUser>();
+            foreach (tblUser user in db.tblUsers)
+            {
+                if (user.fname.ToLower().Contains(text) || user.lname.ToLower().Contains(text) || user.email.ToLower().Contains(text) || user.address.ToLower().Contains(text))
+                {
+                    if (text == "admin" && user.role == "A")
+                        users.Add(user);
+                    else if (text == "trader" && user.role == "U")
+                        users.Add(user);
+                    else if (text == "active" && user.status == "A")
+                        users.Add(user);
+                    else if (text == "suspended" && user.status == "S")
+                        users.Add(user);
+                    else if (user.fname.ToLower().Contains(text) || user.lname.ToLower().Contains(text) || user.email.ToLower().Contains(text) || user.address.ToLower().Contains(text))
+                        users.Add(user);
+                }
+            }
+            return View(users);
+        }
+
 
         // GET: tblUsers/Edit/5
         public ActionResult EditUser(int? id) //AdminController => EditUser()
