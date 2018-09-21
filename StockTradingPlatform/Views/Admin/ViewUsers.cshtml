@@ -10,17 +10,24 @@
 }
 
 <div class="container">
-    <h2 style="text-align:center">User Details</h2>
-
-
-
-    <p>
-        <button class="button btn btn-primary  btn_submit"><a href="~/Admin/AddUser.aspx" style="color:white">Add New User</a></button>
-    </p>
-
+    <h2 style="text-align:center">User Details</h2><br/>
+    <div class="row col-sm-12">
+        <div class="form-group col-sm-2 pull-left">
+            <button class="button btn btn-primary  btn_submit"><a href="~/Admin/AddUser.aspx" style="color:white">Add New User</a></button>
+        </div>
+        @using (Html.BeginForm("ViewUsers", "Admin", FormMethod.Post))
+        {
+            <div class="form-group col-sm-1 pull-right">
+                <button class="button btn btn-primary  btn_submit" onclick="">Search</button>
+            </div>
+            <div class="form-group col-sm-3 pull-right">
+                <input type="text" class="form-control border border-primary" name="searchbox" placeholder="Keyword" />
+            </div>
+        }
+    </div>
     <table class="table table-striped">
         <tr>
-            <th>UId</th>    
+            <th>UId</th>
             <th>
                 First Name
             </th>
@@ -67,23 +74,33 @@
                     @Html.DisplayFor(modelItem => item.mobile)
                 </td>
                 <td>
-                    @{ 
-                        string dob = item.dob.ToString().Substring(0,11);
+                    @{
+                        string dob = item.dob.ToString().Substring(0, 11);
                     }
                     @dob
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.address)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.role)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.status)
-                </td>
+                @if (item.role == "A")
+                {
+                    <td>Admin</td>
+                }
+                else
+                {
+                    <td>Trader</td>
+                }
+                @if (item.status == "A")
+                {
+                    <td>Active</td>
+                }
+                else
+                {
+                    <td>Suspended</td>
+                }
                 <td>
                     <button class="button btn btn-primary  btn_submit">@Html.ActionLink("Modify", "EditUser", new { id = item.uid }, new { @style = "color:White" })</button>
-                  
+
                 </td>
             </tr>
         }
