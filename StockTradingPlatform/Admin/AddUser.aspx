@@ -28,10 +28,11 @@
         <header class="main-header">
             <!-- Logo -->
             <a href="/Admin/Index" class="logo">
+               
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><b>CME</b></span>
                 <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg"><b>CME</b> GROUP</span>
+                <span class="logo-lg"><img src="../Images/whitelogo.jpg" class=" img-circle " alt="User Image" height="30px"/>&nbsp;<b>CME</b> GROUP</span>
             </a>
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top">
