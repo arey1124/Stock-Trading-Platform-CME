@@ -166,7 +166,7 @@ namespace StockTradingPlatform.Controllers
             ViewBag.fname = u.fname;
             ViewBag.lname = u.lname;
             //code ends
-
+            ViewBag.transactions = db.tblTransactions.ToList();
             var tblTradeRequests = db.tblTradeRequests.Include(t => t.tblStock).Include(t => t.tblUser);
             return View(tblTradeRequests.ToList());
         }

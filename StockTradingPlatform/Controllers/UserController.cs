@@ -105,7 +105,7 @@ namespace StockTradingPlatform.Controllers
             {
                 ViewBag.stocks = db.tblStocks.ToList();
                 ViewBag.type = "Add";
-                ViewBag.Title = "Put a trade request";
+                ViewBag.Title = "Put a Trade Request";
                 ViewBag.reqPrice = "";
                 ViewBag.requestQty = "";
             }
