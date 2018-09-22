@@ -1,6 +1,5 @@
 ﻿@{
     Layout = "~/Views/Shared/Admin_Layout.cshtml";
-
 }
 @using StockTradingPlatform.Models
 @model IEnumerable<StockTradingPlatform.Models.tblTradeRequest>
@@ -44,69 +43,105 @@
 
         @foreach (var item in Model)
         {
-        <tr class="bg-secondary">
-            <td>
-                @Html.DisplayFor(modelItem => item.requestId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.tblUser.fname) @Html.DisplayFor(modelItem => item.tblUser.lname)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.tblStock.stockName)
-            </td>
-            @if (item.requestType == "B")
-            {
-                <td>Buy</td>
-            }
-            else
-            {
-                <td>Sell</td>
-            }
-            <td>
-                @Html.DisplayFor(modelItem => item.requestQty)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.remainingQty)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.requestPrice)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.requestTime)
-            </td>
-            @if (item.requestStatus == "O")
-            {
-                <td>Open</td>
-            }
-            else if (item.requestStatus == "P")
-            {
-                <td>Partially Filled</td>
+            <tr class="bg-secondary">
                 <td>
-                    <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                        View Details
-                    </a>
+                    @Html.DisplayFor(modelItem => item.requestId)
                 </td>
-            }
-            else if (item.requestStatus == "C")
-            {
-                <td>Cancelled</td>
-            }
-            else if (item.requestStatus == "D")
-            {
-                <td>Executed</td>
                 <td>
-                    <button class="btn btn-primary view" onclick="toggleView(this)"  data-id="@Html.DisplayFor(modelItem => item.requestId)" role="button" aria-expanded="false" aria-controls="collapseExample">
-                        View Details
-                    </button>
+                    @Html.DisplayFor(modelItem => item.tblUser.fname) @Html.DisplayFor(modelItem => item.tblUser.lname)
                 </td>
-            }
-        </tr>
-        <tr class="collapse bg-primary" id="@Html.DisplayFor(modelItem => item.requestId)" >
-            <td  colspan="10" >
-                More details here
-                <!--Prajjwal can write transaction details here-->
-            </td>
-        </tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tblStock.stockName)
+                </td>
+                @if (item.requestType == "B")
+                {
+                    <td>Buy</td>
+                }
+                else
+                {
+                    <td>Sell</td>
+                }
+                <td>
+                    @Html.DisplayFor(modelItem => item.requestQty)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.remainingQty)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.requestPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.requestTime)
+                </td>
+                @if (item.requestStatus == "O")
+                {
+                    <td>Open</td>
+                }
+                else if (item.requestStatus == "P")
+                {
+                    <td>Partially Filled</td>
+                    <td>
+                        <button class="btn btn-primary view" onclick="toggleView(this)" data-id="@Html.DisplayFor(modelItem => item.requestId)" role="button" aria-expanded="false" aria-controls="collapseExample">
+                            View Details
+                        </button>
+                    </td>
+                }
+                else if (item.requestStatus == "C")
+                {
+                    <td>Cancelled</td>
+                }
+                else if (item.requestStatus == "D")
+                {
+                    <td>Executed</td>
+                    <td>
+                        <button class="btn btn-primary view" onclick="toggleView(this)" data-id="@Html.DisplayFor(modelItem => item.requestId)" role="button" aria-expanded="false" aria-controls="collapseExample">
+                            View Details
+                        </button>
+                    </td>
+                }
+            </tr>
+            <tr class="collapse" id="@Html.DisplayFor(modelItem => item.requestId)">
+                <td colspan="10">
+                    <table class="table table-bordered">
+                        <tr>
+                            <td>Transaction Id</td>
+                            @if (item.requestType == "S")
+                            {
+                                <td>Buyer Req Id</td>
+                                <td>Buy Price</td>
+                            }
+                            else
+                            {
+                                <td>Seller Req Id</td>
+                                <td>Sell Price</td>
+                            }
+                            <td>Quantity</td>
+                            <td>Time</td>
+                        </tr>
+                        @foreach (var tran in ViewBag.transactions)
+                        {
+                            <tr>
+                                @if (item.requestType == "B" && @tran.buyerReqId == item.requestId)
+                                {
+                                <td>@tran.transactionId</td>
+                                <td>@tran.sellerReqId</td>
+                                <td>@tran.sellPrice</td>
+                                <td>@tran.quantity</td>
+                                <td>@tran.time</td>
+                                }
+                                else if (item.requestType == "S" && @tran.sellerReqId == item.requestId)
+                                {
+                                <td>@tran.transactionId</td>
+                                <td>@tran.buyerReqId</td>
+                                <td>@tran.buyPrice</td>
+                                <td>@tran.quantity</td>
+                                <td>@tran.time</td>
+                                }
+                            </tr>
+                        }
+                    </table>
+                </td>
+            </tr>
         }
     </table>
 </div>

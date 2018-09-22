@@ -74,7 +74,7 @@
             }
             else if (item.requestStatus == "D")
             {
-                <td>Done</td>
+                <td>Executed</td>
             }
             @if (item.requestStatus == "O")
             {
@@ -87,7 +87,7 @@
             else if (item.requestStatus == "P")
             {
                 <td>
-                    @Html.ActionLink("Cancel", "Cancel", new { id = item.uid })
+                    <a href='@Url.Action("CancelRequest",new { id = item.requestId })'><input type="button" value="Cancel" class="btn btn-outline-danger" /></a>
                 </td>
             }
             else

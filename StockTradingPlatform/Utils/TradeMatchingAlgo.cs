@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using StockTradingPlatform.Models;
+using System.Net.Mail;
 
 namespace StockTradingPlatform.Utils
 {
@@ -40,14 +41,15 @@ namespace StockTradingPlatform.Utils
                     UpdateTblTransaction(tradeRequest.requestId, request.requestId, (double)tradeRequest.requestPrice, (double)request.requestPrice, quantity);
                     UpdateTblWallet((int)request.uid, (double)quantity * (double)request.requestPrice);
                     UpdateTblHoldings((int)tradeRequest.uid, (int)request.uid, (int)tradeRequest.stockId, (int)quantity);
+                    //SendMail();
                 }
                 else if(tradeRequest.requestType == "S")
                 {
                     UpdateTblTransaction(request.requestId, tradeRequest.requestId, (double)request.requestPrice, (double)tradeRequest.requestPrice, quantity);
                     UpdateTblHoldings((int)request.uid, (int)tradeRequest.uid, (int)tradeRequest.stockId, (int)quantity);
+
                 }
                 UpdateTblTradeRequests(request.requestId, (int)request.requestQty, (int)request.remainingQty - quantity);
-
             }
             UpdateTblTradeRequests(tradeRequest.requestId, (int)tradeRequest.requestQty , remQty);
             UpdateTblWallet((int)tradeRequest.uid, (double)(tradeRequest.requestQty - remQty) * (double)tradeRequest.requestPrice);
@@ -104,6 +106,37 @@ namespace StockTradingPlatform.Utils
             tblWallet wallet = db.tblWallets.SingleOrDefault(x => x.uid == uid);
             wallet.balance = Convert.ToDecimal((double)wallet.balance + amount);
             db.SaveChanges();
+        }
+
+        public void SendMail(tblTradeRequest req, int qty, int remQty)
+        {
+            int s = 0;
+            tblUser user = db.tblUsers.SingleOrDefault(x => x.uid == req.uid);
+            string eMail = user.email;
+            string fname = user.fname;
+            try
+            {
+                MailMessage mail = new MailMessage();
+                SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+                mail.From = new MailAddress("cme.stp@gmail.com");
+                mail.To.Add(eMail);
+                mail.Subject = "Trade Requested Executed";
+                mail.Body = "Hello " + fname + ",\n\nCongratulations! Your Trade Request with RequestId " + req.requestId + " is successfully executed ";
+                if (remQty != 0)
+                    mail.Body += "partially.";
+                mail.Body += "\nBelow are the details of Transaction :\n\nTransaction Id: ";
+                SmtpServer.Port = 587;
+                SmtpServer.UseDefaultCredentials = false;
+                SmtpServer.Credentials = new System.Net.NetworkCredential("cme.stp@gmail.com", "%TGB6yhn^YHN5tgb");
+                SmtpServer.EnableSsl = true;
+                SmtpServer.Send(mail);
+                s = 1;
+            }
+            catch (Exception ex)
+            {
+                s = 0;
+            }
+            //return s;
         }
     }
 }
