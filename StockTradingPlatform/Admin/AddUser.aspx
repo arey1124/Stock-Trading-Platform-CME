@@ -28,10 +28,11 @@
         <header class="main-header">
             <!-- Logo -->
             <a href="/Admin/Index" class="logo">
+               
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><b>CME</b></span>
                 <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg"><b>CME</b> GROUP</span>
+                <span class="logo-lg"><img src="../Images/whitelogo.jpg" class=" img-circle " alt="User Image" height="30px"/>&nbsp;<b>CME</b> GROUP</span>
             </a>
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top">
@@ -141,15 +142,15 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                                                           <li><asp:HyperLink ID="HyperLink7" runat="server" NavigateUrl="../Admin/AddUser.aspx"><i class="fa fa-circle-o"></i>View Users</asp:HyperLink> </li>
+                                                           <li><asp:HyperLink ID="HyperLink7" runat="server" NavigateUrl="../Admin/AddUser.aspx"><i class="fa fa-circle-o"></i>Add Users</asp:HyperLink> </li>
 
                                                            <li><asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/Admin/ViewUsers"><i class="fa fa-circle-o"></i>View Users</asp:HyperLink> </li>
 
                                                            <li><asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="~/Admin/AllUsersTradeRequests"><i class="fa fa-circle-o"></i>View Trade Requests</asp:HyperLink> </li>
 
-                                                           <li><asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="~/Admin/Index"><i class="fa fa-circle-o"></i>View Transactions</asp:HyperLink> </li>
+                                                           <li><asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="../Admin/AllTransactions.aspx"><i class="fa fa-circle-o"></i>View Transactions</asp:HyperLink> </li>
 
-                           
+                           s
                         </ul>
                     </li>
 

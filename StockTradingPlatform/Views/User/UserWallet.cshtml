@@ -71,7 +71,8 @@
 
                         double balance = (double)Model.tblWallet.balance;
                         double total_amount = total + balance;
-                        Html.Display("hey");
+                        double percen = ((total - 10000) / 10000)*100;
+
                     }
                     <table class="table ">
                         <tr>
@@ -80,8 +81,21 @@
                             <td><i class="fa fa-inr" aria-hidden="true"></i>  @(String.Format("{0:n}", balance))</td>
                         </tr>
                         <tr>
-                            <td>Profit/Loss :</td>
+                            <td>Holdings :</td>
                             <td><i class="fa fa-inr" aria-hidden="true">  @(String.Format("{0:n}", total)) </i></td>
+                        </tr>
+                        <tr>
+                            <td>Unrealized Profit/Loss :</td>
+                            <td>
+                                @if (percen < 0)
+                                {
+                                    <span class="text-danger">@percen %</span>
+                                }
+                                else
+                                {
+                                    <span class="text-success">@percen %</span>
+                                }
+                             </td>
                         </tr>
 
                         <tr class="table-info">

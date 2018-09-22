@@ -10,13 +10,15 @@ using StockTradingPlatform.Models;
 
 namespace StockTradingPlatform.Controllers
 {
-
+    
     public class AdminController : Controller
     {
         /// <summary>
         /// check out my push
         /// </summary>
         private StpDBEntities db = new StpDBEntities();
+
+        private UserManager manager = new UserManager();
         // GET: Admin
 
         //index is dashboard
@@ -24,10 +26,11 @@ namespace StockTradingPlatform.Controllers
         {
           if (Session["user"] == null || Session["userName"] == null)
              return Redirect("~/Login.aspx");
-            StockManager manager = new StockManager();
+           
             var user = Session["user"] as tblUser;
-            ViewBag.fname = user.fname;
-            ViewBag.lname= user.lname;
+            tblUser u = manager.StpDBEntities.tblUsers.Find(user.uid);
+            ViewBag.fname = u.fname;
+            ViewBag.lname= u.lname;
             ViewBag.usercount = string.Format("{0:n0}", manager.StpDBEntities.tblUsers.Where(x => x.status == "A" && x.role == "U").Count());
             ViewBag.stockcount = string.Format("{0:n0}", manager.StpDBEntities.tblStocks.Where(x => x.status == "A").Count());
             ViewBag.traderequestcount = string.Format("{0:n0}", manager.StpDBEntities.tblTradeRequests.Count());
@@ -62,9 +65,11 @@ namespace StockTradingPlatform.Controllers
                 return Redirect("~/Login.aspx");
 
             //code for showing who signed in -
+            
             var user = Session["user"] as tblUser;
-            ViewBag.fname = user.fname;
-            ViewBag.lname = user.lname;
+            tblUser u = manager.StpDBEntities.tblUsers.Find(user.uid);
+            ViewBag.fname = u.fname;
+            ViewBag.lname = u.lname;
             //code ends
             ViewBag.transactions = db.tblTransactions.ToList();
             var tblTradeRequests = db.tblTradeRequests.Include(t => t.tblStock).Include(t => t.tblUser);
@@ -81,9 +86,11 @@ namespace StockTradingPlatform.Controllers
                 return Redirect("~/Login.aspx");
 
             //code for showing who signed in -
+            
             var user = Session["user"] as tblUser;
-            ViewBag.fname = user.fname;
-            ViewBag.lname = user.lname;
+            tblUser u = manager.StpDBEntities.tblUsers.Find(user.uid);
+            ViewBag.fname = u.fname;
+            ViewBag.lname = u.lname;
             //code ends
 
             return View(db.tblUsers.ToList());
@@ -95,6 +102,15 @@ namespace StockTradingPlatform.Controllers
             string text = searchbox;
             if (Session["user"] == null || Session["userName"] == null)
                 return Redirect("~/Login.aspx");
+
+            //code for showing who signed in -
+           
+            var us = Session["user"] as tblUser;
+            tblUser u = manager.StpDBEntities.tblUsers.Find(us.uid);
+            ViewBag.fname = u.fname;
+            ViewBag.lname = u.lname;
+            //code ends
+
             text = text.ToLower();
             List<tblUser> users = new List<tblUser>();
             foreach (tblUser user in db.tblUsers)
@@ -124,10 +140,13 @@ namespace StockTradingPlatform.Controllers
                 return Redirect("~/Login.aspx");
 
             //code for showing who signed in -
-            var user = Session["user"] as tblUser;
-            ViewBag.fname = user.fname;
-            ViewBag.lname = user.lname;
+            
+            var us = Session["user"] as tblUser;
+            tblUser u = manager.StpDBEntities.tblUsers.Find(us.uid);
+            ViewBag.fname = u.fname;
+            ViewBag.lname = u.lname;
             //code ends
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -149,9 +168,11 @@ namespace StockTradingPlatform.Controllers
                 return Redirect("~/Login.aspx");
 
             //code for showing who signed in -
-            var user = Session["user"] as tblUser;
-            ViewBag.fname = user.fname;
-            ViewBag.lname = user.lname;
+            
+            var us = Session["user"] as tblUser;
+            tblUser u = manager.StpDBEntities.tblUsers.Find(us.uid);
+            ViewBag.fname = u.fname;
+            ViewBag.lname = u.lname;
             //code ends
 
             if (ModelState.IsValid)
@@ -170,10 +191,14 @@ namespace StockTradingPlatform.Controllers
                 return Redirect("~/Login.aspx");
 
             //code for showing who signed in -
-            var user = Session["user"] as tblUser;
-            ViewBag.fname = user.fname;
-            ViewBag.lname = user.lname;
+            
+            var us = Session["user"] as tblUser;
+            tblUser u = manager.StpDBEntities.tblUsers.Find(us.uid);
+            ViewBag.fname = u.fname;
+            ViewBag.lname = u.lname;
             //code ends
+
+
             TransactionsManager model = new TransactionsManager();
             return View(model);
         }
@@ -193,15 +218,86 @@ namespace StockTradingPlatform.Controllers
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /////chayank's code starts
         //below everything related to stock chyaank's code below
+        public ActionResult Profile()
+        {
+           if (Session["user"] == null || Session["userName"] == null)
+               return Redirect("~/Login.aspx");
+            var user = Session["user"] as tblUser;
+            string education = "Computer Science";
+            
+            if (user.fname == "Prajjwal") education = "Computer Science from LPU,Punjab";
+            if (user.fname == "Arihant") education = "Computer science from Manipal University,Jaipur";
+            if(user.fname=="Chayank") education = "Information Science from SJCE,Mysore";
+            tblUser u = manager.StpDBEntities.tblUsers.Find(user.uid);
+
+            ViewBag.fname = u.fname;
+            ViewBag.lname = u.lname;
+            ViewBag.mob = u.mobile;
+            ViewBag.userName = Session["userName"].ToString();
+            ViewBag.education = education;
+
+            
+            ViewBag.uid = user.uid;
+            return View();
+        }
+
+        public ActionResult EditAdminUser(int id)
+        {
+            if (Session["user"] == null || Session["userName"] == null)
+                return Redirect("~/Login.aspx");
+
+            //code for showing who signed in -
+            
+            var us = Session["user"] as tblUser;
+            tblUser u = manager.StpDBEntities.tblUsers.Find(us.uid);
+            ViewBag.fname = u.fname;
+            ViewBag.lname = u.lname;
+            //code ends
+
+            tblUser tblUsers = db.tblUsers.Find(id);
+            if (tblUsers == null)
+            {
+                return HttpNotFound();
+            }
+            return View(tblUsers);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditAdminUser([Bind(Include = "uid,fname,lname,email,mobile,dob,address,role,status")] tblUser tblUsers)
+        {
+            if (Session["user"] == null || Session["userName"] == null)
+                return Redirect("~/Login.aspx");
+
+            //code for showing who signed in -
+            
+            var us = Session["user"] as tblUser;
+            tblUser u = manager.StpDBEntities.tblUsers.Find(us.uid);
+            ViewBag.fname = u.fname;
+            ViewBag.lname = u.lname;
+            //code ends
+
+            if (ModelState.IsValid)
+            {
+                db.Entry(tblUsers).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Profile");
+            }
+            return View(tblUsers);
+        }
+
+
         public ActionResult ListOfStocks()
         {//to pass two models in one onject
            if (Session["user"] == null || Session["userName"] == null)
                return Redirect("~/Login.aspx");
 
             //code for showing who signed in -
-          var user = Session["user"] as tblUser;
-           ViewBag.fname = user.fname;
-           ViewBag.lname = user.lname;
+            
+            var us = Session["user"] as tblUser;
+            tblUser u = manager.StpDBEntities.tblUsers.Find(us.uid);
+            ViewBag.fname = u.fname;
+            ViewBag.lname = u.lname;
             //code ends
             StockManager model = new StockManager();
             
@@ -215,9 +311,11 @@ namespace StockTradingPlatform.Controllers
            if (Session["user"] == null || Session["userName"] == null)
                return Redirect("~/Login.aspx");
             //code for showing who signed in -
-            var user = Session["user"] as tblUser;
-            ViewBag.fname = user.fname;
-            ViewBag.lname = user.lname;
+            
+            var us = Session["user"] as tblUser;
+            tblUser u = manager.StpDBEntities.tblUsers.Find(us.uid);
+            ViewBag.fname = u.fname;
+            ViewBag.lname = u.lname;
             //code ends
             ViewBag.name = "ADD STOCK";
             StockManager model = new StockManager();
@@ -231,13 +329,15 @@ namespace StockTradingPlatform.Controllers
         {
              if (Session["user"] == null || Session["userName"] == null)
                  return Redirect("~/Login.aspx");
-
+            
             //code for showing who signed in -
-             var user = Session["user"] as tblUser;
-             ViewBag.fname = user.fname;
-             ViewBag.lname = user.lname;
+            
+            var user = Session["user"] as tblUser;
+            tblUser u1 = manager.StpDBEntities.tblUsers.Find(user.uid);
+            ViewBag.fname = u1.fname;
+             ViewBag.lname = u1.lname;
             //code ends
-            UserManager manager = new UserManager();
+            
             int uid = user.uid;
             int id = Convert.ToInt32(submit);
 
@@ -332,19 +432,20 @@ namespace StockTradingPlatform.Controllers
 
             //code for showing who signed in -
             var user = Session["user"] as tblUser;
-            ViewBag.fname = user.fname;
-            ViewBag.lname = user.lname;
+            tblUser u = manager.StpDBEntities.tblUsers.Find(user.uid);
+            ViewBag.fname = u.fname;
+            ViewBag.lname = u.lname;
             //code ends
 
-            StockManager model = new StockManager();
-            model.tblStock=model.StpDBEntities.tblStocks.Single(x => x.stockId == id );
-            int index = (int)model.StpDBEntities.getIdexFromStockPriceTable(id).FirstOrDefault();
-            model.tblStocksPrice = model.StpDBEntities.tblStocksPrices.Single(x => x.id==index);
+           
+            manager.tblStock= manager.StpDBEntities.tblStocks.Single(x => x.stockId == id );
+            int index = (int)manager.StpDBEntities.getIdexFromStockPriceTable(id).FirstOrDefault();
+            manager.tblStocksPrice = manager.StpDBEntities.tblStocksPrices.Single(x => x.id==index);
 
-            System.Diagnostics.Debug.WriteLine("this is a bug " + model.tblStocksPrice.stockId +"  : price " + model.tblStocksPrice.currentPrice);
+            System.Diagnostics.Debug.WriteLine("this is a bug " + manager.tblStocksPrice.stockId +"  : price " + manager.tblStocksPrice.currentPrice);
             ViewBag.name = "EDIT";
             
-            return View(model);
+            return View(manager);
         }
 
         //post for addstock
