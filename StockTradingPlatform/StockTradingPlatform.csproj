@@ -173,8 +173,30 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\OtherHelperScripts\bootstrap.min.js" />
     <Content Include="Scripts\OtherHelperScripts\fastclick\lib\fastclick.js" />
+    <Content Include="Scripts\OtherHelperScripts\Flot\.gitignore" />
+    <Content Include="Scripts\OtherHelperScripts\Flot\excanvas.js" />
+    <Content Include="Scripts\OtherHelperScripts\Flot\excanvas.min.js" />
+    <Content Include="Scripts\OtherHelperScripts\Flot\jquery.colorhelpers.js" />
+    <Content Include="Scripts\OtherHelperScripts\Flot\jquery.flot.canvas.js" />
+    <Content Include="Scripts\OtherHelperScripts\Flot\jquery.flot.categories.js" />
+    <Content Include="Scripts\OtherHelperScripts\Flot\jquery.flot.crosshair.js" />
+    <Content Include="Scripts\OtherHelperScripts\Flot\jquery.flot.errorbars.js" />
+    <Content Include="Scripts\OtherHelperScripts\Flot\jquery.flot.fillbetween.js" />
+    <Content Include="Scripts\OtherHelperScripts\Flot\jquery.flot.image.js" />
+    <Content Include="Scripts\OtherHelperScripts\Flot\jquery.flot.js" />
+    <Content Include="Scripts\OtherHelperScripts\Flot\jquery.flot.navigate.js" />
+    <Content Include="Scripts\OtherHelperScripts\Flot\jquery.flot.pie.js" />
+    <Content Include="Scripts\OtherHelperScripts\Flot\jquery.flot.resize.js" />
+    <Content Include="Scripts\OtherHelperScripts\Flot\jquery.flot.selection.js" />
+    <Content Include="Scripts\OtherHelperScripts\Flot\jquery.flot.stack.js" />
+    <Content Include="Scripts\OtherHelperScripts\Flot\jquery.flot.symbol.js" />
+    <Content Include="Scripts\OtherHelperScripts\Flot\jquery.flot.threshold.js" />
+    <Content Include="Scripts\OtherHelperScripts\Flot\jquery.flot.time.js" />
+    <Content Include="Scripts\OtherHelperScripts\Flot\jquery.js" />
+    <Content Include="Scripts\OtherHelperScripts\Flot\LICENSE.txt" />
     <Content Include="Scripts\OtherHelperScripts\jquery-slimscroll\jquery.slimscroll.js" />
     <Content Include="Scripts\OtherHelperScripts\jquery-slimscroll\jquery.slimscroll.min.js" />
+    <Content Include="Scripts\OtherHelperScripts\jquery-ui.min.js" />
     <Content Include="Scripts\OtherHelperScripts\jquery\AUTHORS.txt" />
     <Content Include="Scripts\OtherHelperScripts\jquery\dist\core.js" />
     <Content Include="Scripts\OtherHelperScripts\jquery\dist\jquery.js" />
@@ -1951,6 +1973,7 @@
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Models\DataPoint.cs" />
     <Compile Include="Models\GetStocksData_Result.cs">
       <DependentUpon>StpDB.tt</DependentUpon>
     </Compile>
@@ -2168,6 +2191,19 @@
     <Content Include="Views\User\UserWallet.cshtml" />
     <Content Include="Views\Admin\Profile.cshtml" />
     <Content Include="Views\Admin\EditAdminUser.cshtml" />
+    <Content Include="Views\Admin\PieChartForDashboard.cshtml" />
+    <Content Include="Scripts\OtherHelperScripts\Flot\.bower.json" />
+    <Content Include="Scripts\OtherHelperScripts\Flot\.travis.yml" />
+    <Content Include="Scripts\OtherHelperScripts\Flot\API.md" />
+    <Content Include="Scripts\OtherHelperScripts\Flot\component.json" />
+    <Content Include="Scripts\OtherHelperScripts\Flot\CONTRIBUTING.md" />
+    <Content Include="Scripts\OtherHelperScripts\Flot\FAQ.md" />
+    <Content Include="Scripts\OtherHelperScripts\Flot\flot.jquery.json" />
+    <Content Include="Scripts\OtherHelperScripts\Flot\Makefile" />
+    <Content Include="Scripts\OtherHelperScripts\Flot\NEWS.md" />
+    <Content Include="Scripts\OtherHelperScripts\Flot\package.json" />
+    <Content Include="Scripts\OtherHelperScripts\Flot\PLUGINS.md" />
+    <Content Include="Scripts\OtherHelperScripts\Flot\README.md" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

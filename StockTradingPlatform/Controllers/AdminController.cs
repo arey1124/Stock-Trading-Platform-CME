@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Newtonsoft.Json;
 using StockTradingPlatform.Models;
 
 namespace StockTradingPlatform.Controllers
@@ -20,13 +21,57 @@ namespace StockTradingPlatform.Controllers
 
         private UserManager manager = new UserManager();
         // GET: Admin
-
-        //index is dashboard
-        public ActionResult Index()
+       
+            //index is dashboard
+            public ActionResult Index()
         {
           if (Session["user"] == null || Session["userName"] == null)
              return Redirect("~/Login.aspx");
-           
+            //check
+            List<DataPoint> BardataPoints = new List<DataPoint>();
+            foreach (var admins in manager.StpDBEntities.tblStocks.GroupBy(x => x.addedBy).Select(group => new {
+                Metric = group.Key,
+                Count = group.Count()
+            }))
+            {
+                System.Diagnostics.Debug.WriteLine("{0} {1}", admins.Metric, admins.Count);
+                var admin = manager.StpDBEntities.tblUsers.Find(admins.Metric);
+                BardataPoints.Add(new DataPoint(admin.fname + " " + admin.lname, admins.Count));
+            }
+
+
+            List<DataPoint> PiedataPoints = new List<DataPoint>();
+            foreach (var admins in manager.StpDBEntities.tblTradeRequests.GroupBy(x => x.requestStatus).Select(group => new {
+                Metric = group.Key,
+                Count = group.Count()
+            }))
+            {
+                System.Diagnostics.Debug.WriteLine("{0} {1}", admins.Metric, admins.Count);
+                string type = string.Empty;
+                switch (admins.Metric)
+                {
+                    case "D":
+                        type = "Filled";
+                        break;
+                    case "O":
+                        type = "Open";
+                        break;
+                    case "P":
+                        type = "Partially Filled";
+                        break;
+                    case "C":
+                        type = "Cancelled";
+                        break;
+
+                }
+                PiedataPoints.Add(new DataPoint(type, admins.Count));
+            }
+
+
+
+            ViewBag.BarDataPoints = JsonConvert.SerializeObject(BardataPoints);
+            ViewBag.PieDataPoints = JsonConvert.SerializeObject(PiedataPoints);
+            //
             var user = Session["user"] as tblUser;
             tblUser u = manager.StpDBEntities.tblUsers.Find(user.uid);
             ViewBag.fname = u.fname;
@@ -38,6 +83,56 @@ namespace StockTradingPlatform.Controllers
 
             return View();
         }
+
+        public ContentResult JSON1()
+        {
+            List<DataPoint> BardataPoints = new List<DataPoint>();
+            foreach (var admins in manager.StpDBEntities.tblStocks.GroupBy(x => x.addedBy).Select(group => new {
+                Metric = group.Key,
+                Count = group.Count()
+            }))
+            {
+                System.Diagnostics.Debug.WriteLine("{0} {1}", admins.Metric, admins.Count);
+                var admin = manager.StpDBEntities.tblUsers.Find(admins.Metric);
+                BardataPoints.Add(new DataPoint(admin.fname + " " + admin.lname, admins.Count));
+            }
+
+            return Content(JsonConvert.SerializeObject(BardataPoints, _jsonSetting), "application/json");
+        }
+
+        public ContentResult JSON()
+        {
+            List<DataPoint> PiedataPoints = new List<DataPoint>();
+            foreach (var admins in manager.StpDBEntities.tblTradeRequests.GroupBy(x => x.requestStatus).Select(group => new {
+                Metric = group.Key,
+                Count = group.Count()
+            }))
+            {
+                System.Diagnostics.Debug.WriteLine("{0} {1}", admins.Metric, admins.Count);
+                string type = string.Empty;
+                switch (admins.Metric)
+                {
+                    case "D":
+                        type = "Filled";
+                        break;
+                    case "O":
+                        type = "Open";
+                        break;
+                    case "P":
+                        type = "Partially Filled";
+                        break;
+                    case "C":
+                        type = "Cancelled";
+                        break;
+                }
+                PiedataPoints.Add(new DataPoint(type, admins.Count));
+            }
+
+            return Content(JsonConvert.SerializeObject(PiedataPoints, _jsonSetting), "application/json");
+        }
+
+        JsonSerializerSettings _jsonSetting = new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore };
+
 
         public ActionResult Logout()
         {
