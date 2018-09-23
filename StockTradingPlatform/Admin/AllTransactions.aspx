@@ -18,10 +18,9 @@
     
    <link rel="stylesheet" type="text/css" href="../Styles/addUser.css" />
    <!-- Google Font -->
-  <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
-<body class="hold-transition skin-blue sidebar-collapse sidebar-mini">
+<body class="hold-transition skin-blue fixed sidebar-mini">
     <!-- Site wrapper -->
     <div class="wrapper">
 
@@ -31,12 +30,12 @@
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><b>CME</b></span>
                 <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg"><b>CME</b> GROUP</span>
+                <span class="logo-lg"><img src="../Images/whitelogo.jpg" class=" img-circle " alt="User Image" height="30px" />&nbsp;<b>CME</b> GROUP</span>
             </a>
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top">
                 <!-- Sidebar toggle button-->
-                <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                <a href="#"  data-toggle="push-menu" role="button">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -44,10 +43,42 @@
                 </a>
 
                 <div class="navbar-custom-menu">
-                    <ul class="nav navbar-nav">
+                       <ul class="nav navbar-nav">
                         <!-- Messages: style can be found in dropdown.less-->
-                        <!-- Control Sidebar Toggle Button -->
+                        <!-- Notifications: style can be found in dropdown.less -->
+                        <!-- Tasks: style can be found in dropdown.less -->
+                        <!-- User Account: style can be found in dropdown.less -->
+                        <li class="dropdown user user-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <img src="../Images/admin.png" class="user-image" alt="User Image"/>
+                                <span class="hidden-xs">@ViewBag.fname &nbsp;@ViewBag.lname</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <!-- User image -->
+                                <li class="user-header">
+                                    <img src="../Images/admin.png" class="img-circle" alt="User Image">
 
+                                    <p>
+                                        @ViewBag.fname &nbsp;@ViewBag.lname - Web Developer
+                                        <small>Member since July. 2018</small>
+                                    </p>
+                                </li>
+                                <!-- Menu Body -->
+                                <!-- Menu Footer-->
+                                <li class="user-footer">
+                                    <div class="pull-left">
+                                        <a href="/Admin/profile" class="btn btn-primary">Profile</a>
+                                    </div>
+                                    <div class="pull-right">
+                                        <a href="/Admin/Logout" class="btn btn-primary">Logout</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- Control Sidebar Toggle Button -->
+                        <li>
+                            <a href="/Admin/Logout"> <i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a>
+                        </li>
                     </ul>
                 </div>
             </nav>
@@ -55,17 +86,28 @@
 
         <!-- =============================================== -->
         <!-- Left side column. contains the sidebar -->
-        <aside class="main-sidebar">
+       <aside class="main-sidebar">
             <!-- sidebar: style can be found in sidebar.less -->
             <section class="sidebar">
+                <br/>
                 <!-- Sidebar user panel -->
-                
+                <div class="user-panel">
+                    <div class="pull-left image">
+                        <img src="../Images/admin.png" class="img-circle" alt="User Image">
+                    </div>
+                    <div class="pull-left info">
+                        <p>@ViewBag.fname &nbsp;@ViewBag.lname</p>
+                        <a href="/Admin/profile"><i class="fa fa-circle text-success"></i> Online</a>
+                    </div>
+                </div>
+                <br/>
+               
 
                 <!-- /.search form -->
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu" data-widget="tree">
                     <li class="header">MAIN NAVIGATION</li>
-                    <li><asp:HyperLink ID="HyperLink6" runat="server" NavigateUrl="~/Admin/Index"><i class="fa fa-book"></i> <span>Dashboard</span></asp:HyperLink> </li>
+                    <li><a href="/Admin/Index"><i class="fa fa-book"></i> <span>Dashboard</span></a></li>
 
                     <li class="treeview">
                         <a href="#">
@@ -76,14 +118,10 @@
                         </a>
                         <ul class="treeview-menu">
                             <li>
-                                
-                                
-                               <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/Admin/ListOfStocks"><i class="fa fa-circle-o"></i>View/Modify Stock</asp:HyperLink> 
-
-
+                                <a href="/Admin/ListOfStocks"><i class="fa fa-circle-o"></i>View/Modify Stock</a>
                             </li>
                             <li>
-                                <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Admin/AddStock"><i class="fa fa-circle-o"></i>Add Stock</asp:HyperLink> 
+                                <a href="/Admin/AddStock"><i class="fa fa-circle-o"></i>Add Stock</a>
                             </li>
                         </ul>
                     </li>
@@ -96,13 +134,10 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                                                           <li><asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/Admin/ViewUsers"><i class="fa fa-circle-o"></i>View Users</asp:HyperLink> </li>
-
-                                                           <li><asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="~/Admin/AllUsersTradeRequests"><i class="fa fa-circle-o"></i>View Trade Requests</asp:HyperLink> </li>
-
-                                                           <li><asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="~/Admin/Index"><i class="fa fa-circle-o"></i>View Transactions</asp:HyperLink> </li>
-
-                           
+                            <li><a href="~/Admin/AddUser.aspx"><i class="fa fa-circle-o"></i>Add User</a></li>
+                            <li><a href="/Admin/ViewUsers"><i class="fa fa-circle-o"></i>View Users</a></li>
+                            <li><a href="/Admin/AllUsersTradeRequests"><i class="fa fa-circle-o"></i>View Trade Requests</a></li>
+                            <li><a href="/Admin/AllTransactions"><i class="fa fa-circle-o"></i>View Transactions</a></li>
                         </ul>
                     </li>
 
@@ -110,7 +145,7 @@
 
 
                     <li class="header">Account</li>
-                    <li><a href="#"><i class="fa fa-circle-o "></i> <span>Logout</span></a></li>
+                    <li><a href="/Admin/Logout"><i class="fa fa-circle-o "></i> <span>Logout</span></a></li>
 
                 </ul>
             </section>
@@ -180,5 +215,21 @@
      immediately after the control sidebar -->
         <div class="control-sidebar-bg"></div>
     </div>
+    <!-- ./wrapper -->
+    <!-- jQuery 3 -->
+ 
+    <script src="~/Scripts/OtherHelperScripts/jquery/dist/jquery.min.js"></script>
+
+    <!-- Bootstrap 3.3.7 -->
+    <script src="~/Scripts/OtherHelperScripts/bootstrap.min.js"></script>
+
+    <!-- SlimScroll -->
+    <script src="~/Scripts/OtherHelperScripts/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+    <!-- FastClick -->
+    <script src="~/Scripts/OtherHelperScripts/fastclick/lib/fastclick.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/Scripts/OtherHelperScripts/js/adminlte.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="~/Scripts/OtherHelperScripts/js/demo.js"></script>
 </body>
 </html>
