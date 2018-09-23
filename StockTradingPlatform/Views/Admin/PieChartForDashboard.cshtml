@@ -1,0 +1,115 @@
+﻿
+<script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+<script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+<script>
+        window.onload = function () {
+
+            var chart = new CanvasJS.Chart("chartContainer", {
+	animationEnabled: true,
+    theme: "light2", // "light1", "light2", "dark1", "dark2"
+    
+	axisY: {
+		title: "No. of Stocks"
+	},
+	data: [{
+		type: "column",
+		dataPoints: @Html.Raw(ViewBag.BarDataPoints)
+	}]
+    });
+            chart.render();
+
+         
+
+var chart1 = new CanvasJS.Chart("chartContainer1", {
+
+
+	data: [{
+		type: "pie",
+        startAngle: 180,
+        toolTipContent: "<b>{label}</b>: {y}",
+        showInLegend: "true",
+        legendText: "{label}",
+        indexLabel: "{label} - {y}",
+        dataPoints: @Html.Raw(ViewBag.PieDataPoints)
+	}]
+});
+
+
+    chart1.render();
+
+
+
+
+    setInterval(function () { inter() }, 2000);
+    function inter() {
+        
+        $.getJSON("/Graphs/json", function (data) {
+            chart1.options.data[0].dataPoints = data;
+
+
+        });
+
+
+        chart1.render();
+
+
+    }
+
+
+
+}
+</script>
+
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <i class="fa fa-bar-chart-o"></i>
+
+                <h3 class="box-title">Stocks Added By Each Admin</h3>
+
+
+            </div>
+            <div class="box-body">
+                <div id="chartContainer" style="height: 300px;"></div>
+            </div>
+            <!-- /.box-body-->
+        </div>
+    </div>
+    <!-- /.col -->
+
+    <div class="col-md-6">
+        <!-- Bar chart -->
+        
+        <!-- /.box -->
+        <!-- Donut chart -->
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <i class="fa fa-bar-chart-o"></i>
+
+                <h3 class="box-title">Trade Requests</h3>
+
+                
+            </div>
+            <div class="box-body">
+                <div id="chartContainer1" style="height: 300px;"></div>
+            </div>
+            <!-- /.box-body-->
+        </div>
+        <!-- /.box -->
+    </div>
+    <!-- /.col -->
+</div>
+
+
+
+
+
+
+
+
+
+
+
+

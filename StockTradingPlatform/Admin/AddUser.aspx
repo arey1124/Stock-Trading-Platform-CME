@@ -7,13 +7,13 @@
     <title>Add/Modify User</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
-    <link href="~/Styles/OtherHelperStyles/bootstrap.min.css" rel="stylesheet" />
+    <link href="../Styles/OtherHelperStyles/bootstrap.min.css" rel="stylesheet" />
     <!-- Font Awesome -->
-    <link href="~/Styles/OtherHelperStyles/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
-    <link href="~/Styles/OtherHelperStyles/Ionicons/css/ionicons.min.css" rel="stylesheet" />
+    <link href="../Styles/OtherHelperStyles/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="../Styles/OtherHelperStyles/Ionicons/css/ionicons.min.css" rel="stylesheet" />
     <link href="../Styles/OtherHelperStyles/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" rel="stylesheet" />
-    <link href="~/Styles/OtherHelperStyles/AdminLTE.min.css" rel="stylesheet" />
-    <link href="~/Styles/OtherHelperStyles/skins/_all-skins.min.css" rel="stylesheet" />
+    <link href="../Styles/OtherHelperStyles/AdminLTE.min.css" rel="stylesheet" />
+    <link href="../Styles/OtherHelperStyles/skins/_all-skins.min.css" rel="stylesheet" />
 
     
    <link rel="stylesheet" type="text/css" href="../Styles/addUser.css" />
@@ -21,33 +21,67 @@
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
     </head>
-<body class="hold-transition skin-blue sidebar-collapse sidebar-mini">
+<body class="hold-transition skin-blue fixed sidebar-mini">
     <!-- Site wrapper -->
     <div class="wrapper">
 
         <header class="main-header">
             <!-- Logo -->
             <a href="/Admin/Index" class="logo">
+               
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><b>CME</b></span>
                 <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg"><b>CME</b> GROUP</span>
+                <span class="logo-lg"><img src="../Images/whitelogo.jpg" class=" img-circle " alt="User Image" height="30px"/>&nbsp;<b>CME</b> GROUP</span>
             </a>
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top">
                 <!-- Sidebar toggle button-->
-                <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                <a href="#"  data-toggle="push-menu" role="button">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </a>
 
-                <div class="navbar-custom-menu">
+                  <div class="navbar-custom-menu">
+
                     <ul class="nav navbar-nav">
                         <!-- Messages: style can be found in dropdown.less-->
-                        <!-- Control Sidebar Toggle Button -->
+                        <!-- Notifications: style can be found in dropdown.less -->
+                        <!-- Tasks: style can be found in dropdown.less -->
+                        <!-- User Account: style can be found in dropdown.less -->
+                        <li class="dropdown user user-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <img src="../Images/admin.png" class="user-image" alt="User Image">
+                                <span class="hidden-xs">@ViewBag.fname &nbsp;@ViewBag.lname</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <!-- User image -->
+                                <li class="user-header">
+                                    <img src="../Images/admin.png" class="img-circle" alt="User Image">
 
+                                    <p>
+                                        @ViewBag.fname &nbsp;@ViewBag.lname - Web Developer
+                                        <small>Member since July. 2018</small>
+                                    </p>
+                                </li>
+                                <!-- Menu Body -->
+                                <!-- Menu Footer-->
+                                <li class="user-footer">
+                                    <div class="pull-left">
+                                        <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                    </div>
+                                    <div class="pull-right">
+                                        <a href="#" class="btn btn-default btn-flat">Logout</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- Control Sidebar Toggle Button -->
+                        <li>
+                            <a href="/Admin/Logout"> <i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a>
+                        </li>
                     </ul>
                 </div>
             </nav>
@@ -59,6 +93,18 @@
             <!-- sidebar: style can be found in sidebar.less -->
             <section class="sidebar">
                 <!-- Sidebar user panel -->
+                <br/>
+                <!-- Sidebar user panel -->
+                <div class="user-panel">
+                    <div class="pull-left image">
+                        <img src="../Images/admin.png" class="img-circle" alt="User Image">
+                    </div>
+                    <div class="pull-left info">
+                        <p>@ViewBag.fname &nbsp;@ViewBag.lname</p>
+                        <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                    </div>
+                </div>
+                <br/>
                 
 
                 <!-- /.search form -->
@@ -96,13 +142,15 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
+                                                           <li><asp:HyperLink ID="HyperLink7" runat="server" NavigateUrl="../Admin/AddUser.aspx"><i class="fa fa-circle-o"></i>Add Users</asp:HyperLink> </li>
+
                                                            <li><asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/Admin/ViewUsers"><i class="fa fa-circle-o"></i>View Users</asp:HyperLink> </li>
 
                                                            <li><asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="~/Admin/AllUsersTradeRequests"><i class="fa fa-circle-o"></i>View Trade Requests</asp:HyperLink> </li>
 
-                                                           <li><asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="~/Admin/Index"><i class="fa fa-circle-o"></i>View Transactions</asp:HyperLink> </li>
+                                                           <li><asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="../Admin/AllTransactions.aspx"><i class="fa fa-circle-o"></i>View Transactions</asp:HyperLink> </li>
 
-                           
+                           s
                         </ul>
                     </li>
 
@@ -211,7 +259,7 @@
 
         <footer class="main-footer">
             
-            <strong>Done By .NET Team </strong>
+            <strong>&copy;2018 .NET Team CME Stock Trading Platform</strong>
         </footer>
 
        
@@ -225,6 +273,14 @@
     <script src="../Scripts/OtherHelperScripts/jquery/dist/jquery.min.js"></script>
     <script src="../Scripts/OtherHelperScripts/bootstrap.min.js"></script>
     <script src="../Styles/OtherHelperStyles/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+     <!-- SlimScroll -->
+    <script src="../Scripts/OtherHelperScripts/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+    <!-- FastClick -->
+    <script src="../Scripts/OtherHelperScripts/fastclick/lib/fastclick.js"></script>
+    <!-- AdminLTE App -->
+    <script src="../Scripts/OtherHelperScripts/js/adminlte.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="../Scripts/OtherHelperScripts/js/demo.js"></script>
 <script>
   $(function () {
    

@@ -15,6 +15,14 @@
           <Property Name="password" Type="varchar" MaxLength="100" />
           <Property Name="dateAdded" Type="datetime" />
         </EntityType>
+        <EntityType Name="tblCodes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="uid" Type="int" />
+          <Property Name="code" Type="varchar" MaxLength="6" />
+        </EntityType>
         <EntityType Name="tblHoldings">
           <Key>
             <PropertyRef Name="id" />
@@ -23,6 +31,16 @@
           <Property Name="uid" Type="int" />
           <Property Name="stockId" Type="int" />
           <Property Name="Qty" Type="int" />
+        </EntityType>
+        <EntityType Name="tblMarketdata">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="stockName" Type="varchar" MaxLength="20" />
+          <Property Name="qty" Type="int" />
+          <Property Name="currentPrice" Type="numeric" Precision="10" Scale="2" />
+          <Property Name="status" Type="char" MaxLength="1" />
         </EntityType>
         <EntityType Name="tblSessionsData">
           <Key>
@@ -123,6 +141,18 @@
               <PropertyRef Name="uid" />
             </Principal>
             <Dependent Role="tblAuthenticate">
+              <PropertyRef Name="uid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblCodes__uid__43A1090D">
+          <End Role="tblUsers" Type="Self.tblUsers" Multiplicity="0..1" />
+          <End Role="tblCodes" Type="Self.tblCodes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUsers">
+              <PropertyRef Name="uid" />
+            </Principal>
+            <Dependent Role="tblCodes">
               <PropertyRef Name="uid" />
             </Dependent>
           </ReferentialConstraint>
@@ -286,7 +316,9 @@
         </Function>
         <EntityContainer Name="StpDBModelStoreContainer">
           <EntitySet Name="tblAuthenticate" EntityType="Self.tblAuthenticate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblCodes" EntityType="Self.tblCodes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblHoldings" EntityType="Self.tblHoldings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblMarketdata" EntityType="Self.tblMarketdata" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblSessionsData" EntityType="Self.tblSessionsData" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblStocks" EntityType="Self.tblStocks" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblStocksHistory" EntityType="Self.tblStocksHistory" Schema="dbo" store:Type="Tables" />
@@ -298,6 +330,10 @@
           <AssociationSet Name="FK__tblAuthenti__uid__440B1D61" Association="Self.FK__tblAuthenti__uid__440B1D61">
             <End Role="tblUsers" EntitySet="tblUsers" />
             <End Role="tblAuthenticate" EntitySet="tblAuthenticate" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblCodes__uid__43A1090D" Association="Self.FK__tblCodes__uid__43A1090D">
+            <End Role="tblUsers" EntitySet="tblUsers" />
+            <End Role="tblCodes" EntitySet="tblCodes" />
           </AssociationSet>
           <AssociationSet Name="FK__tblHoldin__stock__65370702" Association="Self.FK__tblHoldin__stock__65370702">
             <End Role="tblStocks" EntitySet="tblStocks" />
@@ -447,6 +483,7 @@
           <NavigationProperty Name="tblTradeRequests" Relationship="Self.FK__tblTradeReq__uid__6477ECF3" FromRole="tblUsers" ToRole="tblTradeRequests" />
           <NavigationProperty Name="tblWallets" Relationship="Self.FK__tblWallet__uid__534D60F1" FromRole="tblUsers" ToRole="tblWallet" />
           <NavigationProperty Name="tblHoldings" Relationship="StpDBModel.FK__tblHoldings__uid__74AE54BC" FromRole="tblUser" ToRole="tblHoldings" />
+          <NavigationProperty Name="tblCodes" Relationship="StpDBModel.FK__tblCodes__uid__43A1090D" FromRole="tblUser" ToRole="tblCode" />
         </EntityType>
         <EntityType Name="tblWallet">
           <Key>
@@ -630,8 +667,14 @@
           <Parameter Name="stockId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UserTransactionsDetailByUid" ReturnType="Collection(StpDBModel.UserTransactionsDetailByUid_Result)">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="tblMarketdatas" EntityType="StpDBModel.tblMarketdata" />
+          <EntitySet Name="tblCodes" EntityType="StpDBModel.tblCode" />
+          <AssociationSet Name="FK__tblCodes__uid__43A1090D" Association="StpDBModel.FK__tblCodes__uid__43A1090D">
+            <End Role="tblUser" EntitySet="tblUsers" />
+            <End Role="tblCode" EntitySet="tblCodes" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="tblTransactions">
           <Key>
@@ -720,6 +763,37 @@
           <Property Type="Decimal" Name="reqPrice" Nullable="true" Precision="10" Scale="2" />
           <Property Type="DateTime" Name="time" Nullable="true" Precision="23" />
         </ComplexType>
+        <EntityType Name="tblMarketdata">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="stockName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="qty" Type="Int32" />
+          <Property Name="currentPrice" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="status" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tblCode">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="uid" Type="Int32" />
+          <Property Name="code" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblUser" Relationship="StpDBModel.FK__tblCodes__uid__43A1090D" FromRole="tblCode" ToRole="tblUser" />
+        </EntityType>
+        <Association Name="FK__tblCodes__uid__43A1090D">
+          <End Type="StpDBModel.tblUser" Role="tblUser" Multiplicity="0..1" />
+          <End Type="StpDBModel.tblCode" Role="tblCode" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="uid" />
+            </Principal>
+            <Dependent Role="tblCode">
+              <PropertyRef Name="uid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -873,6 +947,26 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="tblMarketdatas">
+            <EntityTypeMapping TypeName="StpDBModel.tblMarketdata">
+              <MappingFragment StoreEntitySet="tblMarketdata">
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="currentPrice" ColumnName="currentPrice" />
+                <ScalarProperty Name="qty" ColumnName="qty" />
+                <ScalarProperty Name="stockName" ColumnName="stockName" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblCodes">
+            <EntityTypeMapping TypeName="StpDBModel.tblCode">
+              <MappingFragment StoreEntitySet="tblCodes">
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="uid" ColumnName="uid" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -887,7 +981,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

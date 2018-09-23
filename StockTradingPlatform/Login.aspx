@@ -56,7 +56,7 @@
 			  </div>
               <asp:Button runat="server" class=" col-sm-12 btn btn-primary" Text="Login" OnClick="Unnamed1_Click" />
 			  <asp:Label ID="Label1" runat="server" class="col-sm-12 form-text text-center" ></asp:Label>
-			  <small id="forgotpass" class="col-sm-12 form-text text-center text-primary forgot-pass">Forgot Password ?</small>
+			  <small><a href="ForgetPassword.aspx" id="forgotpass" class="col-sm-12 form-text text-center text-primary forgot-pass">Forgot Password ?</small>
 			</form>
 		</div>
 	</div>

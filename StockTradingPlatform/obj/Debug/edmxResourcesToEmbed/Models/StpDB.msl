@@ -148,5 +148,25 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <EntitySetMapping Name="tblMarketdatas">
+      <EntityTypeMapping TypeName="StpDBModel.tblMarketdata">
+        <MappingFragment StoreEntitySet="tblMarketdata">
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="currentPrice" ColumnName="currentPrice" />
+          <ScalarProperty Name="qty" ColumnName="qty" />
+          <ScalarProperty Name="stockName" ColumnName="stockName" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblCodes">
+      <EntityTypeMapping TypeName="StpDBModel.tblCode">
+        <MappingFragment StoreEntitySet="tblCodes">
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="uid" ColumnName="uid" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

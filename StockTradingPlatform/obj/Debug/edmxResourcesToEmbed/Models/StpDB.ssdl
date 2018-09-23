@@ -10,6 +10,14 @@
     <Property Name="password" Type="varchar" MaxLength="100" />
     <Property Name="dateAdded" Type="datetime" />
   </EntityType>
+  <EntityType Name="tblCodes">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="uid" Type="int" />
+    <Property Name="code" Type="varchar" MaxLength="6" />
+  </EntityType>
   <EntityType Name="tblHoldings">
     <Key>
       <PropertyRef Name="id" />
@@ -18,6 +26,16 @@
     <Property Name="uid" Type="int" />
     <Property Name="stockId" Type="int" />
     <Property Name="Qty" Type="int" />
+  </EntityType>
+  <EntityType Name="tblMarketdata">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="stockName" Type="varchar" MaxLength="20" />
+    <Property Name="qty" Type="int" />
+    <Property Name="currentPrice" Type="numeric" Precision="10" Scale="2" />
+    <Property Name="status" Type="char" MaxLength="1" />
   </EntityType>
   <EntityType Name="tblSessionsData">
     <Key>
@@ -118,6 +136,18 @@
         <PropertyRef Name="uid" />
       </Principal>
       <Dependent Role="tblAuthenticate">
+        <PropertyRef Name="uid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tblCodes__uid__43A1090D">
+    <End Role="tblUsers" Type="Self.tblUsers" Multiplicity="0..1" />
+    <End Role="tblCodes" Type="Self.tblCodes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUsers">
+        <PropertyRef Name="uid" />
+      </Principal>
+      <Dependent Role="tblCodes">
         <PropertyRef Name="uid" />
       </Dependent>
     </ReferentialConstraint>
@@ -281,7 +311,9 @@
   </Function>
   <EntityContainer Name="StpDBModelStoreContainer">
     <EntitySet Name="tblAuthenticate" EntityType="Self.tblAuthenticate" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblCodes" EntityType="Self.tblCodes" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblHoldings" EntityType="Self.tblHoldings" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblMarketdata" EntityType="Self.tblMarketdata" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblSessionsData" EntityType="Self.tblSessionsData" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblStocks" EntityType="Self.tblStocks" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblStocksHistory" EntityType="Self.tblStocksHistory" Schema="dbo" store:Type="Tables" />
@@ -293,6 +325,10 @@
     <AssociationSet Name="FK__tblAuthenti__uid__440B1D61" Association="Self.FK__tblAuthenti__uid__440B1D61">
       <End Role="tblUsers" EntitySet="tblUsers" />
       <End Role="tblAuthenticate" EntitySet="tblAuthenticate" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tblCodes__uid__43A1090D" Association="Self.FK__tblCodes__uid__43A1090D">
+      <End Role="tblUsers" EntitySet="tblUsers" />
+      <End Role="tblCodes" EntitySet="tblCodes" />
     </AssociationSet>
     <AssociationSet Name="FK__tblHoldin__stock__65370702" Association="Self.FK__tblHoldin__stock__65370702">
       <End Role="tblStocks" EntitySet="tblStocks" />

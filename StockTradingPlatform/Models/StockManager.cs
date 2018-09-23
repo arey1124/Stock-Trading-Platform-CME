@@ -13,6 +13,7 @@ namespace StockTradingPlatform.Models
         public tblStock tblStock { get; set; }
         public tblStocksPrice tblStocksPrice { get; set; }
         public tblStocksHistory tblStocksHistory { get; set; }
+        public tblMarketdata tblMarketdata { get; set; }
         public int? qty { get; set; }
 
         public StockManager()
