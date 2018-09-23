@@ -2150,6 +2150,7 @@
     <Content Include="Views\User\TransactionsByUid.cshtml" />
     <Content Include="Views\User\Graph.cshtml" />
     <Content Include="Views\User\UserWallet.cshtml" />
+    <Content Include="Views\User\StockPrices.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

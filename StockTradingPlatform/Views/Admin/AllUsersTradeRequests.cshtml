@@ -77,25 +77,27 @@
             @if (item.requestStatus == "O")
             {
                 <td>Open</td>
+                <td></td>
             }
             else if (item.requestStatus == "P")
             {
                 <td>Partially Filled</td>
                 <td>
-                    <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    <button class="btn btn-primary view" onclick="toggleView(this)" data-id="@Html.DisplayFor(modelItem => item.requestId)" role="button" aria-expanded="false" aria-controls="collapseExample">
                         View Details
-                    </a>
+                    </button>
                 </td>
             }
             else if (item.requestStatus == "C")
             {
                 <td>Cancelled</td>
+                <td></td>
             }
             else if (item.requestStatus == "D")
             {
                 <td>Executed</td>
                 <td>
-                    <button class="btn btn-primary view" onclick="toggleView(this)"  data-id="@Html.DisplayFor(modelItem => item.requestId)" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    <button class="btn btn-primary view" onclick="toggleView(this)" data-id="@Html.DisplayFor(modelItem => item.requestId)" role="button" aria-expanded="false" aria-controls="collapseExample">
                         View Details
                     </button>
                 </td>

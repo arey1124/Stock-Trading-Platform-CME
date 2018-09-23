@@ -1,0 +1,63 @@
+﻿@using StockTradingPlatform.Models
+@model List<GetStocksData_Result>
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script type="text/javascript">
+    window.setInterval(function () {
+        $.ajax({
+            url: "/User/GetUpdatedData",
+            type: 'GET',
+            dataType: 'json',
+            success: function (data) {
+                //var obj = JSON.parse(data);
+                for (var i = 0; i < data.length; i++) {
+                    console.log(data[i]);
+                    $("#" + data[i].stockId).text(parseFloat(data[i].currentPrice).toFixed(2));
+                    if ((parseFloat(data[i].currentPrice) - parseFloat(data[i].openingPrice)) > 0)
+                    {
+                        var d = (((parseFloat(data[i].currentPrice) - parseFloat(data[i].openingPrice)) / parseFloat(data[i].currentPrice)) * 100);
+                        $("#" + data[i].stockName).html(' <span class="text-success" id="' + data[i].stockName + '">+' + parseFloat(d).toFixed(2) +' %</span>');
+                    }
+                    else
+                    {
+                        var d = (((parseFloat(data[i].openingPrice) - parseFloat(data[i].currentPrice)) / parseFloat(data[i].openingPrice)) * 100);
+                        $("#" + data[i].stockName).html(' <span class="text-danger" id="' + data[i].stockName + '">- ' + parseFloat(d).toFixed(2) + ' %</span>');
+                        
+                    }
+                   
+                    
+                }
+            }
+        });
+    }, 5000);
+</script>
+
+<div class="row" style="padding: 20px;">
+    @foreach (var e in Model)
+    {
+        <div class="col-sm-2 rounded" style="background-color: #fff;margin:10px;border-bottom: 4px solid #3498db;">
+            <div class="card-body">
+                @{
+                    string stockName = e.stockName.ToString();
+                }
+                <button class="btn btn-outline-primary view" data-id="@e.stockId" data-name="@e.stockName" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    @e.stockName
+                </button>
+                <br />
+                <span id="@e.stockId">@e.currentPrice</span><br />
+                @if ((e.currentPrice - e.openingPrice) > 0)
+                {
+                    decimal d = (((e.currentPrice - e.openingPrice) / e.currentPrice) * 100) ?? 0;
+                    <span class="text-success"  id="@e.stockName">+  @d.ToString("0.00")  %</span>
+                }
+                else
+                {
+                    decimal d = (((e.openingPrice - e.currentPrice) / e.openingPrice) * 100) ?? 0;
+                    <span class="text-danger" id="@e.stockName">-  @d.ToString("0.00")  %</span>
+                }
+            </div>
+        </div>
+    }
+</div>
+

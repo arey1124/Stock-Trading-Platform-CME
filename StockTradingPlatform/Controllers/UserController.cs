@@ -36,6 +36,8 @@ namespace StockTradingPlatform.Controllers
             ViewBag.stockDetails = db.GetStocksData().ToList();
             return View();
         }
+        
+
         public ActionResult Profile()
         {
             if (Session["user"] == null || Session["userName"] == null)
@@ -44,6 +46,34 @@ namespace StockTradingPlatform.Controllers
             ViewBag.userName = Session["userName"].ToString();
             return View();
         }
+
+        public ActionResult GetData(int id)
+        {
+            JsonResult result = new JsonResult();
+            try
+            {
+                // Loading.  
+                db.Configuration.ProxyCreationEnabled = false;
+                var data = (from x in db.tblStocksPrices where x.stockId == id select x).ToList();
+                data =  data.Skip(Math.Max(0, data.Count() - 10)).ToList();
+                
+                result = this.Json(data, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                // Info  
+                Console.Write(ex);
+            }
+            return result;
+        }
+
+        public ActionResult GetUpdatedData()
+        {
+            JsonResult result = new JsonResult();
+            result = this.Json(db.GetStocksData().ToList(), JsonRequestBehavior.AllowGet);
+            return result;
+        }
+
         public ActionResult Graph(int id, string stockName)
         {
             ArrayList xValues = new ArrayList();
