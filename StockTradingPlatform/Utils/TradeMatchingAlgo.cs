@@ -136,6 +136,7 @@ namespace StockTradingPlatform.Utils
             catch (Exception ex)
             {
                 s = 0;
+
             }
             //return s;
         }

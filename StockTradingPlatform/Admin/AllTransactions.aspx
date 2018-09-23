@@ -51,7 +51,7 @@
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <img src="../Images/admin.png" class="user-image" alt="User Image"/>
-                                <span class="hidden-xs">@ViewBag.fname &nbsp;@ViewBag.lname</span>
+                                <span class="hidden-xs"><%= fname %>&nbsp;<%= lname %></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
@@ -59,7 +59,7 @@
                                     <img src="../Images/admin.png" class="img-circle" alt="User Image">
 
                                     <p>
-                                        @ViewBag.fname &nbsp;@ViewBag.lname - Web Developer
+                                        <%= fname %> &nbsp;<%= lname %> - Web Developer
                                         <small>Member since July. 2018</small>
                                     </p>
                                 </li>
@@ -96,7 +96,7 @@
                         <img src="../Images/admin.png" class="img-circle" alt="User Image">
                     </div>
                     <div class="pull-left info">
-                        <p>@ViewBag.fname &nbsp;@ViewBag.lname</p>
+                        <p><%= fname %> &nbsp;<%= lname %></p>
                         <a href="/Admin/profile"><i class="fa fa-circle text-success"></i> Online</a>
                     </div>
                 </div>
@@ -111,7 +111,7 @@
 
                     <li class="treeview">
                         <a href="#">
-                            <i class="fa fa-dashboard"></i> <span>Stocks</span>
+                            <i class="fa fa-dashboard"></i><span>Stocks</span>
                             <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right"></i>
                             </span>
@@ -137,12 +137,9 @@
                             <li><a href="~/Admin/AddUser.aspx"><i class="fa fa-circle-o"></i>Add User</a></li>
                             <li><a href="/Admin/ViewUsers"><i class="fa fa-circle-o"></i>View Users</a></li>
                             <li><a href="/Admin/AllUsersTradeRequests"><i class="fa fa-circle-o"></i>View Trade Requests</a></li>
-                            <li><a href="/Admin/AllTransactions"><i class="fa fa-circle-o"></i>View Transactions</a></li>
+                            <li><a href="/Admin/AllTransactions.aspx"><i class="fa fa-circle-o"></i>View Transactions</a></li>
                         </ul>
                     </li>
-
-
-
 
                     <li class="header">Account</li>
                     <li><a href="/Admin/Logout"><i class="fa fa-circle-o "></i> <span>Logout</span></a></li>
@@ -218,18 +215,20 @@
     <!-- ./wrapper -->
     <!-- jQuery 3 -->
  
-    <script src="~/Scripts/OtherHelperScripts/jquery/dist/jquery.min.js"></script>
-
+    <script src="../Scripts/OtherHelperScripts/jquery/dist/jquery.min.js"></script>
+    <script>
+        $.widget.bridge('uibutton', $.ui.button);
+    </script>
     <!-- Bootstrap 3.3.7 -->
-    <script src="~/Scripts/OtherHelperScripts/bootstrap.min.js"></script>
+    <script src="../Scripts/OtherHelperScripts/bootstrap.min.js"></script>
 
     <!-- SlimScroll -->
-    <script src="~/Scripts/OtherHelperScripts/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="../Scripts/OtherHelperScripts/jquery-slimscroll/jquery.slimscroll.min.js"></script>
     <!-- FastClick -->
-    <script src="~/Scripts/OtherHelperScripts/fastclick/lib/fastclick.js"></script>
+    <script src="../Scripts/OtherHelperScripts/fastclick/lib/fastclick.js"></script>
     <!-- AdminLTE App -->
-    <script src="~/Scripts/OtherHelperScripts/js/adminlte.min.js"></script>
+    <script src="../Scripts/OtherHelperScripts/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
-    <script src="~/Scripts/OtherHelperScripts/js/demo.js"></script>
+    <script src="../Scripts/OtherHelperScripts/js/demo.js"></script>
 </body>
 </html>
