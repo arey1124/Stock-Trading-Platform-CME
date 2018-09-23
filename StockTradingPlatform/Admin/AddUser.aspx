@@ -54,7 +54,7 @@
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <img src="../Images/admin.png" class="user-image" alt="User Image">
-                                <span class="hidden-xs">@ViewBag.fname &nbsp;@ViewBag.lname</span>
+                                <span class="hidden-xs"><%= firstname %>&nbsp;<%= lastname %></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
@@ -62,7 +62,7 @@
                                     <img src="../Images/admin.png" class="img-circle" alt="User Image">
 
                                     <p>
-                                        @ViewBag.fname &nbsp;@ViewBag.lname - Web Developer
+                                        <%= firstname %>&nbsp;<%= lastname %> - Web Developer
                                         <small>Member since July. 2018</small>
                                     </p>
                                 </li>
@@ -70,10 +70,10 @@
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
                                     <div class="pull-left">
-                                        <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                        <a href="/Admin/profile" class="btn btn-primary">Profile</a>
                                     </div>
                                     <div class="pull-right">
-                                        <a href="#" class="btn btn-default btn-flat">Logout</a>
+                                        <a href="/Admin/Logout" class="btn btn-primary">Logout</a>
                                     </div>
                                 </li>
                             </ul>
@@ -100,7 +100,7 @@
                         <img src="../Images/admin.png" class="img-circle" alt="User Image">
                     </div>
                     <div class="pull-left info">
-                        <p>@ViewBag.fname &nbsp;@ViewBag.lname</p>
+                        <p><%= firstname %>&nbsp;<%= lastname %></p>
                         <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                     </div>
                 </div>
@@ -195,7 +195,7 @@
                     </div>
                     
                     <div class="form-group col-sm-6">
-                        <asp:TextBox ID="email" runat="server" class="form-control border border-primary" placeholder="email" onkeyup="validateEmail()" onblur="validateEmail()" required TextMode="Email"></asp:TextBox>
+                        <asp:TextBox ID="email" runat="server" class="form-control border border-primary" placeholder="Email" onkeyup="validateEmail()" onblur="validateEmail()" required TextMode="Email"></asp:TextBox>
                         <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="email" ErrorMessage="Email is Incorrect" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>
                     </div>
                     <div class="form-group col-sm-6">
