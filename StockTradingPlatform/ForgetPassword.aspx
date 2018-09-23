@@ -1,9 +1,9 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="StockTradingPlatform.Login" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ForgetPassword.aspx.cs" Inherits="StockTradingPlatform.ForgetPassword" %>
 
 <!DOCTYPE>
 <html>
 <head>
-<title>Login</title>
+<title>Forget Password</title>
 <script src="jquery.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -22,7 +22,7 @@
 	  <div class="collapse navbar-collapse" id="navbarNavDropdown">
 	    <ul class="navbar-nav mr-auto">
 	      <li class="nav-item active">
-	        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+	        <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
 	      </li>
 	      <li class="nav-item">
 	        <a class="nav-link" href="#">About</a>
@@ -49,14 +49,16 @@
 		<div class="form-div">
 			<form id="form" runat="server">
 			  <div class="form-group">
-			    <asp:TextBox runat="server"  class="form-control border border-primary" id="email" aria-describedby="emailHelp" placeholder="Email" ></asp:TextBox>
+			    <asp:TextBox runat="server"  class="form-control border border-primary" id="email" aria-describedby="emailHelp" placeholder="Enter Your Registered Email"></asp:TextBox>
 			  </div>
+              <div class="form-group">  
+                <asp:Button runat="server" class=" col-sm-12 btn btn-primary" Text="Send Code" id="emailbtn" OnClick="Unnamed1_Click"/>
+              </div>
 			  <div class="form-group">
-			    <asp:TextBox type="password" runat="server" class="form-control border border-primary" id="password" placeholder="Password" onblur="validatePassword()" onkeyup="validatePassword()" ></asp:TextBox>
+			    <asp:TextBox type="text" runat="server" class="form-control border border-primary" id="code" placeholder="Enter 6 Digits Code"></asp:TextBox>
 			  </div>
-              <asp:Button runat="server" class=" col-sm-12 btn btn-primary" Text="Login" OnClick="Unnamed1_Click" />
+              <asp:Button runat="server" class=" col-sm-12 btn btn-primary" Text="Submit" ID="submit" OnClick="submit_Click"/>
 			  <asp:Label ID="Label1" runat="server" class="col-sm-12 form-text text-center" ></asp:Label>
-			  <small><a href="ForgetPassword.aspx" id="forgotpass" class="col-sm-12 form-text text-center text-primary forgot-pass">Forgot Password ?</small>
 			</form>
 		</div>
 	</div>

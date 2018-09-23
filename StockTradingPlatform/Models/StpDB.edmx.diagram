@@ -28,6 +28,8 @@
         <AssociationConnector Association="StpDBModel.FK__tblHoldin__stock__75A278F5" />
         <AssociationConnector Association="StpDBModel.FK__tblHoldings__uid__74AE54BC" />
         <EntityTypeShape EntityType="StpDBModel.tblMarketdata" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="StpDBModel.tblCode" Width="1.5" PointX="3" PointY="19.125" />
+        <AssociationConnector Association="StpDBModel.FK__tblCodes__uid__43A1090D" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

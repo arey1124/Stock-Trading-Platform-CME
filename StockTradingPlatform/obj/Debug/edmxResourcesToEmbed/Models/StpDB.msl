@@ -159,5 +159,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="tblCodes">
+      <EntityTypeMapping TypeName="StpDBModel.tblCode">
+        <MappingFragment StoreEntitySet="tblCodes">
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="uid" ColumnName="uid" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

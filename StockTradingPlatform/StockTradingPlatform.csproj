@@ -113,6 +113,7 @@
   <ItemGroup>
     <Content Include="Admin\AddUser.aspx" />
     <Content Include="Admin\AllTransactions.aspx" />
+    <Content Include="ChangePassword.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
@@ -120,6 +121,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="ForgetPassword.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Images\admin.png" />
     <Content Include="Images\whitelogo.jpg" />
@@ -1961,8 +1963,22 @@
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="ChangePassword.aspx.cs">
+      <DependentUpon>ChangePassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ChangePassword.aspx.designer.cs">
+      <DependentUpon>ChangePassword.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="ForgetPassword.aspx.cs">
+      <DependentUpon>ForgetPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ForgetPassword.aspx.designer.cs">
+      <DependentUpon>ForgetPassword.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1994,6 +2010,9 @@
       <DependentUpon>StpDB.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\tblAuthenticate.cs">
+      <DependentUpon>StpDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblCode.cs">
       <DependentUpon>StpDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tblHoldings.cs">
