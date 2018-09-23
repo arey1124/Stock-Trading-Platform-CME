@@ -7,7 +7,6 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using StockTradingPlatform.Models;
-using System.Collections.Generic;
 using System.Web.Helpers;
 using System.Collections;
 using StockTradingPlatform.Utils;
@@ -17,6 +16,7 @@ namespace StockTradingPlatform.Controllers
     public class UserController : Controller
     {
         private StpDBEntities db = new StpDBEntities();
+      
         // GET: User
         public ActionResult Index()
         {
@@ -36,6 +36,7 @@ namespace StockTradingPlatform.Controllers
             ViewBag.stockDetails = db.GetStocksData().ToList();
             return View();
         }
+
         public ActionResult Profile()
         {
             if (Session["user"] == null || Session["userName"] == null)
@@ -44,15 +45,14 @@ namespace StockTradingPlatform.Controllers
             ViewBag.userName = Session["userName"].ToString();
             return View();
         }
+
         public ActionResult Graph(int id, string stockName)
         {
             ArrayList xValues = new ArrayList();
             ArrayList yValues = new ArrayList();
-
             var results = (from x in db.tblStocksPrices where x.stockId == id select x);
             results.ToList().ForEach(rs => xValues.Add(rs.timeOfDay.ToString()));
             results.ToList().ForEach(rs => yValues.Add(rs.currentPrice));
-
             new Chart(width: 1000, height: 400, theme: ChartTheme.Vanilla)
                 .AddTitle(stockName)
                 .AddSeries("Default", chartType: "Area", xValue: xValues, yValues: yValues)
@@ -130,6 +130,7 @@ namespace StockTradingPlatform.Controllers
             }
             return View();
         }
+
         [HttpPost]
         public ActionResult TradeRequest(int? stockId, string requestType, decimal? reqPrice, int? reqQty, int? requestId, string Operation)
         {
@@ -153,7 +154,6 @@ namespace StockTradingPlatform.Controllers
 
                 //to call matching algo
                 ob.MatchingAlgo(tradeRequest);
-
                 return Redirect("/User/Dashboard");
             }
             else if (Operation == "Update")
@@ -187,7 +187,7 @@ namespace StockTradingPlatform.Controllers
             if(Session["user"] == null || Session["userName"] == null)
                 return Redirect("~/Login.aspx");
             var user = Session["user"] as tblUser;
-            int id = user.uid;
+            int? id = user.uid;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -245,19 +245,12 @@ namespace StockTradingPlatform.Controllers
             ///
             if (Session["user"] == null || Session["userName"] == null)
                 return Redirect("~/Login.aspx");
-
             var user = Session["user"] as tblUser;
             int uid = user.uid;
             UserManager manager = new UserManager();
-
             manager.tblHoldings = manager.StpDBEntities.tblHoldings.Include(t => t.tblStocks).Where(t => t.uid == uid && t.Qty > 0);
             manager.tblWallet = manager.StpDBEntities.tblWallets.SingleOrDefault(t => t.uid == uid);
             return View(manager);
         }
-
-        /// <summary>
-        ///  Chayank's code ends
-        /// </summary>
-
     }
 }

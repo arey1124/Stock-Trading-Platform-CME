@@ -10,6 +10,7 @@ namespace StockTradingPlatform.Utils
     public class TradeMatchingAlgo
     {
         StpDBEntities db = new StpDBEntities();
+
         public void MatchingAlgo(tblTradeRequest tradeRequest)
         {
             List<tblTradeRequest> possibleTradeRequests = new List<tblTradeRequest>();

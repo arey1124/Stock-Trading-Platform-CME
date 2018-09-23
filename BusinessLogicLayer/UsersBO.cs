@@ -16,6 +16,7 @@ namespace BusinessLogicLayer
         {
             return UsersHelper.AddUser(fname, lname, email, mobile, dob, address, role, status, uname, password);
         }
+
         public static int SendMail(string eMail, string fname, string uName, string password)
         {
             int s = 0;
