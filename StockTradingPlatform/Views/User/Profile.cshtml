@@ -9,11 +9,12 @@
 
 <div class="container rounded">
     <div class="row">
-        <div class="card col-sm-3" style="background-color: #fff;margin: 20px;height: 300px;">
+        <div class="card col-sm-3" style="background-color: #fff;margin: 20px;">
             <img class="card-img-top" src="~/Images/man.png" alt="Card image cap" style="padding-top: 20px;padding-left: 50px;padding-right: 50px;">
             <div class="card-body">
-                <p class="card-text text-center">@user.fname  @user.lname</p>
+                <p class="card-text text-center">@user.fname  @user.lname</p><br/>
                 <a href=""><input class="btn btn-outline-primary" value="Edit Profile" style="margin:5px;" /></a>
+                <a href="~/ChangePassword.aspx"><input class="btn btn-outline-primary" value="Change Password" style="margin:5px;" /></a>
             </div>
         </div>
         <div class="card col-sm-8" style="background-color: #fff;padding: 10px;margin: 20px;">
