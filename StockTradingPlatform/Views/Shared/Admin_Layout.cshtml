@@ -38,9 +38,9 @@
                 <span class="logo-lg"><img src="../Images/whitelogo.jpg" class=" img-circle " alt="User Image" height="30px" />&nbsp;<b>CME</b> GROUP</span>
             </a>
             <!-- Header Navbar: style can be found in header.less -->
-            <nav class="navbar navbar-static-top" >
+            <nav class="navbar navbar-static-top">
                 <!-- Sidebar toggle button-->
-                <a href="#"  data-toggle="push-menu" role="button">
+                <a href="#" data-toggle="push-menu" role="button">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -94,7 +94,7 @@
         <aside class="main-sidebar">
             <!-- sidebar: style can be found in sidebar.less -->
             <section class="sidebar">
-                <br/>
+                <br />
                 <!-- Sidebar user panel -->
                 <div class="user-panel">
                     <div class="pull-left image">
@@ -105,8 +105,8 @@
                         <a href="/Admin/profile"><i class="fa fa-circle text-success"></i> Online</a>
                     </div>
                 </div>
-                <br/>
-               
+                <br />
+
 
                 <!-- /.search form -->
                 <!-- sidebar menu: : style can be found in sidebar.less -->
@@ -161,10 +161,7 @@
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
-            <section class="content-header">
-               
-
-            </section>
+            <section class="content-header"></section>
 
             <!-- Main content -->
             <section class="content">
@@ -179,23 +176,25 @@
         <!-- /.content-wrapper -->
 
         <footer class="main-footer">
-            
+
             <strong>&copy; @DateTime.Now.Year  .NET Team CME Stock Trading Platform</strong>
         </footer>
 
-       
+
         <!-- Add the sidebar's background. This div must be placed
-     immediately after the control sidebar -->
+        immediately after the control sidebar -->
         <div class="control-sidebar-bg"></div>
     </div>
     <!-- ./wrapper -->
     <!-- jQuery 3 -->
- 
-    <script src="~/Scripts/OtherHelperScripts/jquery/dist/jquery.min.js"></script>
 
+    <script src="~/Scripts/OtherHelperScripts/jquery/dist/jquery.min.js"></script>
+    <script>
+        $.widget.bridge('uibutton', $.ui.button);
+    </script>
     <!-- Bootstrap 3.3.7 -->
     <script src="~/Scripts/OtherHelperScripts/bootstrap.min.js"></script>
-
+    
     <!-- SlimScroll -->
     <script src="~/Scripts/OtherHelperScripts/jquery-slimscroll/jquery.slimscroll.min.js"></script>
     <!-- FastClick -->
