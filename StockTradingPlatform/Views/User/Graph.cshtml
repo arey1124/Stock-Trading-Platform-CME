@@ -1,6 +1,7 @@
-﻿@model List<string>
+﻿<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+@model List<string>
 <div class="container rounded" style="background-color: #fff;padding: 20px;">
+    @Html.Partial("StockPrices")
     <img src="@Url.Action("Graph",new { id=Convert.ToInt32(Model[1]),stockName=Model[0]})" />
 </div>
-
-

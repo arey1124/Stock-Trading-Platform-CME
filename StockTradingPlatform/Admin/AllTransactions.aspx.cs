@@ -12,8 +12,14 @@ namespace StockTradingPlatform.Admin
     public partial class AllTransactions : System.Web.UI.Page
     {
         StpDBEntities ob = new StpDBEntities();
+        public string fname { get; set; }
+        public string lname { get; set; }
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            var user = Session["user"] as tblUser;
+            this.fname = user.fname;
+            this.lname = user.lname;
             DataTable dt = new DataTable();
             DataRow dr;
             DataColumn dc;

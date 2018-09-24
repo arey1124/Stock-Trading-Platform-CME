@@ -10,6 +10,7 @@ namespace StockTradingPlatform.Utils
     public class TradeMatchingAlgo
     {
         StpDBEntities db = new StpDBEntities();
+
         public void MatchingAlgo(tblTradeRequest tradeRequest)
         {
             List<tblTradeRequest> possibleTradeRequests = new List<tblTradeRequest>();
@@ -20,14 +21,16 @@ namespace StockTradingPlatform.Utils
                 possibleTradeRequests = db.tblTradeRequests.Where(t => t.requestType == "S" &&
                                                                  (t.requestStatus == "O" || t.requestStatus == "P") &&
                                                                   t.stockId == tradeRequest.stockId &&
-                                                                  t.requestPrice <= tradeRequest.requestPrice).ToList();
+                                                                  t.requestPrice <= tradeRequest.requestPrice &&
+                                                                  t.uid != tradeRequest.uid).ToList();
             }
             else if(tradeRequest.requestType == "S")
             {
                 possibleTradeRequests = db.tblTradeRequests.Where(t => t.requestType == "B" &&
                                                                  (t.requestStatus == "O" || t.requestStatus == "P") &&
                                                                   t.stockId == tradeRequest.stockId &&
-                                                                  t.requestPrice >= tradeRequest.requestPrice).ToList();
+                                                                  t.requestPrice >= tradeRequest.requestPrice &&
+                                                                  t.uid != tradeRequest.uid).ToList();
             }
             foreach (tblTradeRequest request in possibleTradeRequests)
             {
@@ -135,6 +138,7 @@ namespace StockTradingPlatform.Utils
             catch (Exception ex)
             {
                 s = 0;
+
             }
             //return s;
         }
