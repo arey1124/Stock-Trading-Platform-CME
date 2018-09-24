@@ -108,8 +108,23 @@ namespace StockTradingPlatform.Controllers
         public ActionResult CancelRequest(int id)
         {
             var result = db.tblTradeRequests.SingleOrDefault(x => x.requestId == id);
+
             if (result != null)
             {
+                if ( result.requestType == "B" )
+                {
+                    int reqQty = result.remainingQty ?? 0;
+                    decimal reqPrice = result.requestPrice ?? 0;
+                    var wallet = db.tblWallets.SingleOrDefault(x => x.uid == result.uid);
+                    wallet.balance = wallet.balance + (reqQty * reqPrice);
+                    db.SaveChanges();
+                }
+                else if( result.requestType == "S" )
+                {
+                    int reqQty = result.remainingQty ?? 0;
+                    var holdings = db.tblHoldings.FirstOrDefault(x=>x.uid == result.uid && x.stockId == result.stockId);
+                    holdings.remQty = holdings.remQty + reqQty;
+                }
                 result.requestStatus = "C";
                 db.SaveChanges();
             }
@@ -166,8 +181,60 @@ namespace StockTradingPlatform.Controllers
             if (Session["user"] == null || Session["userName"] == null)
                 return Redirect("~/Login.aspx");
             var user = Session["user"] as tblUser;
+            
             if (Operation == "Add")
             {
+                if (requestType == "B")
+                {
+                    var balance = db.tblWallets.SingleOrDefault(x => x.uid == user.uid);
+                    decimal reqp = reqPrice ?? 0;
+                    int reqq = reqQty ?? 0;
+                    decimal reqTotalPrice = reqp * reqq;
+                    if (reqTotalPrice > balance.balance)
+                    {
+                        ViewBag.result = "Insufficient Funds . Unable to place a request";
+                        ViewBag.stocks = db.tblStocks.ToList();
+                        ViewBag.type = "Add";
+                        ViewBag.Title = "Put a trade request";
+                        ViewBag.reqPrice = "";
+                        ViewBag.requestQty = "";
+                        return View();
+                    }
+                    var accountBalance = db.tblWallets.SingleOrDefault(x => x.uid == user.uid);
+                    if (accountBalance != null)
+                    {
+                        accountBalance.balance = (accountBalance.balance - reqTotalPrice);
+                        this.db.SaveChanges();
+                    }
+                }
+                else if(requestType == "S")
+                {
+                    var holdings = db.tblHoldings.SingleOrDefault(x => x.uid == user.uid && x.stockId == stockId);
+                    int qty;
+                    if (holdings == null)
+                    {
+                        qty = 0;
+                    }
+                    else
+                    {
+                        qty = holdings.remQty ?? 0;
+                    }
+                    
+                    if (reqQty > qty)
+                    {
+                        ViewBag.result = "You do not have stocks to sell . Unable to place a request";
+                        ViewBag.stocks = db.tblStocks.ToList();
+                        ViewBag.type = "Add";
+                        ViewBag.Title = "Put a trade request";
+                        ViewBag.reqPrice = "";
+                        ViewBag.requestQty = "";
+                        return View();
+                    }
+
+                    holdings.remQty = holdings.remQty - reqQty;
+                    db.SaveChanges();
+                }
+
                 tblTradeRequest tradeRequest = new tblTradeRequest();
                 tradeRequest.uid = user.uid;
                 tradeRequest.requestType = requestType;
@@ -179,6 +246,8 @@ namespace StockTradingPlatform.Controllers
                 tradeRequest.requestStatus = "O";
                 this.db.tblTradeRequests.Add(tradeRequest);
                 this.db.SaveChanges();
+               
+               
                 return Redirect("/User/Dashboard");
             }
             else if (Operation == "Update")

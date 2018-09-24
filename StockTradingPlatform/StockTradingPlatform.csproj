@@ -2223,6 +2223,7 @@
     <Content Include="Scripts\OtherHelperScripts\Flot\package.json" />
     <Content Include="Scripts\OtherHelperScripts\Flot\PLUGINS.md" />
     <Content Include="Scripts\OtherHelperScripts\Flot\README.md" />
+    <Content Include="Views\User\StockPrices.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
