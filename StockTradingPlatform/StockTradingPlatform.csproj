@@ -124,6 +124,7 @@
     <Content Include="ForgetPassword.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Images\admin.png" />
+    <Content Include="Images\user.jpg" />
     <Content Include="Images\whitelogo.jpg" />
     <Content Include="Images\curve-bottom.png" />
     <Content Include="Images\curve.png" />
@@ -2223,6 +2224,7 @@
     <Content Include="Scripts\OtherHelperScripts\Flot\package.json" />
     <Content Include="Scripts\OtherHelperScripts\Flot\PLUGINS.md" />
     <Content Include="Scripts\OtherHelperScripts\Flot\README.md" />
+    <Content Include="Views\User\AboutUs.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
