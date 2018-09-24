@@ -9,13 +9,21 @@ using System.Drawing;
 using System.Net;
 using System.Net.Mail;
 using System.Text;
+using StockTradingPlatform.Models;
 
 namespace StockTradingPlatform.Admin
 {
     public partial class AddUser : System.Web.UI.Page
     {
+        StpDBEntities db = new StpDBEntities();
+        public string firstname { get; set; }
+        public string lastname { get; set; }
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            var user = Session["user"] as tblUser;
+            this.firstname = user.fname;
+            this.lastname = user.lname;
             ValidationSettings.UnobtrusiveValidationMode = UnobtrusiveValidationMode.None;
         }
 
