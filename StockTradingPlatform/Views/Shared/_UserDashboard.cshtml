@@ -17,8 +17,14 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="/User/Dashboard">Dashboard <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/User/UserTradeRequests">Trade Requests</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="tradeReqDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Trade Requests
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="tradeReqDropdown">
+                        <a class="dropdown-item" href="~/User/UserTradeRequests">View Trade Requests</a>
+                        <a class="dropdown-item" href='@Url.Action("TradeRequest", new { a = 1 })'>Put Trade Request</a>
+                    </div>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/User/UserTransactions">Transactions</a>
