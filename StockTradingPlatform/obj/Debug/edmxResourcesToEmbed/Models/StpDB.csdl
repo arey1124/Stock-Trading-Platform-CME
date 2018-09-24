@@ -99,7 +99,7 @@
     <NavigationProperty Name="tblTradeRequests" Relationship="Self.FK__tblTradeReq__uid__6477ECF3" FromRole="tblUsers" ToRole="tblTradeRequests" />
     <NavigationProperty Name="tblWallets" Relationship="Self.FK__tblWallet__uid__534D60F1" FromRole="tblUsers" ToRole="tblWallet" />
     <NavigationProperty Name="tblHoldings" Relationship="StpDBModel.FK__tblHoldings__uid__74AE54BC" FromRole="tblUser" ToRole="tblHoldings" />
-    <NavigationProperty Name="tblCodes" Relationship="StpDBModel.FK__tblCodes__uid__43A1090D" FromRole="tblUser" ToRole="tblCode" />
+    <NavigationProperty Name="tblCodes" Relationship="StpDBModel.FK__tblCodes__uid__04E4BC85" FromRole="tblUser" ToRole="tblCode" />
   </EntityType>
   <EntityType Name="tblWallet">
     <Key>
@@ -285,9 +285,9 @@
     <FunctionImport Name="UserTransactionsDetailByUid" ReturnType="Collection(StpDBModel.UserTransactionsDetailByUid_Result)">
       <Parameter Name="id" Mode="In" Type="Int32" />
     </FunctionImport>
-    <EntitySet Name="tblMarketdatas" EntityType="StpDBModel.tblMarketdata" />
     <EntitySet Name="tblCodes" EntityType="StpDBModel.tblCode" />
-    <AssociationSet Name="FK__tblCodes__uid__43A1090D" Association="StpDBModel.FK__tblCodes__uid__43A1090D">
+    <EntitySet Name="tblMarketdatas" EntityType="StpDBModel.tblMarketdata" />
+    <AssociationSet Name="FK__tblCodes__uid__04E4BC85" Association="StpDBModel.FK__tblCodes__uid__04E4BC85">
       <End Role="tblUser" EntitySet="tblUsers" />
       <End Role="tblCode" EntitySet="tblCodes" />
     </AssociationSet>
@@ -380,6 +380,15 @@
     <Property Type="Decimal" Name="reqPrice" Nullable="true" Precision="10" Scale="2" />
     <Property Type="DateTime" Name="time" Nullable="true" Precision="23" />
   </ComplexType>
+  <EntityType Name="tblCode">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="uid" Type="Int32" />
+    <Property Name="code" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tblUser" Relationship="StpDBModel.FK__tblCodes__uid__04E4BC85" FromRole="tblCode" ToRole="tblUser" />
+  </EntityType>
   <EntityType Name="tblMarketdata">
     <Key>
       <PropertyRef Name="id" />
@@ -390,16 +399,7 @@
     <Property Name="currentPrice" Type="Decimal" Precision="10" Scale="2" />
     <Property Name="status" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
   </EntityType>
-  <EntityType Name="tblCode">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="uid" Type="Int32" />
-    <Property Name="code" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="tblUser" Relationship="StpDBModel.FK__tblCodes__uid__43A1090D" FromRole="tblCode" ToRole="tblUser" />
-  </EntityType>
-  <Association Name="FK__tblCodes__uid__43A1090D">
+  <Association Name="FK__tblCodes__uid__04E4BC85">
     <End Type="StpDBModel.tblUser" Role="tblUser" Multiplicity="0..1" />
     <End Type="StpDBModel.tblCode" Role="tblCode" Multiplicity="*" />
     <ReferentialConstraint>

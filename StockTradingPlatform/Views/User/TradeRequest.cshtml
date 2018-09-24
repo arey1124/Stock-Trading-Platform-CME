@@ -11,59 +11,62 @@
     </div>
     @using (Html.BeginForm("TradeRequest", "User", FormMethod.Post))
     {
-        <div class="row col-sm-12" style="margin-top:20px;">
-            <div class="col-sm-6" style="padding:5px;">
-                <select name="stockId" class="form-control col-sm-10">
+    <div class="row col-sm-12" style="margin-top:20px;">
+        <div class="col-sm-6" style="padding:5px;">
+            <select name="stockId" class="form-control col-sm-10">
 
-                    @if (ViewBag.type == "Add")
-                    {
-                        <option value="Select" disabled selected>Choose Stock</option>
-                        foreach (var stock in ViewBag.stocks)
-                        {
-                            <option value='@stock.stockId'>@stock.stockName</option>
-                        }
-                    }
-                    else
-                    {
-                        foreach (var stock in ViewBag.stocks)
-                        {
-                            if (stock.stockId == ViewBag.stockId)
-                            {
-                                <option value='@stock.stockId' selected disabled>@stock.stockName</option>
-                            }
-                        }
-                    }
-
-                </select>
-            </div>
-            <div class="col-sm-6" style="padding:5px;">
                 @if (ViewBag.type == "Add")
                 {
-                    <select name="requestType" class="form-control col-sm-10">
-                        <option value="Select" disabled selected>Request Type</option>
-                        <option value="B">Buy</option>
-                        <option value="S">Sell</option>
-                    </select>
+                    <option value="Select" disabled selected>Choose Stock</option>
+                    foreach (var stock in ViewBag.stocks)
+                    {
+                        <option value='@stock.stockId'>@stock.stockName</option>
+                    }
                 }
                 else
                 {
-                    <input type="text" class="form-control col-sm-10" name="requestType" value="@ViewBag.requestType" disabled />
+                    foreach (var stock in ViewBag.stocks)
+                    {
+                        if (stock.stockId == ViewBag.stockId)
+                        {
+                            <option value='@stock.stockId' selected disabled>@stock.stockName</option>
+                        }
+                    }
                 }
-            </div>
-            <div class="col-sm-6" style="padding:5px;">
-                <input type="text" class="form-control col-sm-10" name="reqPrice" placeholder="Request Price" value="@ViewBag.reqPrice" />
-            </div>
-            <div class="col-sm-6" style="padding:5px;">
-                <input type="text" class="form-control col-sm-10" name="reqQty" placeholder="Request Quantity" value="@ViewBag.requestQty" />
-            </div>
-            <div>
-                <input type="text" class="btn btn-success" name="requestId" value="@ViewBag.requestId" style="visibility:hidden;position:absolute;" />
-            </div>
-            <div class="col-sm-12 text-center" style="margin-top:30px;">
-                <input type="submit" class="btn btn-success col-sm-3" name="Operation" value="@ViewBag.type" />
-            </div>
 
+            </select>
         </div>
+        <div class="col-sm-6" style="padding:5px;">
+            @if (ViewBag.type == "Add")
+            {
+                <select name="requestType" class="form-control col-sm-10">
+                    <option value="Select" disabled selected>Request Type</option>
+                    <option value="B">Buy</option>
+                    <option value="S">Sell</option>
+                </select>
+            }
+            else
+            {
+                <input type="text" class="form-control col-sm-10" name="requestType" value="@ViewBag.requestType" disabled />
+            }
+        </div>
+        <div class="col-sm-6" style="padding:5px;">
+            <input type="text" class="form-control col-sm-10" name="reqPrice" placeholder="Request Price" value="@ViewBag.reqPrice" />
+        </div>
+        <div class="col-sm-6" style="padding:5px;">
+            <input type="text" class="form-control col-sm-10" name="reqQty" placeholder="Request Quantity" value="@ViewBag.requestQty" />
+        </div>
+        <div>
+            <input type="text" class="btn btn-success" name="requestId" value="@ViewBag.requestId" style="visibility:hidden;position:absolute;" />
+        </div>
+        <div class="col-sm-12 text-center" style="margin-top:30px;">
+            <input type="submit" class="btn btn-success col-sm-3" name="Operation" value="@ViewBag.type" />
+        </div>
+        <div class="col-sm-12 text-center" style="margin-top:30px;">
+            <span>@ViewBag.result</span>
+        </div>
+
+    </div>
     }
 </div>
 
