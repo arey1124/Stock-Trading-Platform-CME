@@ -92,11 +92,13 @@ namespace StockTradingPlatform.Utils
                 rec.uid = buyerUid;
                 rec.stockId = StockId;
                 rec.Qty = qty;
+                rec.remQty = qty;
                 db.tblHoldings.Add(rec);
             }
             else
             {
                 buyer.Qty = buyer.Qty + qty;
+                buyer.remQty = buyer.remQty + qty;
                 db.SaveChanges();
             }
             tblHoldings seller = db.tblHoldings.SingleOrDefault(x => x.uid == sellerUid && x.stockId == StockId);
@@ -117,6 +119,8 @@ namespace StockTradingPlatform.Utils
             tblUser user = db.tblUsers.SingleOrDefault(x => x.uid == req.uid);
             string eMail = user.email;
             string fname = user.fname;
+            tblTransactions trans = db.tblTransactions.OrderByDescending(x => x.time).SingleOrDefault();
+            
             try
             {
                 MailMessage mail = new MailMessage();
@@ -127,7 +131,7 @@ namespace StockTradingPlatform.Utils
                 mail.Body = "Hello " + fname + ",\n\nCongratulations! Your Trade Request with RequestId " + req.requestId + " is successfully executed ";
                 if (remQty != 0)
                     mail.Body += "partially.";
-                mail.Body += "\nBelow are the details of Transaction :\n\nTransaction Id: ";
+                mail.Body += "\nBelow are the details of Transaction :\n\nTransaction Id: " + trans.transactionId;
                 SmtpServer.Port = 587;
                 SmtpServer.UseDefaultCredentials = false;
                 SmtpServer.Credentials = new System.Net.NetworkCredential("cme.stp@gmail.com", "%TGB6yhn^YHN5tgb");
@@ -138,7 +142,6 @@ namespace StockTradingPlatform.Utils
             catch (Exception ex)
             {
                 s = 0;
-
             }
             //return s;
         }

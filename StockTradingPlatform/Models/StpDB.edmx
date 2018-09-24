@@ -31,6 +31,7 @@
           <Property Name="uid" Type="int" />
           <Property Name="stockId" Type="int" />
           <Property Name="Qty" Type="int" />
+          <Property Name="remQty" Type="int" />
         </EntityType>
         <EntityType Name="tblMarketdata">
           <Key>
@@ -724,6 +725,7 @@
           <Property Name="Qty" Type="Int32" />
           <NavigationProperty Name="tblStocks" Relationship="StpDBModel.FK__tblHoldin__stock__75A278F5" FromRole="tblHoldings" ToRole="tblStock" />
           <NavigationProperty Name="tblUsers" Relationship="StpDBModel.FK__tblHoldings__uid__74AE54BC" FromRole="tblHoldings" ToRole="tblUser" />
+          <Property Name="remQty" Type="Int32" />
         </EntityType>
         <Association Name="FK__tblHoldin__stock__75A278F5">
           <End Type="StpDBModel.tblStock" Role="tblStock" Multiplicity="0..1" />
@@ -915,6 +917,7 @@
           <EntitySetMapping Name="tblHoldings">
             <EntityTypeMapping TypeName="StpDBModel.tblHoldings">
               <MappingFragment StoreEntitySet="tblHoldings">
+                <ScalarProperty Name="remQty" ColumnName="remQty" />
                 <ScalarProperty Name="Qty" ColumnName="Qty" />
                 <ScalarProperty Name="stockId" ColumnName="stockId" />
                 <ScalarProperty Name="uid" ColumnName="uid" />

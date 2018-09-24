@@ -116,6 +116,7 @@
     <EntitySetMapping Name="tblHoldings">
       <EntityTypeMapping TypeName="StpDBModel.tblHoldings">
         <MappingFragment StoreEntitySet="tblHoldings">
+          <ScalarProperty Name="remQty" ColumnName="remQty" />
           <ScalarProperty Name="Qty" ColumnName="Qty" />
           <ScalarProperty Name="stockId" ColumnName="stockId" />
           <ScalarProperty Name="uid" ColumnName="uid" />

@@ -179,6 +179,7 @@ namespace StockTradingPlatform.Controllers
                 tradeRequest.requestStatus = "O";
                 this.db.tblTradeRequests.Add(tradeRequest);
                 this.db.SaveChanges();
+
                 return Redirect("/User/Dashboard");
             }
             else if (Operation == "Update")

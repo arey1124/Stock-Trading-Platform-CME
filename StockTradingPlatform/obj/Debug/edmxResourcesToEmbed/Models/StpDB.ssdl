@@ -26,6 +26,7 @@
     <Property Name="uid" Type="int" />
     <Property Name="stockId" Type="int" />
     <Property Name="Qty" Type="int" />
+    <Property Name="remQty" Type="int" />
   </EntityType>
   <EntityType Name="tblMarketdata">
     <Key>

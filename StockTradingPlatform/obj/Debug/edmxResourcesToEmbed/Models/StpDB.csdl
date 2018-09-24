@@ -340,6 +340,7 @@
     <Property Name="Qty" Type="Int32" />
     <NavigationProperty Name="tblStocks" Relationship="StpDBModel.FK__tblHoldin__stock__75A278F5" FromRole="tblHoldings" ToRole="tblStock" />
     <NavigationProperty Name="tblUsers" Relationship="StpDBModel.FK__tblHoldings__uid__74AE54BC" FromRole="tblHoldings" ToRole="tblUser" />
+    <Property Name="remQty" Type="Int32" />
   </EntityType>
   <Association Name="FK__tblHoldin__stock__75A278F5">
     <End Type="StpDBModel.tblStock" Role="tblStock" Multiplicity="0..1" />
