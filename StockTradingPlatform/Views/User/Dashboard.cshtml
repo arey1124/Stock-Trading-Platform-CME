@@ -139,6 +139,7 @@
                 type: 'GET',
                 dataType: 'json',
                 success: function (chartsdata) {
+                    console.log(chartsdata);
                     var data = new google.visualization.DataTable();
                     data.addColumn('date', 'd');
                     data.addColumn('number', 'price');
@@ -158,7 +159,7 @@
                     };
 
 
-                    var chart = new google.visualization.ColumnChart(document.getElementById('graph1'));
+                    var chart = new google.visualization.AreaChart(document.getElementById('graph1'));
 
                     chart.draw(data, options);
                 }
