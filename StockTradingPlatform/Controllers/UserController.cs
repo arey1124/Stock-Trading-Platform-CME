@@ -277,9 +277,14 @@ namespace StockTradingPlatform.Controllers
             return View(manager);
         }
 
-        /// <summary>
-        ///  Chayank's code ends
-        /// </summary>
+        public ActionResult AboutUs()
+        {
+            return View();
+        }
 
-    }
+            /// <summary>
+            ///  Chayank's code ends
+            /// </summary>
+
+        }
 }
