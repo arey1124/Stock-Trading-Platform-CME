@@ -43,15 +43,6 @@ C:\Users\User\Desktop\PrajjwalSTP\BusinessLogicLayer\obj\Debug\BusinessLogicLaye
 C:\Users\User\Desktop\PrajjwalSTP\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.csproj.CopyComplete
 C:\Users\User\Desktop\PrajjwalSTP\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.dll
 C:\Users\User\Desktop\PrajjwalSTP\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.pdb
-C:\Users\User\Desktop\FinalSTP\BusinessLogicLayer\bin\Debug\BusinessLogicLayer.dll
-C:\Users\User\Desktop\FinalSTP\BusinessLogicLayer\bin\Debug\BusinessLogicLayer.pdb
-C:\Users\User\Desktop\FinalSTP\BusinessLogicLayer\bin\Debug\DataAccessLayer.dll
-C:\Users\User\Desktop\FinalSTP\BusinessLogicLayer\bin\Debug\DataAccessLayer.pdb
-C:\Users\User\Desktop\FinalSTP\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.csprojAssemblyReference.cache
-C:\Users\User\Desktop\FinalSTP\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.csproj.CoreCompileInputs.cache
-C:\Users\User\Desktop\FinalSTP\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.csproj.CopyComplete
-C:\Users\User\Desktop\FinalSTP\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.dll
-C:\Users\User\Desktop\FinalSTP\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.pdb
 C:\Users\Lenovo\Desktop\Final project STP\BusinessLogicLayer\bin\Debug\BusinessLogicLayer.dll
 C:\Users\Lenovo\Desktop\Final project STP\BusinessLogicLayer\bin\Debug\BusinessLogicLayer.pdb
 C:\Users\Lenovo\Desktop\Final project STP\BusinessLogicLayer\bin\Debug\DataAccessLayer.dll
@@ -61,3 +52,12 @@ C:\Users\Lenovo\Desktop\Final project STP\BusinessLogicLayer\obj\Debug\BusinessL
 C:\Users\Lenovo\Desktop\Final project STP\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.csproj.CopyComplete
 C:\Users\Lenovo\Desktop\Final project STP\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.dll
 C:\Users\Lenovo\Desktop\Final project STP\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.pdb
+C:\Users\User\Desktop\FinalSTP\BusinessLogicLayer\bin\Debug\BusinessLogicLayer.dll
+C:\Users\User\Desktop\FinalSTP\BusinessLogicLayer\bin\Debug\BusinessLogicLayer.pdb
+C:\Users\User\Desktop\FinalSTP\BusinessLogicLayer\bin\Debug\DataAccessLayer.dll
+C:\Users\User\Desktop\FinalSTP\BusinessLogicLayer\bin\Debug\DataAccessLayer.pdb
+C:\Users\User\Desktop\FinalSTP\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.csprojAssemblyReference.cache
+C:\Users\User\Desktop\FinalSTP\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\FinalSTP\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.csproj.CopyComplete
+C:\Users\User\Desktop\FinalSTP\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.dll
+C:\Users\User\Desktop\FinalSTP\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.pdb
