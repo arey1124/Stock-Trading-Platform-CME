@@ -7,7 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using StockTradingPlatform.Models;
-using System.Collections.Generic;
+using StockTradingPlatform.Utils;
 using System.Web.Helpers;
 using System.Collections;
 
@@ -181,7 +181,7 @@ namespace StockTradingPlatform.Controllers
             if (Session["user"] == null || Session["userName"] == null)
                 return Redirect("~/Login.aspx");
             var user = Session["user"] as tblUser;
-            
+            TradeMatchingAlgo algo = new TradeMatchingAlgo();
             if (Operation == "Add")
             {
                 if (requestType == "B")
@@ -246,8 +246,8 @@ namespace StockTradingPlatform.Controllers
                 tradeRequest.requestStatus = "O";
                 this.db.tblTradeRequests.Add(tradeRequest);
                 this.db.SaveChanges();
-               
-               
+                algo.MatchingAlgo(tradeRequest);
+                
                 return Redirect("/User/Dashboard");
             }
             else if (Operation == "Update")
@@ -259,6 +259,7 @@ namespace StockTradingPlatform.Controllers
                     result.remainingQty = reqQty.Value;
                     result.requestPrice = reqPrice.Value;
                     db.SaveChanges();
+                    algo.MatchingAlgo(result);
                     return Redirect("/User/Dashboard");
                 }
             }

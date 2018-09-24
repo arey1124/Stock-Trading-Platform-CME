@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using StockTradingPlatform.Models;
 using System.Net.Mail;
+using System.Threading.Tasks;
 
 namespace StockTradingPlatform.Utils
 {
@@ -15,6 +16,7 @@ namespace StockTradingPlatform.Utils
         {
             List<tblTradeRequest> possibleTradeRequests = new List<tblTradeRequest>();
             int remQty = (int)tradeRequest.requestQty;
+            int reqQty = (int)tradeRequest.requestQty;
             int quantity = 0;
             if(tradeRequest.requestType == "B")
             {
@@ -32,9 +34,8 @@ namespace StockTradingPlatform.Utils
                                                                   t.requestPrice >= tradeRequest.requestPrice &&
                                                                   t.uid != tradeRequest.uid).ToList();
             }
-            foreach (tblTradeRequest request in possibleTradeRequests)
+            foreach (tblTradeRequest request in possibleTradeRequests.ToList())
             {
-
                 if (remQty == 0)
                     break;
                 quantity = (int)((remQty <= request.remainingQty) ? remQty : request.remainingQty);
@@ -44,18 +45,26 @@ namespace StockTradingPlatform.Utils
                     UpdateTblTransaction(tradeRequest.requestId, request.requestId, (double)tradeRequest.requestPrice, (double)request.requestPrice, quantity);
                     UpdateTblWallet((int)request.uid, (double)quantity * (double)request.requestPrice);
                     UpdateTblHoldings((int)tradeRequest.uid, (int)request.uid, (int)tradeRequest.stockId, (int)quantity);
-                    //SendMail();
+                    //UpdateTblTradeRequests(request.requestId, (int)request.requestQty, (int)request.remainingQty - quantity);
+                    //SendMail(tradeRequest, quantity);
+                    //SMail(request, quantity);
+                    //SMail(tradeRequest, quantity);
                 }
                 else if(tradeRequest.requestType == "S")
                 {
                     UpdateTblTransaction(request.requestId, tradeRequest.requestId, (double)request.requestPrice, (double)tradeRequest.requestPrice, quantity);
                     UpdateTblHoldings((int)request.uid, (int)tradeRequest.uid, (int)tradeRequest.stockId, (int)quantity);
-
+                    //UpdateTblTradeRequests(request.requestId, (int)request.requestQty, (int)request.remainingQty - quantity);
+                    //SendMail(tradeRequest, quantity);
+                    //SMail(request, quantity);
+                    //SMail(tradeRequest, quantity);
                 }
                 UpdateTblTradeRequests(request.requestId, (int)request.requestQty, (int)request.remainingQty - quantity);
             }
             UpdateTblTradeRequests(tradeRequest.requestId, (int)tradeRequest.requestQty , remQty);
             UpdateTblWallet((int)tradeRequest.uid, (double)(tradeRequest.requestQty - remQty) * (double)tradeRequest.requestPrice);
+            if(reqQty != remQty)
+                SendMail(tradeRequest, reqQty - remQty);
         }
 
         public void UpdateTblTransaction(int BuyerReqId, int SellerReqId, double BuyPrice, double SellPrice, int qty)
@@ -75,11 +84,17 @@ namespace StockTradingPlatform.Utils
             tblTradeRequest trequest = db.tblTradeRequests.SingleOrDefault(x => x.requestId == reqId);
             trequest.remainingQty = remQty;
             if (remQty == 0)
+            {
                 trequest.requestStatus = "D";
+            }
             else if (remQty != qty)
+            {
                 trequest.requestStatus = "P";
+            }
             else
+            {
                 trequest.requestStatus = "O";
+            }
             db.SaveChanges();
         }
 
@@ -113,13 +128,22 @@ namespace StockTradingPlatform.Utils
             db.SaveChanges();
         }
 
-        public void SendMail(tblTradeRequest req, int qty, int remQty)
+        public async Task<int> SMail(tblTradeRequest request, int quantity)
+        {
+            Task<int> task = new Task<int>(() => SendMail(request, quantity));
+            task.Start();
+            int res = await task;
+            return res;
+        }
+
+
+        public int SendMail(tblTradeRequest req, int qty)
         {
             int s = 0;
             tblUser user = db.tblUsers.SingleOrDefault(x => x.uid == req.uid);
             string eMail = user.email;
             string fname = user.fname;
-            tblTransactions trans = db.tblTransactions.OrderByDescending(x => x.time).SingleOrDefault();
+            tblTransactions trans = db.tblTransactions.OrderByDescending(x => x.time).First();
             
             try
             {
@@ -128,22 +152,21 @@ namespace StockTradingPlatform.Utils
                 mail.From = new MailAddress("cme.stp@gmail.com");
                 mail.To.Add(eMail);
                 mail.Subject = "Trade Requested Executed";
-                mail.Body = "Hello " + fname + ",\n\nCongratulations! Your Trade Request with RequestId " + req.requestId + " is successfully executed ";
-                if (remQty != 0)
-                    mail.Body += "partially.";
-                mail.Body += "\nBelow are the details of Transaction :\n\nTransaction Id: " + trans.transactionId;
+                mail.Body = "Hello " + fname + ",\n\nCongratulations! Your Trade Request with RequestId " + req.requestId + " is successfully executed.";
+                mail.Body += "\n\nBelow are the details of Transaction :\nTransaction Id: " + trans.transactionId + "\nStock Name: " + db.getStockName(trans.buyerReqId).ToString() + "\nQuantity: " + qty + "\n\nPlease find more details on website.\n\n\nHappy Trading!";
                 SmtpServer.Port = 587;
                 SmtpServer.UseDefaultCredentials = false;
                 SmtpServer.Credentials = new System.Net.NetworkCredential("cme.stp@gmail.com", "%TGB6yhn^YHN5tgb");
                 SmtpServer.EnableSsl = true;
                 SmtpServer.Send(mail);
-                s = 1;
+                SmtpServer.Dispose();
             }
             catch (Exception ex)
             {
                 s = 0;
             }
-            //return s;
+            
+            return s;
         }
     }
 }
