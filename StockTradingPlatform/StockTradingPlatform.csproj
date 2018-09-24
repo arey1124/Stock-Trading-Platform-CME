@@ -2225,6 +2225,7 @@
     <Content Include="Scripts\OtherHelperScripts\Flot\PLUGINS.md" />
     <Content Include="Scripts\OtherHelperScripts\Flot\README.md" />
     <Content Include="Views\User\AboutUs.cshtml" />
+    <Content Include="Views\Shared\Admin_Edit_Layouts.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
