@@ -18,6 +18,7 @@ namespace StockTradingPlatform.Models
         public Nullable<int> uid { get; set; }
         public Nullable<int> stockId { get; set; }
         public Nullable<int> Qty { get; set; }
+        public Nullable<int> remQty { get; set; }
     
         public virtual tblStock tblStocks { get; set; }
         public virtual tblUser tblUsers { get; set; }
