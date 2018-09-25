@@ -34,11 +34,6 @@
 	        <a class="nav-link" href="#">Stock Data</a>
 	      </li>
 	    </ul>
-	    <ul class="navbar-nav">
-	    	<li class="nav-item mr-sm-2">
-		      <a class="nav-link" href="Login.aspx">Login</a>
-		    </li>
-	    </ul>
 	  </div>
 	</nav>
 	<div class="curve-image-top">

@@ -31,8 +31,8 @@ namespace StockTradingPlatform.Controllers
             var user = Session["user"] as tblUser;
             int currentUser = user.uid;
             ViewBag.stocks = db.tblStocks.ToList();
-            ViewBag.allUserReq = db.tblTradeRequests.Where(x => x.uid != currentUser & ( x.requestStatus != "D" || x.requestStatus != "C")).Take(5).ToList();
-            ViewBag.ongoingReq = db.tblTradeRequests.Where(x => (x.uid == currentUser) & (x.requestStatus == "O" || x.requestStatus == "P")).Take(5).ToList();
+            ViewBag.allUserReq = db.tblTradeRequests.Where(x => (x.uid != currentUser) && ( x.requestStatus != "D" && x.requestStatus != "C")).Take(5).ToList();
+            ViewBag.ongoingReq = db.tblTradeRequests.Where(x => (x.uid == currentUser) && (x.requestStatus == "O" || x.requestStatus == "P")).Take(5).ToList();
             ViewBag.stockDetails = db.GetStocksData().ToList();
             return View();
         }
@@ -137,7 +137,7 @@ namespace StockTradingPlatform.Controllers
                 return Redirect("~/Login.aspx");
             var user = Session["user"] as tblUser;
             int currentUser = user.uid;
-            ViewBag.allUserReq = db.tblTradeRequests.Where(x => x.uid != currentUser).ToList();
+            ViewBag.allUserReq = db.tblTradeRequests.Where(x => (x.uid != currentUser) && (x.requestStatus != "D" && x.requestStatus != "C")).ToList();
             ViewBag.stocks = db.tblStocks.ToList();
             return View();
         }
