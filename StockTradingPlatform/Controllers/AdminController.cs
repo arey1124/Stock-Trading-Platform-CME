@@ -366,6 +366,7 @@ namespace StockTradingPlatform.Controllers
                 holding.uid = user_id;
                 holding.stockId = manager.tblStock.stockId;
                 holding.Qty = share_per_user;
+                holding.remQty = share_per_user;
                 manager.StpDBEntities.tblHoldings.Add(holding);
             }
             if(extra != 0)
