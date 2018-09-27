@@ -93,7 +93,7 @@
                 <!-- Sidebar user panel -->
                 <div class="user-panel">
                     <div class="pull-left image">
-                        <img src="../Images/admin.png" class="img-circle" alt="User Image">
+                        <img src="../Images/admin.png" class="img-circle" alt="User Image"/>
                     </div>
                     <div class="pull-left info">
                         <p><%= fname %> &nbsp;<%= lname %></p>
@@ -173,9 +173,21 @@
                                         <asp:TextBox ID="TextBox1" class="form-control border border-primary" runat="server" placeholder="Search By Seller/Buyer/Stock Name"></asp:TextBox>
                                     </div>
                                  </div>
-                                <asp:GridView ID="GridView1" runat="server" ShowHeaderWhenEmpty="true" AllowSorting="True" CellPadding="4" CssClass="wrapper table
-                                    " ForeColor="#333333" GridLines="None" HorizontalAlign="Center" style="left: 0px; top: 0px">
+                                <asp:GridView ID="GridView1" runat="server" ShowHeaderWhenEmpty="True" CellPadding="4" CssClass="wrapper table
+                                    " ForeColor="#333333" GridLines="None" HorizontalAlign="Center" style="left: 0px; top: 0px" AllowPaging="True" AutoGenerateColumns="False" DataKeyNames="transactionId" DataSourceID="SqlDataSource1" PageSize="5">
                                     <AlternatingRowStyle BackColor="White" />
+                                    <Columns>
+                                        <asp:BoundField DataField="transactionId" HeaderText="Transaction Id" InsertVisible="False" ReadOnly="True" SortExpression="transactionId" />
+                                        <asp:BoundField DataField="buyerReqId" HeaderText="Buyer Req Id" SortExpression="buyerReqId" />
+                                        <asp:BoundField DataField="buyerName" HeaderText="Buyer Name" SortExpression="buyerName" />
+                                        <asp:BoundField DataField="sellerReqId" HeaderText="Seller Req Id" SortExpression="sellerReqId" />
+                                        <asp:BoundField DataField="sellerName" HeaderText="Seller Name" SortExpression="sellerName" />
+                                        <asp:BoundField DataField="stock" HeaderText="Stock" SortExpression="stock" />
+                                        <asp:BoundField DataField="buyPrice" HeaderText="Buy Price" SortExpression="buyPrice" />
+                                        <asp:BoundField DataField="sellPrice" HeaderText="Sell Price" SortExpression="sellPrice" />
+                                        <asp:BoundField DataField="quantity" HeaderText="Quantity" SortExpression="quantity" />
+                                        <asp:BoundField DataField="time" HeaderText="Time" SortExpression="time" />
+                                    </Columns>
                                     <EditRowStyle BackColor="#2461BF" />
                                     <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
                                     <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
@@ -187,11 +199,11 @@
                                     <SortedDescendingCellStyle BackColor="#E9EBEF" />
                                     <SortedDescendingHeaderStyle BackColor="#4870BE" />
                                 </asp:GridView>
-                                
+                                 <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:StpDBConnectionString %>" SelectCommand="SELECT * FROM [tblTransacts]"></asp:SqlDataSource>
                             </div>
                         </form>
                      </div>
-    </div>
+                </div>
 
     <!-- this is where form ends -->
 

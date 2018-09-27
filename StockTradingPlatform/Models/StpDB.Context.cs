@@ -39,6 +39,7 @@ namespace StockTradingPlatform.Models
         public virtual DbSet<tblHoldings> tblHoldings { get; set; }
         public virtual DbSet<tblCode> tblCodes { get; set; }
         public virtual DbSet<tblMarketdata> tblMarketdatas { get; set; }
+        public virtual DbSet<tblTransact> tblTransacts { get; set; }
     
         public virtual ObjectResult<Nullable<int>> getLastStockId()
         {

@@ -79,6 +79,8 @@
     <NavigationProperty Name="tblUser" Relationship="Self.FK__tblTradeReq__uid__6477ECF3" FromRole="tblTradeRequests" ToRole="tblUsers" />
     <NavigationProperty Name="tblTransactions" Relationship="StpDBModel.FK__tblTransa__buyer__6E01572D" FromRole="tblTradeRequest" ToRole="tblTransactions" />
     <NavigationProperty Name="tblTransactions1" Relationship="StpDBModel.FK__tblTransa__selle__6EF57B66" FromRole="tblTradeRequest" ToRole="tblTransactions" />
+    <NavigationProperty Name="tblTransacts" Relationship="StpDBModel.FK__tblTransa__buyer__54CB950F" FromRole="tblTradeRequest" ToRole="tblTransact" />
+    <NavigationProperty Name="tblTransacts1" Relationship="StpDBModel.FK__tblTransa__selle__55BFB948" FromRole="tblTradeRequest" ToRole="tblTransact" />
   </EntityType>
   <EntityType Name="tblUser">
     <Key>
@@ -291,6 +293,15 @@
       <End Role="tblUser" EntitySet="tblUsers" />
       <End Role="tblCode" EntitySet="tblCodes" />
     </AssociationSet>
+    <EntitySet Name="tblTransacts" EntityType="StpDBModel.tblTransact" />
+    <AssociationSet Name="FK__tblTransa__buyer__54CB950F" Association="StpDBModel.FK__tblTransa__buyer__54CB950F">
+      <End Role="tblTradeRequest" EntitySet="tblTradeRequests" />
+      <End Role="tblTransact" EntitySet="tblTransacts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tblTransa__selle__55BFB948" Association="StpDBModel.FK__tblTransa__selle__55BFB948">
+      <End Role="tblTradeRequest" EntitySet="tblTradeRequests" />
+      <End Role="tblTransact" EntitySet="tblTransacts" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="tblTransactions">
     <Key>
@@ -408,6 +419,47 @@
       </Principal>
       <Dependent Role="tblCode">
         <PropertyRef Name="uid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="tblTransact">
+    <Key>
+      <PropertyRef Name="transactionId" />
+    </Key>
+    <Property Name="transactionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="buyerReqId" Type="Int32" />
+    <Property Name="buyerName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="sellerReqId" Type="Int32" />
+    <Property Name="sellerName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="stock" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="buyPrice" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="sellPrice" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="quantity" Type="Int32" />
+    <Property Name="time" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="tblTradeRequest" Relationship="StpDBModel.FK__tblTransa__buyer__54CB950F" FromRole="tblTransact" ToRole="tblTradeRequest" />
+    <NavigationProperty Name="tblTradeRequest1" Relationship="StpDBModel.FK__tblTransa__selle__55BFB948" FromRole="tblTransact" ToRole="tblTradeRequest" />
+  </EntityType>
+  <Association Name="FK__tblTransa__buyer__54CB950F">
+    <End Type="StpDBModel.tblTradeRequest" Role="tblTradeRequest" Multiplicity="0..1" />
+    <End Type="StpDBModel.tblTransact" Role="tblTransact" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblTradeRequest">
+        <PropertyRef Name="requestId" />
+      </Principal>
+      <Dependent Role="tblTransact">
+        <PropertyRef Name="buyerReqId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tblTransa__selle__55BFB948">
+    <End Type="StpDBModel.tblTradeRequest" Role="tblTradeRequest" Multiplicity="0..1" />
+    <End Type="StpDBModel.tblTransact" Role="tblTransact" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblTradeRequest">
+        <PropertyRef Name="requestId" />
+      </Principal>
+      <Dependent Role="tblTransact">
+        <PropertyRef Name="sellerReqId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

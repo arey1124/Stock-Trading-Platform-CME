@@ -43,7 +43,7 @@ var chart1 = new CanvasJS.Chart("chartContainer1", {
     setInterval(function () { inter() }, 2000);
     function inter() {
         
-        $.getJSON("/Graphs/json", function (data) {
+        $.getJSON("/Admin/json", function (data) {
             chart1.options.data[0].dataPoints = data;
 
 
