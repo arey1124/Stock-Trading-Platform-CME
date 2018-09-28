@@ -169,5 +169,21 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="tblTransacts">
+      <EntityTypeMapping TypeName="StpDBModel.tblTransact">
+        <MappingFragment StoreEntitySet="tblTransacts">
+          <ScalarProperty Name="time" ColumnName="time" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="sellPrice" ColumnName="sellPrice" />
+          <ScalarProperty Name="buyPrice" ColumnName="buyPrice" />
+          <ScalarProperty Name="stock" ColumnName="stock" />
+          <ScalarProperty Name="sellerName" ColumnName="sellerName" />
+          <ScalarProperty Name="sellerReqId" ColumnName="sellerReqId" />
+          <ScalarProperty Name="buyerName" ColumnName="buyerName" />
+          <ScalarProperty Name="buyerReqId" ColumnName="buyerReqId" />
+          <ScalarProperty Name="transactionId" ColumnName="transactionId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

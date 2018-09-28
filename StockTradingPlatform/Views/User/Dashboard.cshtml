@@ -71,7 +71,7 @@
 
 
 <div class="container rounded" style="background-color: #fff;padding-top: 20px;margin-top:20px;padding-left:20px;padding-right:20px;padding-bottom:40px;">
-    <h4>Ongoing Requests</h4>
+    <h4>Open Requests</h4>
     <table class="table table-striped" style="margin-top:15px;">
         <tr class="text-center">
             <th>Stock Name</th>
@@ -159,7 +159,7 @@
                     };
 
 
-                    var chart = new google.visualization.AreaChart(document.getElementById('graph1'));
+                    var chart = new google.visualization.ColumnChart(document.getElementById('graph1'));
 
                     chart.draw(data, options);
                 }

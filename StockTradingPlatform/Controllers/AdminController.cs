@@ -170,19 +170,16 @@ namespace StockTradingPlatform.Controllers
             List<tblUser> users = new List<tblUser>();
             foreach (tblUser user in db.tblUsers)
             {
-                if (user.fname.ToLower().Contains(text) || user.lname.ToLower().Contains(text) || user.email.ToLower().Contains(text) || user.address.ToLower().Contains(text))
-                {
-                    if (text == "admin" && user.role == "A")
-                        users.Add(user);
-                    else if (text == "trader" && user.role == "U")
-                        users.Add(user);
-                    else if (text == "active" && user.status == "A")
-                        users.Add(user);
-                    else if (text == "suspended" && user.status == "S")
-                        users.Add(user);
-                    else if (user.fname.ToLower().Contains(text) || user.lname.ToLower().Contains(text) || user.email.ToLower().Contains(text) || user.address.ToLower().Contains(text))
-                        users.Add(user);
-                }
+                if (text == "admin" && user.role == "A")
+                    users.Add(user);
+                else if (text == "trader" && user.role == "U")
+                    users.Add(user);
+                else if (text == "active" && user.status == "A")
+                    users.Add(user);
+                else if (text == "suspended" && user.status == "S")
+                    users.Add(user);
+                else if (user.fname.ToLower().Contains(text) || user.lname.ToLower().Contains(text) || user.email.ToLower().Contains(text) || user.address.ToLower().Contains(text))
+                    users.Add(user);
             }
             return View(users);
         }

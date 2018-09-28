@@ -30,6 +30,9 @@
         <EntityTypeShape EntityType="StpDBModel.tblCode" Width="1.5" PointX="3.375" PointY="19.125" />
         <EntityTypeShape EntityType="StpDBModel.tblMarketdata" Width="1.5" PointX="0.75" PointY="0.75" />
         <AssociationConnector Association="StpDBModel.FK__tblCodes__uid__04E4BC85" />
+        <EntityTypeShape EntityType="StpDBModel.tblTransact" Width="1.5" PointX="11.75" PointY="13.625" />
+        <AssociationConnector Association="StpDBModel.FK__tblTransa__buyer__54CB950F" />
+        <AssociationConnector Association="StpDBModel.FK__tblTransa__selle__55BFB948" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

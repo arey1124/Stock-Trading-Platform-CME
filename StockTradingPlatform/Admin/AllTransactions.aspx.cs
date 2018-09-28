@@ -17,7 +17,7 @@ namespace StockTradingPlatform.Admin
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            var user = Session["user"] as tblUser;
+            /*var user = Session["user"] as tblUser;
             this.fname = user.fname;
             this.lname = user.lname;
             DataTable dt = new DataTable();
@@ -80,12 +80,12 @@ namespace StockTradingPlatform.Admin
                 dt.Rows.InsertAt(dr, i++);
             }
             GridView1.DataSource = dt;
-            GridView1.DataBind();
+            GridView1.DataBind();*/
         }
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            if(TextBox1.Text!=null || TextBox1.Text.Trim() != "")
+            /*if(TextBox1.Text!=null || TextBox1.Text.Trim() != "")
             {
                 string s = TextBox1.Text.Trim().ToLower();
                 DataTable dt = new DataTable();
@@ -152,7 +152,7 @@ namespace StockTradingPlatform.Admin
                 }
                 GridView1.DataSource = dt;
                 GridView1.DataBind();
-            }
+            }*/
         }
     }
 }

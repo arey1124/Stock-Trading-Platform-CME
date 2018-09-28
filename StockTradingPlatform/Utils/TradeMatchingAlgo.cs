@@ -5,6 +5,8 @@ using System.Web;
 using StockTradingPlatform.Models;
 using System.Net.Mail;
 using System.Threading.Tasks;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace StockTradingPlatform.Utils
 {
@@ -43,6 +45,7 @@ namespace StockTradingPlatform.Utils
                 if (tradeRequest.requestType == "B")
                 {
                     UpdateTblTransaction(tradeRequest.requestId, request.requestId, (double)tradeRequest.requestPrice, (double)request.requestPrice, quantity);
+                    UpdateTblTransacts(tradeRequest.requestId, request.requestId, (double)tradeRequest.requestPrice, (double)request.requestPrice, quantity);
                     UpdateTblWallet((int)request.uid, (double)quantity * (double)request.requestPrice);
                     UpdateTblHoldings((int)tradeRequest.uid, (int)request.uid, (int)tradeRequest.stockId, (int)quantity);
                     //UpdateTblTradeRequests(request.requestId, (int)request.requestQty, (int)request.remainingQty - quantity);
@@ -53,6 +56,7 @@ namespace StockTradingPlatform.Utils
                 else if(tradeRequest.requestType == "S")
                 {
                     UpdateTblTransaction(request.requestId, tradeRequest.requestId, (double)request.requestPrice, (double)tradeRequest.requestPrice, quantity);
+                    UpdateTblTransacts(request.requestId, tradeRequest.requestId, (double)request.requestPrice, (double)tradeRequest.requestPrice, quantity);
                     UpdateTblHoldings((int)request.uid, (int)tradeRequest.uid, (int)tradeRequest.stockId, (int)quantity);
                     //UpdateTblTradeRequests(request.requestId, (int)request.requestQty, (int)request.remainingQty - quantity);
                     //SendMail(tradeRequest, quantity);
@@ -65,6 +69,29 @@ namespace StockTradingPlatform.Utils
             UpdateTblWallet((int)tradeRequest.uid, (double)(tradeRequest.requestQty - remQty) * (double)tradeRequest.requestPrice);
             if(reqQty != remQty)
                 SendMail(tradeRequest, reqQty - remQty);
+        }
+
+        public void UpdateTblTransacts(int BuyerReqId, int SellerReqId, double BuyPrice, double SellPrice, int qty)
+        {
+            String buyName = db.getUserName(BuyerReqId).FirstOrDefault().ToString();
+            String sellname = db.getUserName(SellerReqId).FirstOrDefault().ToString();
+            String sName = db.getStockName(BuyerReqId).FirstOrDefault().ToString();
+            tblTransact transaction = new tblTransact();
+            transaction.buyerReqId = BuyerReqId;
+            //transaction.buyerName = db.getUserName(BuyerReqId).ToString();
+            transaction.buyerName = buyName;
+            transaction.sellerReqId = SellerReqId;
+            //transaction.sellerName = db.getUserName(SellerReqId).ToString();
+            transaction.sellerName = sellname;
+            transaction.stock = sName;
+            //System.Diagnostics.Debug.WriteLine("\n\n{0} {1} {2}\n\n",buyName,sellname,sName);
+            //transaction.stock = db.getStockName(BuyerReqId).ToString();
+            transaction.buyPrice = Convert.ToDecimal(BuyPrice);
+            transaction.sellPrice = Convert.ToDecimal(SellPrice);
+            transaction.quantity = qty;
+            transaction.time = DateTime.Now;
+            db.tblTransacts.Add(transaction);
+
         }
 
         public void UpdateTblTransaction(int BuyerReqId, int SellerReqId, double BuyPrice, double SellPrice, int qty)
@@ -153,7 +180,7 @@ namespace StockTradingPlatform.Utils
                 mail.To.Add(eMail);
                 mail.Subject = "Trade Requested Executed";
                 mail.Body = "Hello " + fname + ",\n\nCongratulations! Your Trade Request with RequestId " + req.requestId + " is successfully executed.";
-                mail.Body += "\n\nBelow are the details of Transaction :\nTransaction Id: " + trans.transactionId + "\nStock Name: " + db.getStockName(trans.buyerReqId).ToString() + "\nQuantity: " + qty + "\n\nPlease find more details on website.\n\n\nHappy Trading!";
+                mail.Body += "\n\nBelow are the details of Transaction :\nTransaction Id: " + trans.transactionId + "\nStock Name: " + db.getStockName(trans.buyerReqId).FirstOrDefault().ToString() + "\nQuantity: " + qty + "\n\nPlease find more details on website.\n\n\nHappy Trading!";
                 SmtpServer.Port = 587;
                 SmtpServer.UseDefaultCredentials = false;
                 SmtpServer.Credentials = new System.Net.NetworkCredential("cme.stp@gmail.com", "%TGB6yhn^YHN5tgb");

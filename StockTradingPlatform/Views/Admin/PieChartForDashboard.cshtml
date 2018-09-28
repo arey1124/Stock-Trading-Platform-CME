@@ -44,7 +44,6 @@ var chart1 = new CanvasJS.Chart("chartContainer1", {
     function inter() {
         
         $.getJSON("/Admin/json", function (data) {
-            
             chart1.options.data[0].dataPoints = data;
 
 

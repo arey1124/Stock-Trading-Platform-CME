@@ -2037,6 +2037,9 @@
     <Compile Include="Models\tblTradeRequest.cs">
       <DependentUpon>StpDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\tblTransact.cs">
+      <DependentUpon>StpDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\tblTransactions.cs">
       <DependentUpon>StpDB.tt</DependentUpon>
     </Compile>
